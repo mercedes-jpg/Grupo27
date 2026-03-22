@@ -10,6 +10,7 @@ struct Jogador {
     string posicao;
     int qualidade;
     int probLesao;
+    int probCastigo;
 
 };
 int main() {
