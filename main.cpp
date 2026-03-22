@@ -14,3 +14,4 @@ int main() {
 char francisco;
 char guilherme;
 char valeria;
+char hoi;
