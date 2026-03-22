@@ -18,8 +18,8 @@ struct equipa {
     jogador* convocados;
     int nGr;
     int nDef;
+    int nMed;
     int nAva;
-
 };
 int main() {
     std::cout << "Hello World!" << std::endl;
