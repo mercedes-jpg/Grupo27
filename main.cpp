@@ -5,13 +5,13 @@ using namespace std;
 
 struct Jogador {
     string nome;
+    string posicao;
     int numero;
     int idade;
-    string posicao;
-    int qualidade;
     int probLesao;
     int probCastigo;
-
+    int qualidade;
+    bool lesionado;
 
 };
 int main() {
