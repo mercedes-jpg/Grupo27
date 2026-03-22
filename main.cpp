@@ -12,4 +12,4 @@ int main() {
     std::cout << "Hello World!" << std::endl;
 }
 
-//esta merda naofunciona
+//esta merda nao funciona
