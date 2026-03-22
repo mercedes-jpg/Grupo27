@@ -15,3 +15,4 @@ char francisco;
 char guilherme;
 char valeria;
 char hoi;
+// o curso faz se no recurso
