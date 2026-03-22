@@ -11,5 +11,3 @@ struct Jogador {
 int main() {
     std::cout << "Hello World!" << std::endl;
 }
-
-//esta merda nao funciona
