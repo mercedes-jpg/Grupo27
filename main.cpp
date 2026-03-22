@@ -7,6 +7,10 @@ struct Jogador {
     string nome;
     int numero;
     int idade;
+    string posicao;
+    int qualidade;
+    int probLesao;
+
 };
 int main() {
     std::cout << "Hello World!" << std::endl;
