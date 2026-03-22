@@ -3,15 +3,23 @@
 
 using namespace std;
 
-struct Jogador {
+struct jogador {
     string nome;
-    string posicao;
     int numero;
+    string posicao;
     int idade;
     int probLesao;
     int probCastigo;
     int qualidade;
     bool lesionado;
+};
+
+struct equipa {
+    jogador* plantel;
+    jogador* convocados;
+    int nGr;
+    int nDef;
+    int nAva;
 
 };
 int main() {
