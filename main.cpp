@@ -23,7 +23,8 @@ struct equipa {
     int nAva;
 };
 int main() {
-    std::cout << "Hello World!" << std::endl;
+    srand(time(NULL));
+    strings* nomes = new nome[118];
 }
 // parece que sim
 //ja veem?
