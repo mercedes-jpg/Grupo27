@@ -11,3 +11,4 @@ struct Jogador {
 int main() {
     std::cout << "Hello World!" << std::endl;
 }
+ char francisco;
