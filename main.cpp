@@ -14,6 +14,7 @@ struct jogador {
     bool lesionado;
 };
 
+
 struct equipa {
     jogador* plantel;
     jogador* convocados;
@@ -24,7 +25,7 @@ struct equipa {
 };
 int main() {
     srand(time(NULL));
-    strings* nomes = new nome[118];
+    strings* nomes = new nome[118]; //Cria um apontador de nome nomes do tipo string e cria se 118 lugares do tipo nomes que recebera o nome dos jogadores
 }
 // parece que sim
 //ja veem?
