@@ -25,12 +25,5 @@ struct equipa {
 int main() {
     std::cout << "Hello World!" << std::endl;
 }
-char francisco;
-char guilherme;
-char valeria;
-char hoi;
-// o curso faz se no recurso
-
 // parece que sim
-// deu
-// que engraçado
+
