@@ -34,4 +34,4 @@ char hoi;
 // parece que sim
 // deu
 // que engraçado
-//fpo caralho
+// finaly
