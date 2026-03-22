@@ -12,6 +12,7 @@ struct Jogador {
     int probLesao;
     int probCastigo;
 
+
 };
 int main() {
     std::cout << "Hello World!" << std::endl;
