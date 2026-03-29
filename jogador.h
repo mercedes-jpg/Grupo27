@@ -5,7 +5,7 @@
 #ifndef GRUPO27_JOGADOR_H
 #define GRUPO27_JOGADOR_H
 
-#include <string>
+#include <string> // string não é básica como int, ela pertence à biblioteca <string>
 using namespace std;
 
 struct Jogador {
@@ -16,6 +16,7 @@ struct Jogador {
     int probLesao;
     int probCastigo;
     int qualidade;
+    int diasTreino;
     int jornadasLesao;
     int jornadasCastigo;
 };
