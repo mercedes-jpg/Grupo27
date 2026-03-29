@@ -1,5 +1,4 @@
-#include <iostream>
-//teste123456789 xD
+#include <iostream> //ficheiro de texto que contem as instruções e as declarações de funções referentes a ações de entrada e saída de dados - biblioteca standard input/output
 
 using namespace std;
 
