@@ -1,12 +1,14 @@
 //
 // Created by clara on 29/03/2026.
 //
+//.cpp implementa
 #include "jogador.h"
 #include <stdlib.h> // dá acesso a rand()
+#include <fstream> // biblioteca (classe) para escrita e leitrua de ficheiros
 
 Jogador criarJogador(string nome, int numero, string posicao) {
     Jogador j;
-    j.nome = nome;
+    j.nome = obterNomeAleatorio();
     j.numero = numero;
     j.posicao = posicao;
 
@@ -20,4 +22,16 @@ Jogador criarJogador(string nome, int numero, string posicao) {
     j.jornadasCastigo = 0;
 
     return j;
+}
+
+string obterNomeAleatorio() {
+    ifstream file("nomes.txt"); // só leitura
+
+    string nomes [150];
+    int total = 0;
+    string linha;
+    while (getline(file,linha)) {
+        nomes[total++] = linha;
+    }
+    return nomes[rand() % total];
 }

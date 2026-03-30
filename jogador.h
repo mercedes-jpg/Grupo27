@@ -1,7 +1,7 @@
 //
 // Created by clara on 29/03/2026.
 //
-
+//.h declara
 #ifndef GRUPO27_JOGADOR_H
 #define GRUPO27_JOGADOR_H
 
@@ -20,5 +20,8 @@ struct Jogador {
     int jornadasLesao;
     int jornadasCastigo;
 };
+
+Jogador criarJogador(string nome, int numero, string posicao);
+string obterNomeAleatorio();
 
 #endif //GRUPO27_JOGADOR_H

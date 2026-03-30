@@ -1,7 +1,7 @@
 //
 // Created by clara on 29/03/2026.
 //
-
+//.h declara
 #ifndef GRUPO27_PLANTEL_H
 #define GRUPO27_PLANTEL_H
 
@@ -12,5 +12,10 @@ struct ListaJogadores {
     int tamanho; // nº atual de jogadores
     int capacidade; //capacidade do plantel, ou seja, o nº máximo de jogadores
 };
+
+void inicializarPlantel(ListaJogadores &p, int capacidade);
+void inserirJogador(ListaJogadores &p, Jogador j);
+void removerJogador(ListaJogadores &p, int index);
+void gerarPlantel(ListaJogadores &o);
 
 #endif //GRUPO27_PLANTEL_H
