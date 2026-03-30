@@ -29,12 +29,12 @@ string obterNomeAleatorio() {
     int total = 0;
     string linha;
     fstream fs;
-    fs.open(nomeFicheiro, ios::in); //abre o ficheiro para leitura
-    if (fs.is_open()) { //faz o que esta a baixo enquanto o ficheiro esta aberto
+    fs.open(nomes.txt, ios::in); // abre o ficheiro para leitura
+    if (fs.is_open()) { // faz o que esta a baixo enquanto o ficheiro esta aberto
         while (getline(file,linha)) {
             nomes[total++] = linha;
         }
-        fs.close();//fecha o ficheiro
+        fs.close();// fecha o ficheiro
     }
     return nomes[rand() % total];
 }
