@@ -25,13 +25,16 @@ Jogador criarJogador(string nome, int numero, string posicao) {
 }
 
 string obterNomeAleatorio() {
-    ifstream file("nomes.txt"); // só leitura
-
     string nomes [150];
     int total = 0;
     string linha;
-    while (getline(file,linha)) {
-        nomes[total++] = linha;
+    fstream fs;
+    fs.open(nomeFicheiro, ios::in);
+    if (fs.is_open()) {
+        while (getline(file,linha)) {
+            nomes[total++] = linha;
+        }
+        fs.close();
     }
     return nomes[rand() % total];
 }
