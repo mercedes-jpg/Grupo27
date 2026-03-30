@@ -29,10 +29,10 @@ string obterNomeAleatorio() {
     int total = 0;
     string linha;
     fstream fs;
-    fs.open(nomes.txt, ios::in); // abre o ficheiro para leitura
+    fs.open("nomes.txt", ios::in); // abre o ficheiro para leitura
     if (fs.is_open()) { // faz o que esta a baixo enquanto o ficheiro esta aberto
-        while (getline(file,linha)) {
-            nomes[total++] = linha;
+        while (getline(fs,linha)) { // enquanto o getline le linhas retorna true - o getline le uma linha inteira do ficheiros nomes.txt e guarda  na var linha
+            nomes[total++] = linha; // o array nomes de 150 capacidade guarda o conteudo var linha na posição total e dps icrementa 1 para guardar a proxima var
         }
         fs.close();// fecha o ficheiro
     }
