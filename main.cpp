@@ -4,6 +4,7 @@
 
 #include "plantel.h"
 #include "jogador.h"
+#include "jogo.h"
 
 using namespace std;
 
