@@ -21,6 +21,7 @@ Jogador criarJogador(string nome, int numero, string posicao) {
     j.jornadasLesao = 0;
     j.jogosCastigo = 0;
 
+
     return j;
 }
 
