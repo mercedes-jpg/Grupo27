@@ -19,6 +19,13 @@ void lesionarJogador(ListaJogadores &plantel, ListaJogadores &lesionados, int in
 	removerJogador(plantel, index); //remove jogador j do plantel atraves da funcao remover jogador ja defenida
 }
 
+void recuperarLesionado(ListaJogadores &plantel, ListaJogadores &lesionados, int index) {
+    Jogador j =lesionados.jogadores[index]; //vai buscar o jogador j á lista de lesionados, que contém jogadores, na posição index
+    j.jornadasLesao = 0; // nao fica lesionado nenhuma jornada nesta momento, porque ja recuperou da lesao
+    inserirJogador(plantel, j); //adiciona o jogador j no fim da lista do plantel onde o jogador j é o jogador que recuperou da lesao
+    removerJogador(lesionados, index); //remove jogador j dos lesionados atraves da funcao remover jogador ja defenida
+}
+
 void castigarJogador(ListaJogadores &plantel, ListaJogadores &castigados, int index) {
     Jogador j =plantel.jogadores[index]; //vai buscar o jogador ao plantel
     j.jogosCastigo = 1 + rand() % 10; // jogos a ficar castigado 1 a 10 aleatoriamente
