@@ -14,7 +14,7 @@ void inicializarPlantel(ListaJogadores &p, int capacidade) {
 void lesionarJogador(ListaJogadores &plantel, ListaJogadores &lesionados, int index) {
     Jogador j =plantel.jogadores[index]; //vai buscar o jogador ao plantel
     j.jornadasLesao = 1 + rand() % 10; // jornadas a ficar lesionado 1 a 10 aleatoriamente
-    lesionados.jogadores[lesionados.tamanho++] = j; // mete o jogador j na lista lesionados dos jogadores acedida atraves dos mesmos na posição tamanho mais 1
+    lesionados.jogadores[lesionados.tamanho++] = j; // mete o jogador j na lista lesionados dos jogadores acedida atraves dos mesmos na posição tamanho e dps encrementa 1
     removerJogador(plantel, index); //remove jogador j do plantel atraves da funcao remover jogador ja defenida
 }
 
