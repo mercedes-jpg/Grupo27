@@ -14,6 +14,9 @@ struct ListaJogadores {
 };
 
 void inicializarPlantel(ListaJogadores &p, int capacidade);
+void lesionarJogador(ListaJogadores &plantel, ListaJogadores &lesionados, int index);
+void castigarJogador(ListaJogadores &plantel, ListaJogadores &castigados, int index);
+void adicionarTransferencia(ListaJogadores &transferencias, Jogador j);
 
 void inserirJogador(ListaJogadores &p, Jogador j);
 void removerJogador(ListaJogadores &p, int index);
