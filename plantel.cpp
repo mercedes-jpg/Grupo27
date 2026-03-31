@@ -23,7 +23,7 @@ void removerJogador(ListaJogadores &p, int index) {
     for (int i = index; i < p.tamanho -1; i++) { //i começa no que vamos remover
         p.jogadores[i] = p.jogadores[i+1]; //para nao deixar espaços em branco os jogadores que vêm depois dele vao recuar uma casa isto é esse lugar vai ser do jogador que vem logo de seguida
     }
-    p.tamanho--; //hummmmm
+    p.tamanho--; //hummmmm o último não fica duplicado por causa disto
 }
 
 void gerarPlantel(ListaJogadores &p) { //ListaJogadores é o tipo, p(plantel) é a variável

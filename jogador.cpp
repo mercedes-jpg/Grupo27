@@ -8,7 +8,7 @@
 
 Jogador criarJogador(string nome, int numero, string posicao) {
     Jogador j;
-    j.nome = obterNomeAleatorio();
+    j.nome = nome;
     j.numero = numero;
     j.posicao = posicao;
 
@@ -25,7 +25,7 @@ Jogador criarJogador(string nome, int numero, string posicao) {
 }
 
 string obterNomeAleatorio() {
-    string nomes [150]; // porque existe a volta de 100 ou mais nomes
+    string nomes [150]; // porque tem 114 nomes na lista de nomes
     int total = 0;
     string linha;
     fstream fs;
@@ -36,5 +36,5 @@ string obterNomeAleatorio() {
         }
         fs.close();// fecha o ficheiro
     }
-    return nomes[rand() % total];
+    return nomes[rand() % total]; // o rand vai dar um indice aleatorio do vetor nomes; logo vai retornar um nome aleatório
 }

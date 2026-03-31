@@ -14,7 +14,7 @@ int main() {
 
     int capacidade = 20 + rand() % 11; // 20 a 30 jogadores
     inicializarPlantel(plantel, capacidade);
-    gerarPlantel(plantel);
+    gerarPlantel(plantel); // aqui p = plantel
 
     cout << "Capacidade: " << capacidade << endl;
 
