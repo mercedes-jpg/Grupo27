@@ -19,7 +19,7 @@ Jogador criarJogador(string nome, int numero, string posicao) {
 
     j.diasTreino = 0;
     j.jornadasLesao = 0;
-    j.jornadasCastigo = 0;
+    j.jogosCastigo = 0;
 
     return j;
 }

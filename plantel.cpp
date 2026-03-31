@@ -11,7 +11,22 @@ void inicializarPlantel(ListaJogadores &p, int capacidade) {
     p.tamanho = 0;
     p.capacidade = capacidade;
 }
+void lesionarJogador(ListaJogadores &plantel, ListaJogadores &lesionados, int index) {
+    Jogador j =plantel.jogadores[index]; //vai buscar o jogador ao plantel
+    j.jornadasLesao = 1 + rand() % 10; // jornadas a ficar lesionado 1 a 10 aleatoriamente
+    lesionados.jogadores[lesionados.tamanho++] = j; // mete o jogador j na lista lesionados dos jogadores acedida atraves dos mesmos na posição tamanho mais 1
+    removerJogador(plantel, index); //remove jogador j do plantel atraves da funcao remover jogador ja defenida
+}
 
+void castigarJogador(ListaJogadores &plantel, ListaJogadores &castigados, int index) {
+    Jogador j =plantel.jogadores[index]; //vai buscar o jogador ao plantel
+    j.jogosCastigo = 1 + rand() % 10; // jogos a ficar castigado 1 a 10 aleatoriamente
+    castigados.jogadores[castigados.tamanho++] = j; // mete o jogador j na lista lesionados dos jogadores acedida atraves dos mesmos na posição tamanho mais 1
+    removerJogador(plantel, index); //remove jogador j do plantel atraves da funcao remover jogador ja defenida
+}
+void adicionarTransferencia(ListaJogadores &transferencias, Jogador j) {
+    transferencias.jogadores[transferencias.tamanho++] = j;
+}
 void inserirJogador(ListaJogadores &p, Jogador j) {
     if (p.tamanho < p.capacidade) { //se o nº de jogadores atual for menor que a capacidade do plantel
         p.jogadores[p.tamanho] = j; //então vamos inserir o jogador no fim da lista   hummmmm

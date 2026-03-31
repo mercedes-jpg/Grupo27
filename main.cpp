@@ -10,10 +10,15 @@ using namespace std;
 int main() {
     srand(time(NULL));
 
-    ListaJogadores plantel;
-
+    ListaJogadores plantel; //declaração dos diferentes arrays
+	ListaJogadores lesionados;
+	ListaJogadores castigados;
+	ListaJogadores transferencias;
     int capacidade = 20 + rand() % 11; // 20 a 30 jogadores
-    inicializarPlantel(plantel, capacidade);
+    inicializarPlantel(plantel, capacidade); //inicoialização dos arrays
+	inicializarPlantel(lesionados, capacidade);
+	inicializarPlantel(castigados, capacidade);
+	inicializarPlantel(transferencias, capacidade);
     gerarPlantel(plantel); // aqui p = plantel
 
     cout << "Capacidade: " << capacidade << endl;
