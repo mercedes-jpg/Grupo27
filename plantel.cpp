@@ -34,6 +34,13 @@ void castigarJogador(ListaJogadores &plantel, ListaJogadores &castigados, int in
 	removerJogador(plantel, index); //remove jogador j do plantel atraves da funcao remover jogador ja defenida
 }
 
+void recuperarCastigado(ListaJogadores &plantel, ListaJogadores &castigados, int index) {
+    Jogador j =castigados.jogadores[index]; // vai buscar o jogador à lista de castigados
+    j.jogosCastigo = 0; // nao fica castigado em nenhum jogo pois tirado do castigo
+    inserirJogador(plantel, j);
+    removerJogador(castigados, index); //remove jogador j da lista de castigados atraves da funcao remover jogador ja definida
+}
+
 void adicionarTransferencia(ListaJogadores &transferencias, Jogador j) {
     transferencias.jogadores[transferencias.tamanho++] = j;
 }
