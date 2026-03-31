@@ -7,4 +7,6 @@ add_executable(Grupo27 main.cpp
         jogador.h
         jogador.cpp
         plantel.h
-        plantel.cpp)
+        plantel.cpp
+        jogo.h
+        jogo.cpp)
