@@ -15,12 +15,14 @@ int main() {
 	ListaJogadores lesionados;
 	ListaJogadores castigados;
 	ListaJogadores transferencias;
+	int capacidadeMax = 30;
     int capacidade = 20 + rand() % 11; // 20 a 30 jogadores
-    inicializarPlantel(plantel, capacidade); //inicoialização dos arrays
-	inicializarPlantel(lesionados, capacidade);
-	inicializarPlantel(castigados, capacidade);
-	inicializarPlantel(transferencias, capacidade);
+    inicializarPlantel(plantel, capacidadeMax); //inicialização dos arrays
+	inicializarPlantel(lesionados, capacidadeMax);
+	inicializarPlantel(castigados, capacidadeMax);
+	inicializarPlantel(transferencias, capacidadeMax);
     gerarPlantel(plantel); // aqui p = plantel
+	simularJornada(plantel, lesionados, castigados, transferencias);
 
     cout << "Capacidade: " << capacidade << endl;
 

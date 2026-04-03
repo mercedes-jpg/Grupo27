@@ -10,39 +10,40 @@ void inicializarPlantel(ListaJogadores &p, int capacidade) {
     p.jogadores = new Jogador[capacidade]; //hummmmm
     p.tamanho = 0;
     p.capacidade = capacidade;
+    p.capacidadeMax = 30;
 }
-void lesionarJogador(ListaJogadores &plantel, ListaJogadores &lesionados, int index) {
-    Jogador j =plantel.jogadores[index]; //vai buscar o jogador ao plantel
+void lesionarJogador(ListaJogadores &plantel, ListaJogadores &lesionados, int a) {
+    Jogador j =plantel.jogadores[a]; //vai buscar o jogador ao plantel
     j.jornadasLesao = 1 + rand() % 10; // jornadas a ficar lesionado 1 a 10 aleatoriamente
-    //lesionados.jogadores[lesionados.tamanho++] = j; // mete o jogador j na lista lesionados dos jogadores acedida atraves dos mesmos na posição tamanho e dps encrementa 1
+    //lesionados.jogadores[lesionados.tamanho++] = j; // mete o jogador j na lista lesionados dos jogadores acedida através dos mesmos na posição tamanho e dps encrementa 1
     inserirJogador(lesionados, j); //adiciona o jogador j no fim da lista dos lesionados onde o jogador j é o jogador lesionado
-	removerJogador(plantel, index); //remove jogador j do plantel atraves da funcao remover jogador ja defenida
+	removerJogador(plantel, a); //remove jogador j do plantel através da função remover jogador já definida
 }
 
-void recuperarLesionado(ListaJogadores &plantel, ListaJogadores &lesionados, int index) {
-    Jogador j =lesionados.jogadores[index]; //vai buscar o jogador j á lista de lesionados, que contém jogadores, na posição index
-    j.jornadasLesao = 0; // nao fica lesionado nenhuma jornada nesta momento, porque ja recuperou da lesao
-    inserirJogador(plantel, j); //adiciona o jogador j no fim da lista do plantel onde o jogador j é o jogador que recuperou da lesao
-    removerJogador(lesionados, index); //remove jogador j dos lesionados atraves da funcao remover jogador ja defenida
+void recuperarLesionado(ListaJogadores &plantel, ListaJogadores &lesionados, int a) {
+    Jogador j =lesionados.jogadores[a]; //vai buscar o jogador j à lista de lesionados, que contém jogadores, na posição index
+    j.jornadasLesao = 0; // não fica lesionado nenhuma jornada neste momento, porque já recuperou da lesão
+    inserirJogador(plantel, j); //adiciona o jogador j no fim da lista do plantel onde o jogador j é o jogador que recuperou da lesão
+    removerJogador(lesionados, a); //remove jogador j dos lesionados atraves da funcao remover jogador ja definida
 }
 
-void castigarJogador(ListaJogadores &plantel, ListaJogadores &castigados, int index) {
-    Jogador j =plantel.jogadores[index]; //vai buscar o jogador ao plantel
+void castigarJogador(ListaJogadores &plantel, ListaJogadores &castigados, int a) {
+    Jogador j =plantel.jogadores[a]; //vai buscar o jogador ao plantel
     j.jogosCastigo = 1 + rand() % 10; // jogos a ficar castigado 1 a 10 aleatoriamente
-    //castigados.jogadores[castigados.tamanho++] = j; // mete o jogador j na lista lesionados dos jogadores acedida atraves dos mesmos na posição tamanho mais 1
+    //castigados.jogadores[castigados.tamanho++] = j; // mete o jogador j na lista lesionados dos jogadores acedida através dos mesmos na posição de índice tamanho
     inserirJogador(castigados, j);
-	removerJogador(plantel, index); //remove jogador j do plantel atraves da funcao remover jogador ja defenida
+	removerJogador(plantel, a); //remove jogador j do plantel através da funcao remover jogador já definida
 }
 
-void recuperarCastigado(ListaJogadores &plantel, ListaJogadores &castigados, int index) {
-    Jogador j =castigados.jogadores[index]; // vai buscar o jogador à lista de castigados
-    j.jogosCastigo = 0; // nao fica castigado em nenhum jogo pois tirado do castigo
+void recuperarCastigado(ListaJogadores &plantel, ListaJogadores &castigados, int a) {
+    Jogador j =castigados.jogadores[a]; // vai buscar o jogador à lista de castigados
+    j.jogosCastigo = 0; // não fica castigado em nenhum jogo, pois tirado do castigo
     inserirJogador(plantel, j);
-    removerJogador(castigados, index); //remove jogador j da lista de castigados atraves da funcao remover jogador ja definida
+    removerJogador(castigados, a); //remove jogador j da lista de castigados através da função remover jogador já definida
 }
 
 void adicionarTransferencia(ListaJogadores &transferencias, Jogador j) {
-    transferencias.jogadores[transferencias.tamanho++] = j;
+    inserirJogador(transferencias, j);
 }
 
 void inserirJogador(ListaJogadores &p, Jogador j) {
@@ -52,34 +53,45 @@ void inserirJogador(ListaJogadores &p, Jogador j) {
     }
 }
 
-void removerJogador(ListaJogadores &p, int index) {
-    for (int i = index; i < p.tamanho -1; i++) { //i começa no que vamos remover
-        p.jogadores[i] = p.jogadores[i+1]; //para nao deixar espaços em branco os jogadores que vêm depois dele vao recuar uma casa isto é esse lugar vai ser do jogador que vem logo de seguida
+void removerJogador(ListaJogadores &p, int a) {
+    for (int i = a; i < p.tamanho -1; i++) { //i começa no que vamos remover
+        p.jogadores[i] = p.jogadores[i+1]; //para não deixar espaços em branco os jogadores que vêm depois dele vão recuar uma casa isto é esse lugar vai ser do jogador que vem logo de seguida
     }
     p.tamanho--; //hummmmm o último não fica duplicado por causa disto
 }
 
 void gerarPlantel(ListaJogadores &p) { //ListaJogadores é o tipo, p(plantel) é a variável
-    int numero = 1;
+    //números aleatórios e não repetidos para os jogadores
+    bool usados[99] = {false};
+    int gerarNumeroUnico(bool usados[]) {
+        int n;
+        do {
+            n = 1 + rand() % 99; // os números no futebol vão de 1 a 99
+        } while (usados[n]);
+        usados[n] = true;
+        return n;
+    }
+    int numero = gerarNumeroUnico(usados);;
+    int gr = 2, def = 7, med = 7, ava = 4; // numero minimo de cada posição
+    int restantes = p.capacidade - 20;
+    while (restantes > 0) {
+        int r = rand() % 4;
 
-   int gr = 2 + rand() % 2; //mínimo 2 GR, máximo 3 GR
-    for (int i = 0; i < gr; i++) { // o i é nos GR
-        string nome = obterNomeAleatorio();
-        p.jogadores[p.tamanho++] = criarJogador(nome, numero++, "GR"); //p.jogadores -> aceder ao array; p.tamanho++ -> usa o tamanho atual e depois incrementa-o
+        if (r == 0 && gr < 3) { gr++; restantes--;} // se já tiver no máximo da posição então nao entra em nenhum if volta ao loop, gera novo r
+        else if (r == 1 && def < 10) { def++; restantes--;}
+        else if (r == 2 && med < 10) { med++; restantes--;}
+        else if (r == 3 && ava < 7) { ava++; restantes--;}
     }
-    int def = 7 + rand() % 4; // mínimo 7 DEF, máximo 10 DEF
-    for (int i = 0; i < def; i++) {
-        string nome = obterNomeAleatorio();
-        p.jogadores[p.tamanho++] = criarJogador(nome, numero++, "DEF");
-    }
-    int med = 7 + rand() % 4; // mínimo 7 MED, máximo 10 MED
-    for (int i = 0; i < med; i++) {
-        string nome = obterNomeAleatorio();
-        p.jogadores[p.tamanho++] = criarJogador(nome, numero++, "MED");
-    }
-    int ava = 4 + rand() % 4; // minimo 4 AVA, máximo 7 AVA
-    for (int i = 0; i < ava; i++) {
-        string nome = obterNomeAleatorio();
-        p.jogadores[p.tamanho++] = criarJogador(nome, numero++, "AVA");
-    }
+    //criar jogadores por ordem
+    for (int i= 0; i < gr; i++)
+        inserirJogador(p, criarJogador(obterNomeAleatorio(), numero, "GR"));
+    for (int i = 0; i < def; i++)
+        inserirJogador(p, criarJogador(obterNomeAleatorio(), numero, "DEF"));
+    for (int i = 0; i < med; i++)
+        inserirJogador(p, criarJogador(obterNomeAleatorio(), numero, "MED"));
+    for (int i = 0; i < ava; i++)
+        inserirJogador(p, criarJogador(obterNomeAleatorio(), numero, "AVA"));
+
+
+
 }

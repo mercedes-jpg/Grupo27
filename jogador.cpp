@@ -26,7 +26,7 @@ Jogador criarJogador(string nome, int numero, string posicao) {
 }
 
 string obterNomeAleatorio() {
-    string nomes [150]; // porque tem 114 nomes na lista de nomes
+    string nomes [150]; // porque tem 118 nomes na lista de nomes
     int total = 0;
     string linha;
     fstream fs;

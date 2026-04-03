@@ -25,3 +25,4 @@ Jogador criarJogador(string nome, int numero, string posicao);
 string obterNomeAleatorio(); // existe uma função com este nome e retorna string
 
 #endif //GRUPO27_JOGADOR_H
+
