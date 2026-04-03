@@ -62,7 +62,7 @@ void removerJogador(ListaJogadores &p, int a) {
 
 void gerarPlantel(ListaJogadores &p) { //ListaJogadores é o tipo, p(plantel) é a variável
     //números aleatórios e não repetidos para os jogadores
-    bool usados[99] = {false};
+    bool usados[100] = {false};
     int gerarNumeroUnico(bool usados[]) {
         int n;
         do {
@@ -71,7 +71,6 @@ void gerarPlantel(ListaJogadores &p) { //ListaJogadores é o tipo, p(plantel) é
         usados[n] = true;
         return n;
     }
-    int numero = gerarNumeroUnico(usados);;
     int gr = 2, def = 7, med = 7, ava = 4; // numero minimo de cada posição
     int restantes = p.capacidade - 20;
     while (restantes > 0) {
@@ -84,13 +83,13 @@ void gerarPlantel(ListaJogadores &p) { //ListaJogadores é o tipo, p(plantel) é
     }
     //criar jogadores por ordem
     for (int i= 0; i < gr; i++)
-        inserirJogador(p, criarJogador(obterNomeAleatorio(), numero, "GR"));
+        inserirJogador(p, criarJogador(obterNomeAleatorio(), gerarNumeroUnico(usados), "GR"));
     for (int i = 0; i < def; i++)
-        inserirJogador(p, criarJogador(obterNomeAleatorio(), numero, "DEF"));
+        inserirJogador(p, criarJogador(obterNomeAleatorio(), gerarNumeroUnico(usados), "DEF"));
     for (int i = 0; i < med; i++)
-        inserirJogador(p, criarJogador(obterNomeAleatorio(), numero, "MED"));
+        inserirJogador(p, criarJogador(obterNomeAleatorio(), gerarNumeroUnico(usados), "MED"));
     for (int i = 0; i < ava; i++)
-        inserirJogador(p, criarJogador(obterNomeAleatorio(), numero, "AVA"));
+        inserirJogador(p, criarJogador(obterNomeAleatorio(), gerarNumeroUnico(usados), "AVA"));
 
 
 

@@ -17,8 +17,8 @@ int main() {
 	ListaJogadores lesionados;
 	ListaJogadores castigados;
 	ListaJogadores transferencias;
-	int capacidadeMax = 30;
     int capacidade = 20 + rand() % 11; // 20 a 30 jogadores
+	int capacidadeMax = 30;
     inicializarPlantel(plantel, capacidadeMax); //inicialização dos arrays
 	inicializarPlantel(lesionados, capacidadeMax);
 	inicializarPlantel(castigados, capacidadeMax);

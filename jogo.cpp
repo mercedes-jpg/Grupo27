@@ -48,7 +48,7 @@ void simularJornada(ListaJogadores &plantel, ListaJogadores &lesionados, ListaJo
     for (int i = 0; i < plantel.tamanho && i < 17; i++) {
         int r = rand() % 101;
         if (r < plantel.jogadores[i].probLesao) {
-            lesionarJogador(plantel, castigados, i);
+            lesionarJogador(plantel, lesionados, i);
             i--; // como o lesionarJogador remove um jogador e os outros andam uma casa para trás temos de decrementar o i para não saltarmos um jogador
         }
     }
@@ -66,7 +66,7 @@ void simularJornada(ListaJogadores &plantel, ListaJogadores &lesionados, ListaJo
     //transferências
     for (int i = 0; i < 2; i++) {
         string posicoes[] = {"GR","DEF","MED","AVA"};
-        Jogador j = criarJogador(obterNomeAleatorio(), rand() % 118, posicoes[rand() % 4]);
+        Jogador j = criarJogador(obterNomeAleatorio(), gerarNumeroUnico(usados), posicoes[rand() % 4]);
         inserirJogador(transferencias, j);
     }
 }

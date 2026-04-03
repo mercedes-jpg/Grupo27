@@ -23,7 +23,7 @@ void recuperarLesionado(ListaJogadores &plantel, ListaJogadores &lesionados, int
 
 void inserirJogador(ListaJogadores &p, Jogador j);
 void removerJogador(ListaJogadores &p, int a);
-void gerarPlantel(ListaJogadores &p); // o & serve para obter o endereço de uma variável na memória (passagem por referência), assim mudamos o plantel verdadeiro; sem & as alteraçaões não ficariam guardadas
+void gerarPlantel(ListaJogadores &p); // o & serve para obter o endereço de uma variável na memória (passagem por referência), assim mudamos o plantel verdadeiro; sem & as alterações não ficariam guardadas
 int gerarNumeroUnico(bool usados[]);
 
 #endif //GRUPO27_PLANTEL_H
