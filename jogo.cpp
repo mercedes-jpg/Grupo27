@@ -2,8 +2,8 @@
 // Created by clara on 31/03/2026.
 //
 
-#include "jogo.h" // que já tem include do plantel.h é tipo um include indireto
-#include "jogador.h" // same por isso que dizem que não usamos
+#include "jogo.h"
+#include "jogador.h"
 #include <iostream>
 #include <fstream>
 #include <stdlib.h>
