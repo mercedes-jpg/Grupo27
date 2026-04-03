@@ -12,3 +12,4 @@ void escolherTitulares(ListaJogadores &plantel, ListaJogadores &titulares);
 void escolherSuplentes(ListaJogadores &plantel, ListaJogadores &suplentes);
 
 #endif //GRUPO27_EQUIPA_H
+

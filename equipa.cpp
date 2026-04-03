@@ -83,3 +83,4 @@ void escolherSuplentes(ListaJogadores &plantel, ListaJogadores &suplentes)
         // adiciona o jogador j a lista dos suplentes na posição tamanho e dps incrementa 1
     }
 }
+
