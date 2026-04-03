@@ -23,6 +23,7 @@ struct Jogador {
 
 Jogador criarJogador(string nome, int numero, string posicao);
 string obterNomeAleatorio(); // existe uma função com este nome e retorna string
+int gerarNumeroUnico(bool usados[]);
 
 #endif //GRUPO27_JOGADOR_H
 

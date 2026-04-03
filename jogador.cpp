@@ -12,7 +12,7 @@ Jogador criarJogador(string nome, int numero, string posicao) {
     j.numero = numero;
     j.posicao = posicao;
 
-    j.idade = rand() % 25 + 16; // entre 16 e 40
+    j.idade = 16 + rand() % 25; // entre 16 e 40
     j.probLesao = rand() % 16; // entre 0 e 15
     j.probCastigo = rand() % 21; // entre 0 e 20
     j.qualidade = rand() % 101; // entre 0 e 100
@@ -20,8 +20,6 @@ Jogador criarJogador(string nome, int numero, string posicao) {
     j.diasTreino = 0;
     j.jornadasLesao = 0;
     j.jogosCastigo = 0;
-
-
 
     return j;
 }
@@ -39,4 +37,15 @@ string obterNomeAleatorio() {
         fs.close();// fecha o ficheiro
     }
     return nomes[rand() % total]; // o rand vai dar um indice aleatorio do vetor nomes; logo vai retornar um nome aleatório
+}
+
+
+//números aleatórios e não repetidos para os jogadores
+int gerarNumeroUnico(bool usados[]) {
+    int n;
+    do {
+        n = 1 + rand() % 99; // os números no futebol vão de 1 a 99
+    } while (usados[n]);
+    usados[n] = true;
+    return n;
 }
