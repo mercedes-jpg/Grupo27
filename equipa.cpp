@@ -7,7 +7,7 @@
 void escolherTitulares(ListaJogadores &plantel, ListaJogadores &titulares)
 {
     titulares.tamanho = 0;
-    // começamos com 0 titulares (lista vazia) - numero de titulares e vazio
+    // começamos com 0 titulares (lista vazia) - numero de titulares e 0
 
     int gr = 0, def = 0, med = 0, ava = 0;
     // inicialização das variaveis das várias posiçoes a 0
@@ -18,11 +18,11 @@ void escolherTitulares(ListaJogadores &plantel, ListaJogadores &titulares)
         Jogador j = plantel.jogadores[i];
         // vamos buscar o jogador j na posição i do plantel
 
-        // ignorar jogadores lesionados ou castigados hummmmmmmm
+        // ignorar jogadores lesionados ou castigados
         if (j.jornadasLesao > 0 || j.jogosCastigo > 0)
         {
             continue;
-            // passa ao próximo jogador
+            // caso if seja verdadeiro passa a proxima linha de codigo
         }
 
         // escolher 1 GR
