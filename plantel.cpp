@@ -29,16 +29,16 @@ void removerJogador(ListaJogadores &p, int a) {
 void gerarPlantel(ListaJogadores &p) { //ListaJogadores é o tipo, p(plantel) é a variável
     bool usados[100] = {false}; // todos começam como não usados; até 100 porque usados[numero] ignoramos o 0
 
-    int total = 20 + rand() % 11; // 20 a 30
-    p.tamanho = 0;
+    int total = 20 + rand() % 11; // 20 a 30 - capacidade
+    p.tamanho = 0; //tamanho inicial do plantel
 
     int gr = 2, def = 7, med = 7, ava = 4; // numero minimo de cada posição
-    int restantes = total - 20; // tirando do número aleatório 20 que são os jogadores mínimos
+    int restantes = total - 20; // tirando do número aleatório 20 que são os jogadores mínimos  - restantes sera o restante da capacidade ou seja tirando o min total de jogadores no plantel que é 20 logo restantes mais total da a capacidade - total no min é 20 e no max é 30 a capacidade é sempre 30
 
     while (restantes > 0) { //enquanto restar jogadores para criar
         int r = rand() % 4; //vamos escolher aleatoriamente uma posição para cada um deles
 
-        if (r == 0 && gr < 3) { gr++; restantes--;} // se já tiver no máximo da posição então não entra em nenhum if e gera outro r
+        if (r == 0 && gr < 3) { gr++; restantes--;} // se já tiver no máximo da posição então não entra em nenhum if e gera outro r, isto e, outra posição aleatoria
         else if (r == 1 && def < 10) { def++; restantes--;}
         else if (r == 2 && med < 10) { med++; restantes--;}
         else if (r == 3 && ava < 7) { ava++; restantes--;}
