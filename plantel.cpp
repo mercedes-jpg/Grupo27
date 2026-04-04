@@ -35,8 +35,7 @@ void removerJogador(ListaJogadores &p, int a) {
     p.tamanho--; // o último não fica duplicado graças a isto
 }
 
-void gerarPlantel(ListaJogadores &p) { // ListaJogadores é o tipo, p(plantel) é a variável
-    bool usados[100] = {false}; // todos começam como não usados; até 100 porque usados[numero] ignoramos o 0
+void gerarPlantel(ListaJogadores &p, bool usados[]) { // ListaJogadores é o tipo, p(plantel) é a variável
 
     int total = 20 + rand() % 11; // 20 a 30 - capacidade
     p.tamanho = 0; //tamanho inicial do plantel

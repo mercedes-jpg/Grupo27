@@ -12,6 +12,7 @@ using namespace std;
 
 int main() {
     srand(time(NULL));
+	bool usados[100] = {false}; // todos começam como não usados; é até 100 porque iremos como índices (usados[numero]) ignoramos o 0
 
     ListaJogadores plantel; //declaração dos diferentes arrays
 	ListaJogadores lesionados;

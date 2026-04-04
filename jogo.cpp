@@ -75,7 +75,6 @@ void simularJornada(ListaJogadores &plantel, ListaJogadores &lesionados, ListaJo
         cout << "O jogo foi terminado por falta de jogadores.";
     }
     //transferências
-    bool usados[100] = {false};
     for (int i = 0; i < 2; i++) {
         string posicoes[] = {"GR","DEF","MED","AVA"};
         Jogador j = criarJogador(obterNomeAleatorio(), gerarNumeroUnico(usados), posicoes[rand() % 4]);
