@@ -44,8 +44,8 @@ void gerarPlantel(ListaJogadores &p) { //ListaJogadores é o tipo, p(plantel) é
         else if (r == 3 && ava < 7) { ava++; restantes--;}
     }
     //criar jogadores por ordem
-    for (int i= 0; i < gr; i++)
-        inserirJogador(p, criarJogador(obterNomeAleatorio(), gerarNumeroUnico(usados), "GR"));
+    for (int i= 0; i < gr; i++) // o for percorre o plantel atraves dos indices: sendo i = 0 e i<gr que é o numero de gr no plantel insere o jogador j no plantel p incrementando 1 em i
+        inserirJogador(p, criarJogador(obterNomeAleatorio(), gerarNumeroUnico(usados), "GR")); //a função inserir jogador recebe o plantel p e um jogador j criado pela função criarJogador, do tipo jogador - struct ja criada que cebe um nome, numero e posição, funcao esta que recebe 3 coisas
     for (int i = 0; i < def; i++)
         inserirJogador(p, criarJogador(obterNomeAleatorio(), gerarNumeroUnico(usados), "DEF"));
     for (int i = 0; i < med; i++)

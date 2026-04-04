@@ -5,7 +5,7 @@
 #include "plantel.h"
 #include "jogador.h"
 #include "jogo.h"
-#include "equipas.h"
+#include "equipa.h"
 
 
 using namespace std;
