@@ -11,7 +11,7 @@
 using namespace std;
 
 string obterEquipaAdvAleatoria() {
-    string equipas[100];
+    string equipas[50];
     int total = 0;
     string linha;
     fstream fs;
@@ -25,27 +25,24 @@ string obterEquipaAdvAleatoria() {
     return equipas[rand() % total];
 }
 
-void simularJornada(ListaJogadores &plantel, ListaJogadores &lesionados, ListaJogadores &castigados, ListaJogadores &transferencias) {
-    int jogadoresEmJogo;
+void simularJornada(ListaJogadores &plantel, ListaJogadores &lesionados, ListaJogadores &castigados, ListaJogadores &transferencias, bool usados[]) {
+    int jogadoresEmJogo = (plantel.tamanho >= 11) ? 11 : plantel.tamanho; // se tivermos 11 ou mais jogadores no plantel, inicialmente serão 11 que irão jogar, se só tiver 10, 9, 8 ou 7 será esse o número de jogadores a jogar
+    int substituicoes = 0;
+
     string adversario = obterEquipaAdvAleatoria();
     int totalGolos = rand() % 9; // mínimo 0 golos, máximo 8 golos, no total
     int golosEDA = rand() % (totalGolos + 1); // escolher um número aleatório entre 0 e o total de golos que deu, para ver quantos golos o EDA FC marcou
     int golosADV = totalGolos - golosEDA; // depois o que restar fica para a equipa adversária
-    int substituicoes = 0;
 
-    cout << "\n=== JORNADA ===\n";
     cout << "EDA FC vs" << adversario << endl;
     cout << "Resultado : EDA FC:" << golosEDA << " - " << adversario << ":"<< golosADV << endl;
-
-    if (plantel.tamanho >= 11)
-        jogadoresEmJogo = 11;
-    else
-        jogadoresEmJogo = plantel.tamanho;
 
     //simular lesões um a um
     for (int i = 0; i < jogadoresEmJogo; i++) {
         int r = rand() % 101;
+
         if (r < plantel.jogadores[i].probLesao) { // se esse número for menos que a probabilidade de lesão desse jogador então ele é lesionado
+
             if (substituicoes < 3) {
                 substituicoes++;
             } else {
@@ -58,7 +55,9 @@ void simularJornada(ListaJogadores &plantel, ListaJogadores &lesionados, ListaJo
     //simular castigos um a um
     for (int i = 0; i < jogadoresEmJogo; i++) {
         int r = rand() % 101;
+
         if (r < plantel.jogadores[i].probCastigo) { // se esse número for menos que a probabilidade de castigo desse jogador então ele é castigado
+
             if (substituicoes < 3) { // se ainda não tivermos usado as 3 substituições
                 substituicoes++; // incrementamos o número de substituições usadas
             } else {
@@ -72,11 +71,12 @@ void simularJornada(ListaJogadores &plantel, ListaJogadores &lesionados, ListaJo
         cout << "Não há jogadores suficientes. Ora bolas!";
     }
     if (jogadoresEmJogo < 7) {
-        cout << "O jogo foi terminado por falta de jogadores.";
+        cout << "O jogo foi terminado por falta de jogadores.\n";
     }
     //transferências
     for (int i = 0; i < 2; i++) {
         string posicoes[] = {"GR","DEF","MED","AVA"};
+
         Jogador j = criarJogador(obterNomeAleatorio(), gerarNumeroUnico(usados), posicoes[rand() % 4]);
         inserirJogador(transferencias, j);
     }

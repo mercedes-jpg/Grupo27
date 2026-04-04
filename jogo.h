@@ -7,6 +7,7 @@
 #include "plantel.h"
 
 string obterEquipaAdvAleatoria();
-void simularJornada(ListaJogadores &plantel, ListaJogadores &lesionados, ListaJogadores &castigados, ListaJogadores &transferencias);
+
+void simularJornada(ListaJogadores &plantel, ListaJogadores &lesionados, ListaJogadores &castigados, ListaJogadores &transferencias, bool usados[]);
 
 #endif //GRUPO27_JOGO_H

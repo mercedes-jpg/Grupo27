@@ -12,24 +12,32 @@ using namespace std;
 
 int main() {
     srand(time(NULL));
-	bool usados[100] = {false}; // todos começam como não usados; é até 100 porque iremos como índices (usados[numero]) ignoramos o 0
 
     ListaJogadores plantel; //declaração dos diferentes arrays
 	ListaJogadores lesionados;
 	ListaJogadores castigados;
 	ListaJogadores transferencias;
-    int capacidade = 20 + rand() % 11; // 20 a 30 jogadores
-	int capacidadeMax = 30;
-    inicializarPlantel(plantel, capacidadeMax); //inicialização dos arrays
-	inicializarPlantel(lesionados, capacidadeMax);
-	inicializarPlantel(castigados, capacidadeMax);
-	inicializarPlantel(transferencias, capacidadeMax);
-    gerarPlantel(plantel); // aqui p = plantel
-	simularJornada(plantel, lesionados, castigados, transferencias);
+	bool usados[100] = {false}; // todos começam como não usados; é até 100 porque iremos como índices (usados[numero]) ignoramos o 0
+    //int capacidade = 20 + rand() % 11; // 20 a 30 jogadores
+	//int capacidadeMax = 30;
+    inicializarPlantel(plantel, 30); //inicialização dos arrays
+	inicializarPlantel(lesionados, 30);
+	inicializarPlantel(castigados, 30);
+	inicializarPlantel(transferencias, 30);
 
-    cout << "Capacidade: " << capacidade << endl;
+    gerarPlantel(plantel, usados); // aqui p = plantel
 
-    return 0;
+	char escolha;
+	int jornada = 1;
+
+	do {
+		cout << "\n===== JORNADA " << jornada++ << " =====\n";
+		simularJornada(plantel, lesionados, castigados, transferencias, usados);
+		cout << "\n(s) seguinte    (o) sair ";
+		cin >> escolha;
+	} while (escolha == 's');
+
+	return 0;
 }
 
 // struct equipa {
