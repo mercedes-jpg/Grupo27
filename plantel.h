@@ -9,8 +9,9 @@
 
 struct ListaJogadores {
     Jogador* jogadores; //array dinâmico  hummmmmm jogadores porque é um array de vários jogadores
-    int tamanho; // nº atual de jogadores
-    int capacidade; // 30
+    int tamanho; // número atual de jogadores
+    int capacidade; // número inicial de jogadores
+    const int CAPACIDADEMAX = 30; // no máximo 30 jogadores
 };
 
 void inicializarPlantel(ListaJogadores &p, int capacidade);

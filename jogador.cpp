@@ -42,6 +42,7 @@ string obterNomeAleatorio() {
 
 //números aleatórios e não repetidos para os jogadores
 int gerarNumeroUnico(bool usados[]) {
+
     int n;
     do {
         n = 1 + rand() % 99; // os números no futebol vão de 1 a 99

@@ -7,26 +7,35 @@
 #include <stdlib.h>
 
 void inicializarPlantel(ListaJogadores &p, int capacidade) {
-    p.jogadores = new Jogador[capacidade]; //hummmmm
+    p.jogadores = new Jogador[capacidade]; // hummmmm
     p.tamanho = 0;
     p.capacidade = capacidade;
 }
 
 void inserirJogador(ListaJogadores &p, Jogador j) {
-    if (p.tamanho < p.capacidade) { //se o nº de jogadores atual for menor que a capacidade do plantel
-        p.jogadores[p.tamanho] = j; //então vamos inserir o jogador no fim da lista
+    if (p.tamanho < p.capacidade) { // se o nº de jogadores atual for menor que a capacidade do plantel
+        int indice = 0;
+        // vamos encontrar a posição certa para a lista continuar ordenada
+        while (indice < p.tamanho && p.jogadores[indice].posicao < j.posicao) { // enquanto a posição for "menor" que a do jogador que temos de inserir
+            indice++; // vamos passar ao próximo
+        }
+        // quando chegarmos a um que a posição seja maior temos de passar os jogadores uma casa para a direita para ter lugar para o que vamos inserir
+        for (int i = p.tamanho; i > indice; i--) {
+            p.jogadores[i] = p.jogadores[i - 1]; // no índice do tamanho, isto é, no fim da lista vamos igualar esse ao anterior, depois o indice anterior ao anterior-anterior (= passar todos uma casa para a direita)
+        }
+        p.jogadores[indice] = j;
         p.tamanho++; // e o número atual de jogadores será incrementado num valor
     }
 }
 
 void removerJogador(ListaJogadores &p, int a) {
-    for (int i = a; i < p.tamanho - 1; i++) { //i começa no que vamos remover
-        p.jogadores[i] = p.jogadores[i+1]; //para não deixar espaços em branco os jogadores que vêm depois dele vão recuar uma casa isto é esse lugar vai ser do jogador que vem logo de seguida
+    for (int i = a; i < p.tamanho - 1; i++) { // i começa no que vamos remover
+        p.jogadores[i] = p.jogadores[i+1]; // para não deixar espaços em branco os jogadores que vêm depois dele vão recuar uma casa isto é esse lugar vai ser do jogador que vem logo de seguida
     }
-    p.tamanho--; //o último não fica duplicado por causa disto
+    p.tamanho--; // o último não fica duplicado graças a isto
 }
 
-void gerarPlantel(ListaJogadores &p) { //ListaJogadores é o tipo, p(plantel) é a variável
+void gerarPlantel(ListaJogadores &p) { // ListaJogadores é o tipo, p(plantel) é a variável
     bool usados[100] = {false}; // todos começam como não usados; até 100 porque usados[numero] ignoramos o 0
 
     int total = 20 + rand() % 11; // 20 a 30
@@ -35,8 +44,8 @@ void gerarPlantel(ListaJogadores &p) { //ListaJogadores é o tipo, p(plantel) é
     int gr = 2, def = 7, med = 7, ava = 4; // numero minimo de cada posição
     int restantes = total - 20; // tirando do número aleatório 20 que são os jogadores mínimos
 
-    while (restantes > 0) { //enquanto restar jogadores para criar
-        int r = rand() % 4; //vamos escolher aleatoriamente uma posição para cada um deles
+    while (restantes > 0) { // enquanto restar jogadores para criar
+        int r = rand() % 4; // vamos escolher aleatoriamente uma posição para cada um deles
 
         if (r == 0 && gr < 3) { gr++; restantes--;} // se já tiver no máximo da posição então não entra em nenhum if e gera outro r
         else if (r == 1 && def < 10) { def++; restantes--;}
@@ -55,33 +64,33 @@ void gerarPlantel(ListaJogadores &p) { //ListaJogadores é o tipo, p(plantel) é
 }
 
 void lesionarJogador(ListaJogadores &plantel, ListaJogadores &lesionados, int a) {
-    Jogador j =plantel.jogadores[a]; //vai buscar o jogador ao plantel
+    Jogador j = plantel.jogadores[a]; // vai buscar o jogador ao plantel
     j.jornadasLesao = 1 + rand() % 10; // jornadas a ficar lesionado 1 a 10 aleatoriamente
-    //lesionados.jogadores[lesionados.tamanho++] = j; // mete o jogador j na lista lesionados dos jogadores acedida através dos mesmos na posição tamanho e dps encrementa 1
-    inserirJogador(lesionados, j); //adiciona o jogador j no fim da lista dos lesionados onde o jogador j é o jogador lesionado
-	removerJogador(plantel, a); //remove jogador j do plantel através da função remover jogador já definida
+    // lesionados.jogadores[lesionados.tamanho++] = j; // mete o jogador j na lista lesionados dos jogadores acedida através dos mesmos na posição tamanho e dps encrementa 1
+    inserirJogador(lesionados, j); // adiciona o jogador j no fim da lista dos lesionados onde o jogador j é o jogador lesionado
+	removerJogador(plantel, a); // remove jogador j do plantel através da função remover jogador já definida
 }
 
 void castigarJogador(ListaJogadores &plantel, ListaJogadores &castigados, int a) {
-    Jogador j =plantel.jogadores[a]; //vai buscar o jogador ao plantel
+    Jogador j = plantel.jogadores[a]; // vai buscar o jogador ao plantel
     j.jogosCastigo = 1 + rand() % 10; // jogos a ficar castigado 1 a 10 aleatoriamente
-    //castigados.jogadores[castigados.tamanho++] = j; // mete o jogador j na lista lesionados dos jogadores acedida através dos mesmos na posição de índice tamanho
+    // castigados.jogadores[castigados.tamanho++] = j; // mete o jogador j na lista lesionados dos jogadores acedida através dos mesmos na posição de índice tamanho
     inserirJogador(castigados, j);
-	removerJogador(plantel, a); //remove jogador j do plantel através da funcao remover jogador já definida
+	removerJogador(plantel, a); // remove jogador j do plantel através da funcao remover jogador já definida
 }
 
 void recuperarLesionado(ListaJogadores &plantel, ListaJogadores &lesionados, int a) {
-    Jogador j =lesionados.jogadores[a]; //vai buscar o jogador j à lista de lesionados, que contém jogadores, na posição index
+    Jogador j = lesionados.jogadores[a]; // vai buscar o jogador j à lista de lesionados, que contém jogadores, na posição index
     j.jornadasLesao = 0; // não fica lesionado nenhuma jornada neste momento, porque já recuperou da lesão
-    inserirJogador(plantel, j); //adiciona o jogador j no fim da lista do plantel onde o jogador j é o jogador que recuperou da lesão
-    removerJogador(lesionados, a); //remove jogador j dos lesionados atraves da funcao remover jogador ja definida
+    inserirJogador(plantel, j); // adiciona o jogador j no fim da lista do plantel onde o jogador j é o jogador que recuperou da lesão
+    removerJogador(lesionados, a); // remove jogador j dos lesionados atraves da funcao remover jogador ja definida
 }
 
 void recuperarCastigado(ListaJogadores &plantel, ListaJogadores &castigados, int a) {
-    Jogador j =castigados.jogadores[a]; // vai buscar o jogador à lista de castigados
+    Jogador j = castigados.jogadores[a]; // vai buscar o jogador à lista de castigados
     j.jogosCastigo = 0; // não fica castigado em nenhum jogo, pois tirado do castigo
     inserirJogador(plantel, j);
-    removerJogador(castigados, a); //remove jogador j da lista de castigados através da função remover jogador já definida
+    removerJogador(castigados, a); // remove jogador j da lista de castigados através da função remover jogador já definida
 }
 
 void adicionarTransferencia(ListaJogadores &transferencias, Jogador j) {
