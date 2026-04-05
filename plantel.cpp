@@ -99,7 +99,7 @@ void adicionarTransferencia(ListaJogadores &transferencias, Jogador j) {
 
 void ordenarPorQualidade(ListaJogadores &p) { // dentro de cada posição
 // bubble sort porque tem relativamente poucos dados
-    bool swapped = true;
+    bool swapped = true; // inicializamos a true para entrar no for
     for (int i = 0; i < p.tamanho - 1 && swapped; i++) { // quando swapped=false quer dizer que não fez trocas então já estão ordenados
         swapped = false;
         for (int j = p.tamanho - 1; j > i; j--) {

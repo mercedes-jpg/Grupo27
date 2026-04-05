@@ -25,7 +25,23 @@ string obterEquipaAdvAleatoria() {
     return equipas[rand() % total];
 }
 
+int encontrarSubstituto(ListaJogadores &s, string pos, int grS, int defS, int medS, int avaS) {
+    for (int i = 0; i < s.tamanho; i++) {
+        if (s.jogadores[i].posicao == pos)
+            return i;
+    }
+    string escolhida;
 
+    if (grS >= defS && grS >= medS && grS >= avaS) escolhida = "GR";
+    else if (defS >= medS && defS >= avaS) escolhida = "DEF";
+    else if (medS>= avaS) escolhida = "MED";
+    else escolhida = "AVA";
+
+    for (int i = 0; i < s.tamanho; i++) {
+        if (s.jogadores[i].posicao == escolhida)
+            return i;
+    }
+}
 
 void simularJornada(ListaJogadores &plantel, ListaJogadores &titulares, ListaJogadores & suplentes, ListaJogadores &lesionados, ListaJogadores &castigados, ListaJogadores &transferencias, bool usados[]) {
 
