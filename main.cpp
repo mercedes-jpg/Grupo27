@@ -17,6 +17,8 @@ int main() {
 	ListaJogadores lesionados;
 	ListaJogadores castigados;
 	ListaJogadores transferencias;
+	ListaJogadores titulares;
+	ListaJogadores suplentes;
 	bool usados[100] = {false}; // todos começam como não usados; é até 100 porque iremos como índices (usados[numero]) ignoramos o 0
     //int capacidade = 20 + rand() % 11; // 20 a 30 jogadores
 	//int capacidadeMax = 30;
@@ -32,7 +34,8 @@ int main() {
 
 	do {
 		cout << "\n===== JORNADA " << jornada++ << " =====\n";
-		simularJornada(plantel, lesionados, castigados, transferencias, usados);
+		selecionarEquipa(plantel, titulares, suplentes);
+		simularJornada(plantel, titulares, suplentes, lesionados, castigados, transferencias, usados);
 		cout << "\n(s) seguinte    (o) sair ";
 		cin >> escolha;
 	} while (escolha == 's');

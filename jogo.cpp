@@ -25,7 +25,9 @@ string obterEquipaAdvAleatoria() {
     return equipas[rand() % total];
 }
 
-void simularJornada(ListaJogadores &plantel, ListaJogadores &lesionados, ListaJogadores &castigados, ListaJogadores &transferencias, bool usados[]) {
+
+
+void simularJornada(ListaJogadores &plantel, ListaJogadores &titulares, ListaJogadores & suplentes, ListaJogadores &lesionados, ListaJogadores &castigados, ListaJogadores &transferencias, bool usados[]) {
 
     int jogadoresEmJogo = (plantel.tamanho >= 11) ? 11 : plantel.tamanho; // se tivermos 11 ou mais jogadores no plantel, inicialmente serão 11 que irão jogar, se só tiver 10, 9, 8 ou 7 será esse o número de jogadores a jogar
     int substituicoes = 0;

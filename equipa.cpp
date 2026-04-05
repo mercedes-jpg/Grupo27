@@ -122,18 +122,20 @@ void selecionarEquipa(ListaJogadores &plantel, ListaJogadores &titulares, ListaJ
         Jogador j = plantel.jogadores[i];
 
         bool jaTitular = false; // para não usar os que já são titulares
+        // vamos ver se este jogador já é titular
         for (int k = 0; k < titulares.tamanho; k++) {
             if (titulares.jogadores[k].numero == j.numero) {
-                jaTitular = true;
-                break;
+                jaTitular = true; // se ele é titular fica true
+                break; // já encontramos ele, então paramos o ciclo
             }
         }
-        if (jaTitular) continue;
-        if (j.posicao == "GR" && grS < 1) {
+        if (jaTitular) continue; // se ele é titular não pode ser suplente vamos passar ao próximo i
+        // não é titular então pode ser suplente:
+        if (j.posicao == "GR" && grS < 1) { // se a posição do jogador em i for gr e ainda não tivermos 1 então este fica suplente
             inserirJogador(suplentes, j);
             grS++;
         }
-        else if (j.posicao == "DEF" && defS < 2) {
+        else if (j.posicao == "DEF" && defS < 2) { // senão se a posição for def e tivermos menos que 2 então este fica suplente
             inserirJogador(suplentes, j);
             defS++;
         }
@@ -145,6 +147,6 @@ void selecionarEquipa(ListaJogadores &plantel, ListaJogadores &titulares, ListaJ
             inserirJogador(suplentes, j);
             avaS++;
         }
-        if (suplentes.tamanho == 6) break;
+        if (suplentes.tamanho == 6) break; // quando tiverem 6 suplentes paramos
     }
 }

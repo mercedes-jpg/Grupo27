@@ -13,17 +13,18 @@ void inicializarLista(ListaJogadores &p, int capacidade) {
 }
 
 void inserirJogador(ListaJogadores &p, Jogador j) {
-    if (p.tamanho < p.capacidade) { // se o nº de jogadores atual for menor que a capacidade do plantel
+    if (p.tamanho < p.CAPACIDADEMAX) { // se o nº de jogadores atual for menor que a capacidade do plantel
         int indice = 0;
         // vamos encontrar a posição certa para a lista continuar ordenada
-        while (indice < p.tamanho && p.jogadores[indice].posicao < j.posicao) { // enquanto a posição for "menor" que a do jogador que temos de inserir
+        while (indice < p.tamanho && (p.jogadores[indice].posicao < j.posicao || (p.jogadores[indice].posicao == j.posicao && p.jogadores[indice].qualidade > j.qualidade))) {
+        // se a posição do jogador de índice i for "menor" que o que vamos inserir, passamos ao próximo, se a posição é a mesma, mas a qualidade é maior passamos ao próximo
             indice++; // vamos passar ao próximo
         }
         // quando chegarmos a um que a posição seja maior temos de passar os jogadores uma casa para a direita para ter lugar para o que vamos inserir
         for (int i = p.tamanho; i > indice; i--) {
             p.jogadores[i] = p.jogadores[i - 1]; // no índice do tamanho, isto é, no fim da lista vamos igualar esse ao anterior, depois o indice anterior ao anterior-anterior (= passar todos uma casa para a direita)
         }
-        p.jogadores[i+1] = j;
+        p.jogadores[indice] = j;
         p.tamanho++; // e o número atual de jogadores será incrementado num valor
     }
 }
@@ -97,13 +98,19 @@ void adicionarTransferencia(ListaJogadores &transferencias, Jogador j) {
 }
 
 void ordenarPorQualidade(ListaJogadores &p) { // dentro de cada posição
-    for (int i = 0; i < p.tamanho - 1; i++) { // -1 para não comparar o último com nada
-        for (int j = i + 1; j < p.tamanho; j++) { // porque vamos comparar o do índice i com o do índice que vem logo a seguir
-            if (p.jogadores[j].qualidade > p.jogadores[i].qualidade) {
-                Jogador temp = p.jogadores[i];
-                p.jogadores[i] = p.jogadores[j];
-                p.jogadores[j] = temp;
+// bubble sort porque tem relativamente poucos dados
+    bool swapped = true;
+    for (int i = 0; i < p.tamanho - 1 && swapped; i++) { // quando swapped=false quer dizer que não fez trocas então já estão ordenados
+        swapped = false;
+        for (int j = p.tamanho - 1; j > i; j--) {
+            if (p.jogadores[j].posicao == p.jogadores[j-1].posicao && p.jogadores[j].qualidade > p.jogadores[j-1].qualidade) {
+                // swap, vamos trocar os dois entre eles
+                Jogador temp = p.jogadores[j];
+                p.jogadores[j]=p.jogadores[j-1];
+                p.jogadores[j-1] = temp;
+
+                swapped = true; // fizemos trocas
             }
         }
     }
-}
+} // 30 40 20 50    40 30 20 50     40 30 20 50
