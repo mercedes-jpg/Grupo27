@@ -88,18 +88,18 @@ void escolherSuplentes(ListaJogadores &plantel, ListaJogadores &suplentes)
 }
 
 void selecionarEquipa(ListaJogadores &plantel, ListaJogadores &titulares, ListaJogadores &suplentes) {
-    inicializarLista(titulares, 11);
-    inicializarLista(suplentes, 6);
-    ordenarPorQualidade(plantel);
+    inicializarLista(titulares, 11);//inicializa a lista de titulares
+    inicializarLista(suplentes, 6);//inicializa a lista dos suplentes
+    ordenarPorQualidade(plantel);//ordena o plantel por qualidade
 
     // titulares 1-4-4-2
-    int gr = 0, def = 0, med = 0, ava = 0;
-    for (int i = 0; i < plantel.tamanho; i++) {
-        Jogador j = plantel.jogadores[i];
+    int gr = 0, def = 0, med = 0, ava = 0;//inicialização das diferentes posições a zero
+    for (int i = 0; i < plantel.tamanho; i++) { //percorre se o plnatel usando o seu indice e o que esta abaixo acontece sempre que i<plantel.tamanho ou i<=(plantel.tamanho - 1) sendo que i começa a zero e vai incrementando sempre 1
+        Jogador j = plantel.jogadores[i];// jogado j é um jogador que se foi buscar ao plantel de jogadores ou a lista de jogadores no plantel na posição i e por sua vez guarda se na variavel j do tipo jogador
 
-        if (j.posicao == "GR" && gr < 1) {
-            inserirJogador(titulares, j);
-            gr++;
+        if (j.posicao == "GR" && gr < 1) { //se a posição do jogador j for gr e se ainda não tivermos nenhum guarda redes, pois so precisamos de um gr, então:
+            inserirJogador(titulares, j); //insere jogador na lista dos titulares como jogador j
+            gr++;//incrementa mais um gr
         }
         else if (j.posicao == "DEF" && def < 4) {
             inserirJogador(titulares, j);
@@ -113,7 +113,7 @@ void selecionarEquipa(ListaJogadores &plantel, ListaJogadores &titulares, ListaJ
             inserirJogador(titulares, j);
             ava++;
         }
-        if (titulares.tamanho == 11) break;
+        if (titulares.tamanho == 11) break;//quebra o ciclo quando tivermos os 11 titulares pois se não entra num if entra noutro e assim sucessivamente e por fim apos verificar td, ja temos os titulares, quebra
     }
     // suplentes 1-2-2-1
     int grS = 0, defS = 0, medS = 0, avaS = 0;
@@ -121,21 +121,21 @@ void selecionarEquipa(ListaJogadores &plantel, ListaJogadores &titulares, ListaJ
     for (int i = 0; i < plantel.tamanho; i++) {
         Jogador j = plantel.jogadores[i];
 
-        bool jaTitular = false; // para não usar os que já são titulares
+        bool jaTitular = false; // para não usar os que já são titulares - cria se uma var do tipo boolenano inicializada a false
         // vamos ver se este jogador já é titular
-        for (int k = 0; k < titulares.tamanho; k++) {
-            if (titulares.jogadores[k].numero == j.numero) {
-                jaTitular = true; // se ele é titular fica true
-                break; // já encontramos ele, então paramos o ciclo
+        for (int k = 0; k < titulares.tamanho; k++) { // percorre se o array dos titulares usando k como a posição
+            if (titulares.jogadores[k].numero == j.numero) { //se numero do jogador k da lista de titulares for igual ao numero do jogador j que e o jogador da posiçao i do plantel de jogadores
+                jaTitular = true; // se ele é titular a var jaTitular fica true
+                break; // como já o encontramos, então paramos o ciclo
             }
         }
-        if (jaTitular) continue; // se ele é titular não pode ser suplente vamos passar ao próximo i
+        if (jaTitular) continue; // se ele é titular não pode ser suplente logo vamos passar ao próximo i ou seja continua
         // não é titular então pode ser suplente:
         if (j.posicao == "GR" && grS < 1) { // se a posição do jogador em i for gr e ainda não tivermos 1 então este fica suplente
-            inserirJogador(suplentes, j);
+            inserirJogador(suplentes, j);//insere o jogador j na lista de suplentes
             grS++;
         }
-        else if (j.posicao == "DEF" && defS < 2) { // senão se a posição for def e tivermos menos que 2 então este fica suplente
+        else if (j.posicao == "DEF" && defS < 2) { // se a posição for def e tivermos menos que 2 então este fica suplente
             inserirJogador(suplentes, j);
             defS++;
         }
