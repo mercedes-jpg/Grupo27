@@ -9,5 +9,7 @@
 string obterEquipaAdvAleatoria();
 
 void simularJornada(ListaJogadores &plantel, ListaJogadores &titulares, ListaJogadores &suplentes, ListaJogadores &lesionados, ListaJogadores &castigados, ListaJogadores &transferencias, bool usados[]);
+int encontrarSubstituto(ListaJogadores &s, string pos, int grS, int defS, int medS, int avaS);
+
 
 #endif //GRUPO27_JOGO_H

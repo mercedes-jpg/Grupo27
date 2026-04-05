@@ -33,7 +33,7 @@ int encontrarSubstituto(ListaJogadores &s, string pos, int grS, int defS, int me
     string escolhida;
 
     if (grS >= defS && grS >= medS && grS >= avaS) escolhida = "GR";
-    else if (defS >= medS && defS >= avaS) escolhida = "DEF";
+    else if (defS >= medS && defS >= avaS) escolhida = "DEF"; // não precisamos de comparar com grS porque já verificamos antes se ele era o maior
     else if (medS>= avaS) escolhida = "MED";
     else escolhida = "AVA";
 
@@ -60,7 +60,7 @@ void simularJornada(ListaJogadores &plantel, ListaJogadores &titulares, ListaJog
     for (int i = 0; i < titulares.tamanho; i++) {
         int r = rand() % 101;
 
-        if (r < plantel.jogadores[i].probLesao) { // se esse número for menos que a probabilidade de lesão desse jogador então ele é lesionado
+        if (r < titulares.jogadores[i].probLesao) { // se esse número for menos que a probabilidade de lesão desse jogador então ele é lesionado
 
             if (substituicoes < 3) {
                 substituicoes++;
@@ -75,7 +75,7 @@ void simularJornada(ListaJogadores &plantel, ListaJogadores &titulares, ListaJog
     for (int i = 0; i < titulares.tamanho; i++) {
         int r = rand() % 101;
 
-        if (r < plantel.jogadores[i].probCastigo) { // se esse número for menos que a probabilidade de castigo desse jogador então ele é castigado
+        if (r < titulares.jogadores[i].probCastigo) { // se esse número for menos que a probabilidade de castigo desse jogador então ele é castigado
 
             if (substituicoes < 3) { // se ainda não tivermos usado as 3 substituições
                 substituicoes++; // incrementamos o número de substituições usadas
