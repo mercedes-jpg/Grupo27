@@ -10,6 +10,7 @@ void escolherTitulares(ListaJogadores &plantel, ListaJogadores &titulares);
 
 // função que escolhe suplentes
 void escolherSuplentes(ListaJogadores &plantel, ListaJogadores &suplentes);
+void selecionarEquipa(ListaJogadores &plantel, ListaJogadores &titulares, ListaJogadores &suplentes);
 
 #endif //GRUPO27_EQUIPA_H
 

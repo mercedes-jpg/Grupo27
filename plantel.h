@@ -14,7 +14,7 @@ struct ListaJogadores {
     const int CAPACIDADEMAX = 30; // no máximo 30 jogadores
 };
 
-void inicializarPlantel(ListaJogadores &p, int capacidade);
+void inicializarLista(ListaJogadores &p, int capacidade);
 void inserirJogador(ListaJogadores &p, Jogador j);
 void removerJogador(ListaJogadores &p, int a);
 
@@ -26,5 +26,6 @@ void recuperarCastigado(ListaJogadores &plantel, ListaJogadores &castigados, int
 void adicionarTransferencia(ListaJogadores &transferencias, Jogador j);
 
 void gerarPlantel(ListaJogadores &p, bool usados[]); // o & serve para obter o endereço de uma variável na memória (passagem por referência), assim mudamos o plantel verdadeiro; sem & as alterações não ficariam guardadas
+void ordenarPorQualidade(ListaJogadores &p);
 
 #endif //GRUPO27_PLANTEL_H

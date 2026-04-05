@@ -26,6 +26,7 @@ string obterEquipaAdvAleatoria() {
 }
 
 void simularJornada(ListaJogadores &plantel, ListaJogadores &lesionados, ListaJogadores &castigados, ListaJogadores &transferencias, bool usados[]) {
+
     int jogadoresEmJogo = (plantel.tamanho >= 11) ? 11 : plantel.tamanho; // se tivermos 11 ou mais jogadores no plantel, inicialmente serão 11 que irão jogar, se só tiver 10, 9, 8 ou 7 será esse o número de jogadores a jogar
     int substituicoes = 0;
 
@@ -38,7 +39,7 @@ void simularJornada(ListaJogadores &plantel, ListaJogadores &lesionados, ListaJo
     cout << "Resultado : EDA FC:" << golosEDA << " - " << adversario << ":"<< golosADV << endl;
 
     //simular lesões um a um
-    for (int i = 0; i < jogadoresEmJogo; i++) {
+    for (int i = 0; i < titulares.tamanho; i++) {
         int r = rand() % 101;
 
         if (r < plantel.jogadores[i].probLesao) { // se esse número for menos que a probabilidade de lesão desse jogador então ele é lesionado
@@ -53,7 +54,7 @@ void simularJornada(ListaJogadores &plantel, ListaJogadores &lesionados, ListaJo
         }
     }
     //simular castigos um a um
-    for (int i = 0; i < jogadoresEmJogo; i++) {
+    for (int i = 0; i < titulares.tamanho; i++) {
         int r = rand() % 101;
 
         if (r < plantel.jogadores[i].probCastigo) { // se esse número for menos que a probabilidade de castigo desse jogador então ele é castigado

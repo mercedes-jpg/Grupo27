@@ -6,7 +6,7 @@
 #include "jogador.h"
 #include <stdlib.h>
 
-void inicializarPlantel(ListaJogadores &p, int capacidade) {
+void inicializarLista(ListaJogadores &p, int capacidade) {
     p.jogadores = new Jogador[capacidade]; // hummmmm
     p.tamanho = 0;
     p.capacidade = capacidade;
@@ -23,7 +23,7 @@ void inserirJogador(ListaJogadores &p, Jogador j) {
         for (int i = p.tamanho; i > indice; i--) {
             p.jogadores[i] = p.jogadores[i - 1]; // no índice do tamanho, isto é, no fim da lista vamos igualar esse ao anterior, depois o indice anterior ao anterior-anterior (= passar todos uma casa para a direita)
         }
-        p.jogadores[indice] = j;
+        p.jogadores[i+1] = j;
         p.tamanho++; // e o número atual de jogadores será incrementado num valor
     }
 }
@@ -37,11 +37,11 @@ void removerJogador(ListaJogadores &p, int a) {
 
 void gerarPlantel(ListaJogadores &p, bool usados[]) { // ListaJogadores é o tipo, p(plantel) é a variável
 
-    int total = 20 + rand() % 11; // 20 a 30 - capacidade
+    int capacidade = 20 + rand() % 11; // 20 a 30 - capacidade
     p.tamanho = 0; //tamanho inicial do plantel
 
     int gr = 2, def = 7, med = 7, ava = 4; // numero minimo de cada posição
-    int restantes = total - 20; // tirando do número aleatório 20 que são os jogadores mínimos  - restantes sera o restante da capacidade ou seja tirando o min total de jogadores no plantel que é 20 logo restantes mais total da a capacidade - total no min é 20 e no max é 30 a capacidade é sempre 30
+    int restantes = capacidade - 20; // tirando do número aleatório 20 que são os jogadores mínimos - restantes será o restante da capacidade, ou seja, tirando o min total de jogadores no plantel que é 20 logo restantes mais total da a capacidade - total no min é 20 e no max é 30 a capacidade é sempre 30
 
     while (restantes > 0) { // enquanto restar jogadores para criar
         int r = rand() % 4; // vamos escolher aleatoriamente uma posição para cada um deles
@@ -94,4 +94,16 @@ void recuperarCastigado(ListaJogadores &plantel, ListaJogadores &castigados, int
 
 void adicionarTransferencia(ListaJogadores &transferencias, Jogador j) {
     inserirJogador(transferencias, j);
+}
+
+void ordenarPorQualidade(ListaJogadores &p) { // dentro de cada posição
+    for (int i = 0; i < p.tamanho - 1; i++) { // -1 para não comparar o último com nada
+        for (int j = i + 1; j < p.tamanho; j++) { // porque vamos comparar o do índice i com o do índice que vem logo a seguir
+            if (p.jogadores[j].qualidade > p.jogadores[i].qualidade) {
+                Jogador temp = p.jogadores[i];
+                p.jogadores[i] = p.jogadores[j];
+                p.jogadores[j] = temp;
+            }
+        }
+    }
 }

@@ -2,6 +2,9 @@
 // Created by gnps0 on 03/04/2026.
 //
 #include "equipa.h"
+#include "plantel.h"
+
+using namespace std;
 
 // função para escolher os titulares
 void escolherTitulares(ListaJogadores &plantel, ListaJogadores &titulares)
@@ -84,3 +87,64 @@ void escolherSuplentes(ListaJogadores &plantel, ListaJogadores &suplentes)
     }
 }
 
+void selecionarEquipa(ListaJogadores &plantel, ListaJogadores &titulares, ListaJogadores &suplentes) {
+    inicializarLista(titulares, 11);
+    inicializarLista(suplentes, 6);
+    ordenarPorQualidade(plantel);
+
+    // titulares 1-4-4-2
+    int gr = 0, def = 0, med = 0, ava = 0;
+    for (int i = 0; i < plantel.tamanho; i++) {
+        Jogador j = plantel.jogadores[i];
+
+        if (j.posicao == "GR" && gr < 1) {
+            inserirJogador(titulares, j);
+            gr++;
+        }
+        else if (j.posicao == "DEF" && def < 4) {
+            inserirJogador(titulares, j);
+            def++;
+        }
+        else if (j.posicao == "MED" && med < 4) {
+            inserirJogador(titulares, j);
+            med++;
+        }
+        else if (j.posicao == "AVA" && ava < 2) {
+            inserirJogador(titulares, j);
+            ava++;
+        }
+        if (titulares.tamanho == 11) break;
+    }
+    // suplentes 1-2-2-1
+    int grS = 0, defS = 0, medS = 0, avaS = 0;
+
+    for (int i = 0; i < plantel.tamanho; i++) {
+        Jogador j = plantel.jogadores[i];
+
+        bool jaTitular = false; // para não usar os que já são titulares
+        for (int k = 0; k < titulares.tamanho; k++) {
+            if (titulares.jogadores[k].numero == j.numero) {
+                jaTitular = true;
+                break;
+            }
+        }
+        if (jaTitular) continue;
+        if (j.posicao == "GR" && grS < 1) {
+            inserirJogador(suplentes, j);
+            grS++;
+        }
+        else if (j.posicao == "DEF" && defS < 2) {
+            inserirJogador(suplentes, j);
+            defS++;
+        }
+        else if (j.posicao == "MED" && medS < 2) {
+            inserirJogador(suplentes, j);
+            medS++;
+        }
+        else if (j.posicao == "AVA" && avaS < 1) {
+            inserirJogador(suplentes, j);
+            avaS++;
+        }
+        if (suplentes.tamanho == 6) break;
+    }
+}

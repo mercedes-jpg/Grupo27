@@ -20,10 +20,10 @@ int main() {
 	bool usados[100] = {false}; // todos começam como não usados; é até 100 porque iremos como índices (usados[numero]) ignoramos o 0
     //int capacidade = 20 + rand() % 11; // 20 a 30 jogadores
 	//int capacidadeMax = 30;
-    inicializarPlantel(plantel, 30); //inicialização dos arrays
-	inicializarPlantel(lesionados, 30);
-	inicializarPlantel(castigados, 30);
-	inicializarPlantel(transferencias, 30);
+    inicializarLista(plantel, 30); //inicialização dos arrays
+	inicializarLista(lesionados, 30);
+	inicializarLista(castigados, 30);
+	inicializarLista(transferencias, 30);
 
     gerarPlantel(plantel, usados); // aqui p = plantel
 
