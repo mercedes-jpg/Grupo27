@@ -8,7 +8,7 @@
 
 string obterEquipaAdvAleatoria();
 
-void simularJornada(ListaJogadores &plantel, ListaJogadores &titulares, ListaJogadores &suplentes, ListaJogadores &lesionados, ListaJogadores &castigados, ListaJogadores &transferencias, bool usados[]);
+void simularJornada(ListaJogadores &plantel, ListaJogadores &titulares, ListaJogadores &suplentes, ListaJogadores &lesionados, ListaJogadores &castigados, ListaJogadores &transferencias, bool usados[], string adversario);
 int encontrarSubstituto(ListaJogadores &s, string pos, int grS, int defS, int medS, int avaS);
 
 

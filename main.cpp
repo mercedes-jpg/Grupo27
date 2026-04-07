@@ -7,7 +7,6 @@
 #include "jogo.h"
 #include "equipa.h"
 
-
 using namespace std;
 
 int main() {
@@ -29,13 +28,33 @@ int main() {
 
     gerarPlantel(plantel, usados); // aqui p = plantel
 
-	char escolha;
-	int jornada = 1;
+	string equipas[17];
+
+	int i = 0;
+	while (i < 17) {
+		string e = obterEquipaAdvAleatoria();
+		bool repetida = false;
+		for (int j= 0; j < i; j++) {
+			if (equipas[j] == e) repetida = true;
+		}
+		if (!repetida) {
+			equipas[i] = e;
+			i++;
+		}
+	}
+
+	//JORNADAS
+	for (int j = 0; j < 34; j++) {
+		cout << "\n====== JORNADA " << j + 1 << " =====\n";
+		string adversario = equipas[j/2];
+		selecionarEquipa(plantel, titulares, suplentes);
+		simularJornada(plantel, titulares, suplentes, lesionados, castigados, transferencias, usados, adversario);
+	}
 
 	do {
 		cout << "\n===== JORNADA " << jornada++ << " =====\n";
 		selecionarEquipa(plantel, titulares, suplentes);
-		simularJornada(plantel, titulares, suplentes, lesionados, castigados, transferencias, usados);
+		simularJornada(plantel, titulares, suplentes, lesionados, castigados, transferencias, usados, adversario);
 		cout << "\n(s) seguinte    (o) sair ";
 		cin >> escolha;
 	} while (escolha == 's');

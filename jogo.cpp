@@ -43,7 +43,7 @@ int encontrarSubstituto(ListaJogadores &s, string pos, int grS, int defS, int me
     }
 }
 
-void simularJornada(ListaJogadores &plantel, ListaJogadores &titulares, ListaJogadores & suplentes, ListaJogadores &lesionados, ListaJogadores &castigados, ListaJogadores &transferencias, bool usados[]) {
+void simularJornada(ListaJogadores &plantel, ListaJogadores &titulares, ListaJogadores &suplentes, ListaJogadores &lesionados, ListaJogadores &castigados, ListaJogadores &transferencias, bool usados[], string adversario) {
 
     int jogadoresEmJogo = titulares.tamanho;
     int substituicoes = 0;
@@ -54,7 +54,7 @@ void simularJornada(ListaJogadores &plantel, ListaJogadores &titulares, ListaJog
     int golosADV = totalGolos - golosEDA; // depois o que restar fica para a equipa adversária
 
     cout << "EDA FC vs" << adversario << endl;
-    cout << "Resultado : EDA FC:" << golosEDA << " - " << adversario << ":"<< golosADV << endl;
+    //cout << "Resultado : EDA FC:" << golosEDA << " - " << adversario << ":"<< golosADV << endl;
 
     //simular lesões um a um
     for (int i = 0; i < titulares.tamanho; i++) {
@@ -62,7 +62,9 @@ void simularJornada(ListaJogadores &plantel, ListaJogadores &titulares, ListaJog
 
         if (r < titulares.jogadores[i].probLesao) { // se esse número for menos que a probabilidade de lesão desse jogador então ele é lesionado
 
-            if (substituicoes < 3) {
+            if (substituicoes < 3 && suplentes.tamanho > 0) {
+                inserirJogador(titulares, suplentes.jogadores[0]);
+                removerJogador(suplentes, 0);
                 substituicoes++;
             } else {
                 jogadoresEmJogo--;
@@ -91,6 +93,13 @@ void simularJornada(ListaJogadores &plantel, ListaJogadores &titulares, ListaJog
     }
     if (jogadoresEmJogo < 7) {
         cout << "O jogo foi terminado por falta de jogadores.\n";
+        if (golosADV > 3) {
+            cout << "Resultado : EDA FC:0" << " - " << adversario << ":"<< golosADV << endl;
+        } else {
+            cout << "Resultado : EDA FC:0" << " - " << adversario << ":"<< 3 << endl;
+        }
+    } else {
+        cout << "Resultado : EDA FC:" << golosEDA << " - " << adversario << ":"<< golosADV << endl;
     }
     //transferências
     for (int i = 0; i < 2; i++) {

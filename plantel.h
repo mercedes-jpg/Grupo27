@@ -16,7 +16,7 @@ struct ListaJogadores {
 
 void inicializarLista(ListaJogadores &p, int capacidade);
 void inserirJogador(ListaJogadores &p, Jogador j);
-void removerJogador(ListaJogadores &p, int a);
+void removerJogador(ListaJogadores &p, int i);
 
 void gerarPlantel(ListaJogadores &p, bool usados[]); // o & serve para obter o endereço de uma variável na memória (passagem por referência), assim mudamos o plantel verdadeiro; sem & as alterações não ficariam guardadas
 void ordenarPorQualidade(ListaJogadores &p);

@@ -14,17 +14,17 @@ void inicializarLista(ListaJogadores &p, int capacidade) {
 
 void inserirJogador(ListaJogadores &p, Jogador j) {
     if (p.tamanho < p.CAPACIDADEMAX) { // se o nº de jogadores atual for menor que a capacidade do plantel
-        int indice = 0;
+        int i = 0;
         // vamos encontrar a posição certa para a lista continuar ordenada
-        while (indice < p.tamanho && (p.jogadores[indice].posicao < j.posicao || (p.jogadores[indice].posicao == j.posicao && p.jogadores[indice].qualidade > j.qualidade))) {
+        while (i < p.tamanho && (p.jogadores[i].posicao < j.posicao || (p.jogadores[i].posicao == j.posicao && p.jogadores[i].qualidade > j.qualidade))) {
         // se a posição do jogador de índice i for "menor" que o que vamos inserir, passamos ao próximo, se a posição é a mesma, mas a qualidade é maior passamos ao próximo
-            indice++; // vamos passar ao próximo
+            i++; // vamos passar ao próximo
         }
         // quando chegarmos a um que a posição seja maior temos de passar os jogadores uma casa para a direita para ter lugar para o que vamos inserir
-        for (int i = p.tamanho; i > indice; i--) {
-            p.jogadores[i] = p.jogadores[i - 1]; // no índice do tamanho, isto é, no fim da lista vamos igualar esse ao anterior, depois o indice anterior ao anterior-anterior (= passar todos uma casa para a direita)
+        for (int k = p.tamanho; k > i; k--) {
+            p.jogadores[k] = p.jogadores[k - 1]; // no índice do tamanho, isto é, no fim da lista vamos igualar esse ao anterior, depois o indice anterior ao anterior-anterior (= passar todos uma casa para a direita)
         }
-        p.jogadores[indice] = j;
+        p.jogadores[i] = j;
         p.tamanho++; // e o número atual de jogadores será incrementado num valor
     }
 }

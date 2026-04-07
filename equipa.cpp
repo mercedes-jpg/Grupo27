@@ -88,17 +88,18 @@ using namespace std;
 // }
 
 void selecionarEquipa(ListaJogadores &plantel, ListaJogadores &titulares, ListaJogadores &suplentes) {
-    inicializarLista(titulares, 11);//inicializa a lista de titulares
-    inicializarLista(suplentes, 6);//inicializa a lista dos suplentes
-    ordenarPorQualidade(plantel);//ordena o plantel por qualidade
+
+    inicializarLista(titulares, 11);// inicializa a lista de titulares
+    inicializarLista(suplentes, 6);// inicializa a lista dos suplentes
+    ordenarPorQualidade(plantel);// ordena o plantel por qualidade
 
     // titulares 1-4-4-2
-    int gr = 0, def = 0, med = 0, ava = 0;//inicialização das diferentes posições a zero
-    for (int i = 0; i < plantel.tamanho; i++) { //percorre se o plantel usando o seu indice e o que esta abaixo acontece sempre que i<plantel.tamanho ou i<=(plantel.tamanho - 1) sendo que i começa a zero e vai incrementando sempre 1
+    int gr = 0, def = 0, med = 0, ava = 0;// inicialização das diferentes posições a zero
+    for (int i = 0; i < plantel.tamanho; i++) { // percorre se o plantel usando o seu indice e o que esta abaixo acontece sempre que i<plantel.tamanho ou i<=(plantel.tamanho - 1) sendo que i começa a zero e vai incrementando sempre 1
         Jogador j = plantel.jogadores[i];// jogado j é um jogador que se foi buscar ao plantel de jogadores ou a lista de jogadores no plantel na posição i e por sua vez guarda se na variavel j do tipo jogador
 
-        if (j.posicao == "GR" && gr < 1) { //se a posição do jogador j for gr e se ainda não tivermos nenhum guarda redes, pois so precisamos de um gr, então:
-            inserirJogador(titulares, j); //insere jogador na lista dos titulares como jogador j
+        if (j.posicao == "GR" && gr < 1) { // se a posição do jogador j for gr e se ainda não tivermos nenhum guarda redes, pois so precisamos de um gr, então:
+            inserirJogador(titulares, j); // insere jogador na lista dos titulares como jogador j
             gr++;//incrementa mais um gr
         }
         else if (j.posicao == "DEF" && def < 4) {
@@ -113,7 +114,7 @@ void selecionarEquipa(ListaJogadores &plantel, ListaJogadores &titulares, ListaJ
             inserirJogador(titulares, j);
             ava++;
         }
-        if (titulares.tamanho == 11) break;//quebra o ciclo quando tivermos os 11 titulares pois se não entra num if entra noutro e assim sucessivamente e por fim apos verificar td, ja temos os titulares, quebra
+        if (titulares.tamanho == 11) break;// quebra o ciclo quando tivermos os 11 titulares pois se não entra num if entra noutro e assim sucessivamente e por fim apos verificar td, ja temos os titulares, quebra
     }
     // suplentes 1-2-2-1
     int grS = 0, defS = 0, medS = 0, avaS = 0;
