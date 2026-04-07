@@ -15,6 +15,8 @@ struct ListaJogadores {
 };
 
 void inicializarLista(ListaJogadores &p, int capacidade);
+int encontrarIndicePorNumero(ListaJogadores &p, int numero);
+int ordemPos(string pos);
 void inserirJogador(ListaJogadores &p, Jogador j);
 void removerJogador(ListaJogadores &p, int i);
 

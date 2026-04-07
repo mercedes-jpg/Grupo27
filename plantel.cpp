@@ -15,15 +15,39 @@ void inicializarLista(ListaJogadores &p, int capacidade) {
     p.capacidade = capacidade;
 }
 
+int encontrarIndicePorNumero(ListaJogadores &p, int numero) {
+    for (int i = 0; i < p.tamanho; i++) {
+        if (p.jogadores[i].numero == numero)
+            return i;
+    }
+    return -1;
+}
+
+int ordemPos(string pos) {
+    if (pos == "GR") {
+        return 0;
+    }
+    if (pos == "DEF") {
+        return 1;
+    }
+    if (pos == "MED") {
+        return 2;
+    }
+    if (pos == "AVA") {
+        return 3;
+    }
+    return -1;
+}
+
 void inserirJogador(ListaJogadores &p, Jogador j) { // & é para trabalhar na lista original
     if (p.tamanho < p.CAPACIDADEMAX) { // se o nº de jogadores atual for menor que a capacidade do plantel
         int i = 0;
         // vamos encontrar a posição certa para a lista continuar ordenada
-        while (i < p.tamanho && (p.jogadores[i].posicao < j.posicao || (p.jogadores[i].posicao == j.posicao && p.jogadores[i].qualidade > j.qualidade))) {
+        while (i < p.tamanho && (ordemPos(p.jogadores[i].posicao) < ordemPos(j.posicao) || (p.jogadores[i].posicao == j.posicao && p.jogadores[i].qualidade > j.qualidade))) {
         // se a posição do jogador de índice i for "menor" que o que vamos inserir, passamos ao próximo, se a posição é a mesma, mas a qualidade é maior passamos ao próximo
             i++; // vamos passar ao próximo
         }
-        // quando chegarmos a um que a posição seja maior temos de passar os jogadores uma casa para a direita para ter lugar para o que vamos inserir
+        // quando chegarmos a um que a posição seja maior, ou que a posição seja a mesma, mas a qualidade seja menor temos de passar os jogadores uma casa para a direita para ter lugar para o que vamos inserir
         for (int k = p.tamanho; k > i; k--) {
             p.jogadores[k] = p.jogadores[k - 1]; // no índice do tamanho, isto é, no fim da lista vamos igualar esse ao anterior, depois o indice anterior ao anterior-anterior (= passar todos uma casa para a direita)
         }
@@ -120,6 +144,6 @@ void ordenarPorQualidade(ListaJogadores &p) { // dentro de cada posição
 
 void mostrarLista(ListaJogadores &p) {
     for (int i = 0; i < p.tamanho; i++) {
-        cout << p.jogadores[i].nome << " | " << p.jogadores[i].posicao << " | " << p.jogadores[i].qualidade << endl;
+        cout << p.jogadores[i].nome << " | " << p.jogadores[i].numero << " | " << p.jogadores[i].posicao << " | " << p.jogadores[i].idade << " | " << p.jogadores[i].probLesao << "% | " << p.jogadores[i].probCastigo << "% | " << p.jogadores[i].qualidade << endl;
     }
 }

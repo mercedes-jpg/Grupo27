@@ -85,10 +85,15 @@ void simularJornada(ListaJogadores &plantel, ListaJogadores &titulares, ListaJog
 
         if (r < titulares.jogadores[i].probLesao) { // se esse número for menos que a probabilidade de lesão desse jogador então ele é lesionado
 
+            int indicePlantel = encontrarIndicePorNumero(plantel, titulares.jogadores[i].numero);
+
+            if (indicePlantel == -1) continue;
             if (substituicoes < 3 && suplentes.tamanho > 0) {
+
                 int s = encontrarSubstituto(suplentes, titulares.jogadores[i].posicao, grS, defS, medS, avaS);
                 subs = subs + titulares.jogadores[i].nome + " -> " + suplentes.jogadores[s].nome + "\n";
-                lesionarJogador(plantel, lesionados, i);
+                lesionarJogador(plantel, lesionados, indicePlantel);
+
                 inserirJogador(titulares, suplentes.jogadores[s]);
                 removerJogador(suplentes, s);
                 substituicoes++;
@@ -106,11 +111,15 @@ void simularJornada(ListaJogadores &plantel, ListaJogadores &titulares, ListaJog
 
         if (r < titulares.jogadores[i].probCastigo) { // se esse número for menos que a probabilidade de castigo desse jogador então ele é castigado
 
+            int indicePlantel = encontrarIndicePorNumero(plantel, titulares.jogadores[i].numero);
+
+            if (indicePlantel == -1) continue;
             if (substituicoes < 3) { // se ainda não tivermos usado as 3 substituições
+
                 int s = encontrarSubstituto(suplentes, titulares.jogadores[i].posicao, grS, defS, medS, avaS);
 
                 subs = subs + titulares.jogadores[i].nome + " -> " + suplentes.jogadores[s].nome + "\n";
-                castigarJogador(plantel, castigados, i);
+                castigarJogador(plantel, castigados, indicePlantel);
                 inserirJogador(titulares, suplentes.jogadores[s]);
                 removerJogador(suplentes, s);
                 substituicoes++; // incrementamos o número de substituições usadas

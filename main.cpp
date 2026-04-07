@@ -5,18 +5,13 @@
 #include "jogador.h"
 #include "jogo.h"
 #include "equipa.h"
-
-#ifdef _WIN32
 #include <windows.h> // para conseguirmos mostrar os acentos e isso na consola
-#endif
 
 using namespace std;
 
 int main() {
     srand(time(NULL));
-#ifdef _WIN32
 	SetConsoleOutputCP(CP_UTF8);
-#endif
     ListaJogadores plantel; //declaração dos diferentes arrays
 	ListaJogadores lesionados;
 	ListaJogadores castigados;
@@ -61,21 +56,22 @@ int main() {
 
 		//jornadasLesao e jogosCastigo
 		for (int i = 0; i < lesionados.tamanho; i++) {
-			lesionados.jogadores[i].jornadasLesao--;
 			if (lesionados.jogadores[i].jornadasLesao == 0) {
 				recuperarLesionado(plantel, lesionados, i);
 				i--;
+			} else {
+				lesionados.jogadores[i].jornadasLesao--;
 			}
 		}
-		if (jornada > 0) {
-			for (int i = 0; i <castigados.tamanho; i++) {
+		for (int i = 0; i <castigados.tamanho; i++) {
+			if (castigados.jogadores[i].jogosCastigo == 0) {
+				recuperarCastigado(plantel, castigados, i);
+				i--;
+			} else {
 				castigados.jogadores[i].jogosCastigo--;
-				if (castigados.jogadores[i].jogosCastigo == 0) {
-					recuperarCastigado(plantel, castigados, i);
-					i--;
-				}
 			}
 		}
+
 		string adversario;
 		if (jornada < 17)
 			adversario = equipas[jornada];
