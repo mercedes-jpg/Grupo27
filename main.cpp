@@ -1,7 +1,7 @@
 #include <iostream> //ficheiro de texto que contem as instruções e as declarações de funções referentes a ações de entrada e saída de dados - biblioteca standard input/output
 #include <stdlib.h>
 #include <time.h> // Para o seed do rand
-
+#include <windows.h>
 #include "plantel.h"
 #include "jogador.h"
 #include "jogo.h"
@@ -11,7 +11,7 @@ using namespace std;
 
 int main() {
     srand(time(NULL));
-
+	SetConsoleOutputCP(CP_UTF8);
     ListaJogadores plantel; //declaração dos diferentes arrays
 	ListaJogadores lesionados;
 	ListaJogadores castigados;

@@ -3,6 +3,7 @@
 // Created by clara on 31/03/2026.
 //
 
+#include <locale.h>
 #include "jogo.h"
 #include "jogador.h"
 #include <iostream>
