@@ -32,15 +32,20 @@ int encontrarSubstituto(ListaJogadores &s, string pos, int grS, int defS, int me
     }
     string escolhida;
 
-    if (grS >= defS && grS >= medS && grS >= avaS) escolhida = "GR";
-    else if (defS >= medS && defS >= avaS) escolhida = "DEF"; // não precisamos de comparar com grS porque já verificamos antes se ele era o maior
-    else if (medS>= avaS) escolhida = "MED";
-    else escolhida = "AVA";
+    if (grS >= defS && grS >= medS && grS >= avaS)
+        escolhida = "GR";
+    else if (defS >= medS && defS >= avaS)
+        escolhida = "DEF"; // não precisamos de comparar com grS porque já verificamos antes se ele era o maior
+    else if (medS>= avaS)
+        escolhida = "MED";
+    else
+        escolhida = "AVA";
 
     for (int i = 0; i < s.tamanho; i++) {
         if (s.jogadores[i].posicao == escolhida)
             return i;
     }
+    return 0;
 }
 
 void simularJornada(ListaJogadores &plantel, ListaJogadores &titulares, ListaJogadores &suplentes, ListaJogadores &lesionados, ListaJogadores &castigados, ListaJogadores &transferencias, bool usados[], string adversario) {
@@ -63,8 +68,9 @@ void simularJornada(ListaJogadores &plantel, ListaJogadores &titulares, ListaJog
         if (r < titulares.jogadores[i].probLesao) { // se esse número for menos que a probabilidade de lesão desse jogador então ele é lesionado
 
             if (substituicoes < 3 && suplentes.tamanho > 0) {
-                inserirJogador(titulares, suplentes.jogadores[0]);
-                removerJogador(suplentes, 0);
+                int s = encontrarSubstituto(suplentes, titulares.jogadores[i].posicao, grS, defS, medS, avaS);
+                inserirJogador(titulares, suplentes.jogadores[s]);
+                removerJogador(suplentes, s);
                 substituicoes++;
             } else {
                 jogadoresEmJogo--;
@@ -80,6 +86,9 @@ void simularJornada(ListaJogadores &plantel, ListaJogadores &titulares, ListaJog
         if (r < titulares.jogadores[i].probCastigo) { // se esse número for menos que a probabilidade de castigo desse jogador então ele é castigado
 
             if (substituicoes < 3) { // se ainda não tivermos usado as 3 substituições
+                int s = encontrarSubstituto(suplentes, titulares.jogadores[i].posicao, grS, defS, medS, avaS);
+                inserirJogador(titulares, suplentes.jogadores[s]);
+                removerJogador(suplentes, s);
                 substituicoes++; // incrementamos o número de substituições usadas
             } else {
                 jogadoresEmJogo--; // se já tivermos usado as 3, o jogador sai à mesma, mas a equipa passa a jogar com menos um jogador

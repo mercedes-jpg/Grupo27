@@ -44,20 +44,27 @@ int main() {
 	}
 
 	//JORNADAS
-	for (int j = 0; j < 34; j++) {
-		cout << "\n====== JORNADA " << j + 1 << " =====\n";
-		string adversario = equipas[j/2];
-		selecionarEquipa(plantel, titulares, suplentes);
-		simularJornada(plantel, titulares, suplentes, lesionados, castigados, transferencias, usados, adversario);
-	}
+	// for (int j = 0; j < 34; j++) {
+	// 	cout << "\n====== JORNADA " << j + 1 << " =====\n";
+	// 	string adversario = equipas[j/2];
+	// 	selecionarEquipa(plantel, titulares, suplentes);
+	// 	simularJornada(plantel, titulares, suplentes, lesionados, castigados, transferencias, usados, adversario);
+	// }
+	int jornada = 0;
+	char escolha;
 
 	do {
-		cout << "\n===== JORNADA " << jornada++ << " =====\n";
+		cout << "\n===== JORNADA " << jornada+1 << " =====\n";
+		string adversario;
+		if (jornada < 17)
+			adversario = equipas[jornada];
+
 		selecionarEquipa(plantel, titulares, suplentes);
 		simularJornada(plantel, titulares, suplentes, lesionados, castigados, transferencias, usados, adversario);
+		jornada++;
 		cout << "\n(s) seguinte    (o) sair ";
 		cin >> escolha;
-	} while (escolha == 's');
+	} while (escolha == 's' && jornada < 34);
 
 	return 0;
 }
