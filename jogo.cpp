@@ -48,19 +48,37 @@ int encontrarSubstituto(ListaJogadores &s, string pos, int grS, int defS, int me
     return 0;
 }
 
-void simularJornada(ListaJogadores &plantel, ListaJogadores &titulares, ListaJogadores &suplentes, ListaJogadores &lesionados, ListaJogadores &castigados, ListaJogadores &transferencias, bool usados[], string adversario) {
+void simularJornada(ListaJogadores &plantel, ListaJogadores &titulares, ListaJogadores &suplentes, ListaJogadores &lesionados, ListaJogadores &castigados, ListaJogadores &transferencias, bool usados[], string adversario, int &pontos) {
 
-    int jogadoresEmJogo = titulares.tamanho;
     int substituicoes = 0;
+    int grS=0, defS=0, medS=0, avaS=0;
+    for (int i = 0; i < suplentes.tamanho; i++) {
+        if (suplentes.jogadores[i].posicao == "GR")
+            grS++;
+        else if (suplentes.jogadores[i].posicao == "DEF")
+            defS++;
+        else if (suplentes.jogadores[i].posicao == "MED")
+            medS++;
+        else if (suplentes.jogadores[i].posicao == "AVA")
+            avaS++;
+    }
 
-    string adversario = obterEquipaAdvAleatoria();
     int totalGolos = rand() % 9; // mínimo 0 golos, máximo 8 golos, no total
     int golosEDA = rand() % (totalGolos + 1); // escolher um número aleatório entre 0 e o total de golos que deu, para ver quantos golos o EDA FC marcou
     int golosADV = totalGolos - golosEDA; // depois o que restar fica para a equipa adversária
 
-    cout << "EDA FC vs" << adversario << endl;
-    //cout << "Resultado : EDA FC:" << golosEDA << " - " << adversario << ":"<< golosADV << endl;
+    // atualizar pontos do EDA FC
 
+    if (golosEDA > golosADV)
+        pontos = pontos + 3;
+    else if (golosEDA == golosADV)
+        pontos = pontos + 1;
+
+    cout << "EDA FC vs " << adversario << endl;
+    cout << "Resultado : EDA FC:" << golosEDA << " - " << adversario << ":"<< golosADV << endl;
+
+
+    string subs = "";
     //simular lesões um a um
     for (int i = 0; i < titulares.tamanho; i++) {
         int r = rand() % 101;
@@ -69,14 +87,16 @@ void simularJornada(ListaJogadores &plantel, ListaJogadores &titulares, ListaJog
 
             if (substituicoes < 3 && suplentes.tamanho > 0) {
                 int s = encontrarSubstituto(suplentes, titulares.jogadores[i].posicao, grS, defS, medS, avaS);
+                subs = subs + titulares.jogadores[i].nome + " -> " + suplentes.jogadores[s].nome + "\n";
                 inserirJogador(titulares, suplentes.jogadores[s]);
                 removerJogador(suplentes, s);
                 substituicoes++;
-            } else {
-                jogadoresEmJogo--;
+            }
+            else {
+                removerJogador(titulares, i);
+                i--; // como remove um jogador e os outros andam uma casa para trás temos de decrementar o i para não saltarmos um jogador
             }
             lesionarJogador(plantel, lesionados, i);
-            i--; // como o lesionarJogador remove um jogador e os outros que estavam à sua frente andam uma casa para trás temos de decrementar o i para não saltarmos um jogador
         }
     }
     //simular castigos um a um
@@ -87,29 +107,35 @@ void simularJornada(ListaJogadores &plantel, ListaJogadores &titulares, ListaJog
 
             if (substituicoes < 3) { // se ainda não tivermos usado as 3 substituições
                 int s = encontrarSubstituto(suplentes, titulares.jogadores[i].posicao, grS, defS, medS, avaS);
+
+                subs = subs + titulares.jogadores[i].nome + " -> " + suplentes.jogadores[s].nome + "\n";
                 inserirJogador(titulares, suplentes.jogadores[s]);
                 removerJogador(suplentes, s);
                 substituicoes++; // incrementamos o número de substituições usadas
-            } else {
-                jogadoresEmJogo--; // se já tivermos usado as 3, o jogador sai à mesma, mas a equipa passa a jogar com menos um jogador
+            }
+            else {
+                removerJogador(titulares, i); // se já tivermos usado as 3, o jogador sai à mesma, mas a equipa passa a jogar com menos um jogador
+                i--; //como remove um jogador e os outros andam uma casa para trás temos de decrementar o i para não saltarmos um jogador
             }
             castigarJogador(plantel, castigados, i);
-            i--; // como o castigarJogador remove um jogador e os outros andam uma casa para trás temos de decrementar o i para não saltarmos um jogador
         }
     }
     if (plantel.tamanho < 7) {
         cout << "Não há jogadores suficientes. Ora bolas!";
     }
-    if (jogadoresEmJogo < 7) {
+    if (titulares.tamanho < 7) {
         cout << "O jogo foi terminado por falta de jogadores.\n";
         if (golosADV > 3) {
             cout << "Resultado : EDA FC:0" << " - " << adversario << ":"<< golosADV << endl;
         } else {
-            cout << "Resultado : EDA FC:0" << " - " << adversario << ":"<< 3 << endl;
+            cout << "Resultado : EDA FC:0" << " - " << adversario << ":"<< "3" << endl;
         }
     } else {
         cout << "Resultado : EDA FC:" << golosEDA << " - " << adversario << ":"<< golosADV << endl;
     }
+
+    cout << "\nSubstituições:\n" << subs << endl;
+
     //transferências
     for (int i = 0; i < 2; i++) {
         string posicoes[] = {"GR","DEF","MED","AVA"};

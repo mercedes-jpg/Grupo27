@@ -44,26 +44,45 @@ int main() {
 	}
 
 	//JORNADAS
-	// for (int j = 0; j < 34; j++) {
-	// 	cout << "\n====== JORNADA " << j + 1 << " =====\n";
-	// 	string adversario = equipas[j/2];
-	// 	selecionarEquipa(plantel, titulares, suplentes);
-	// 	simularJornada(plantel, titulares, suplentes, lesionados, castigados, transferencias, usados, adversario);
-	// }
 	int jornada = 0;
+	int pontos = 0;
 	char escolha;
 
 	do {
-		cout << "\n===== JORNADA " << jornada+1 << " =====\n";
+		cout << "***********************************\n";
+		cout << "* EDA FC - " << jornada+1 << "ª Jornada - " << pontos << " pontos.\n";
+		cout << "***********************************\n";
+		cout << "***********************************" << " Plantel Disponível: " << "***********************************\n";
+
+		//jornadasLesao e jogosCastigo
+		for (int i = 0; i < lesionados.tamanho; i++) {
+			lesionados.jogadores[i].jornadasLesao--;
+			if (lesionados.jogadores[i].jornadasLesao == 0) {
+				recuperarLesionado(plantel, lesionados, i);
+				i--;
+			}
+		}
+		if (jornada > 0) {
+			for (int i = 0; i <castigados.tamanho; i++) {
+				castigados.jogadores[i].jogosCastigo--;
+				if (castigados.jogadores[i].jogosCastigo == 0) {
+					recuperarCastigado(plantel, castigados, i);
+					i--;
+				}
+			}
+		}
 		string adversario;
 		if (jornada < 17)
 			adversario = equipas[jornada];
+		else
+			adversario = equipas[jornada - 17];
 
 		selecionarEquipa(plantel, titulares, suplentes);
-		simularJornada(plantel, titulares, suplentes, lesionados, castigados, transferencias, usados, adversario);
+		simularJornada(plantel, titulares, suplentes, lesionados, castigados, transferencias, usados, adversario, pontos);
 		jornada++;
 		cout << "\n(s) seguinte    (o) sair ";
 		cin >> escolha;
+
 	} while (escolha == 's' && jornada < 34);
 
 	return 0;
