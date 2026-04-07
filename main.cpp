@@ -12,15 +12,16 @@ using namespace std;
 int main() {
     srand(time(NULL));
 	SetConsoleOutputCP(CP_UTF8);
+
     ListaJogadores plantel; //declaração dos diferentes arrays
 	ListaJogadores lesionados;
 	ListaJogadores castigados;
 	ListaJogadores transferencias;
 	ListaJogadores titulares;
 	ListaJogadores suplentes;
+
 	bool usados[100] = {false}; // todos começam como não usados; é até 100 porque iremos como índices (usados[numero]) ignoramos o 0
-    //int capacidade = 20 + rand() % 11; // 20 a 30 jogadores
-	//int capacidadeMax = 30;
+
     inicializarLista(plantel, 30); //inicialização dos arrays
 	inicializarLista(lesionados, 30);
 	inicializarLista(castigados, 30);
@@ -28,8 +29,8 @@ int main() {
 
     gerarPlantel(plantel, usados); // aqui p = plantel
 
+	//gerar 17 equipas sem repetir
 	string equipas[17];
-
 	int i = 0;
 	while (i < 17) {
 		string e = obterEquipaAdvAleatoria();
@@ -47,12 +48,20 @@ int main() {
 	int jornada = 0;
 	int pontos = 0;
 	char escolha;
+	string resumoAnterior = "";
 
 	do {
 		cout << "***********************************\n";
 		cout << "* EDA FC - " << jornada+1 << "ª Jornada - " << pontos << " pontos.\n";
 		cout << "***********************************\n";
+
+		//mostrar resultado anterior
+		if (jornada > 0) {
+			cout << "\nResultado Anterior:\n";
+			cout << resumoAnterior << endl;
+		}
 		cout << "***********************************" << " Plantel Disponível: " << "***********************************\n";
+		mostrarLista(plantel);
 
 		//jornadasLesao e jogosCastigo
 		for (int i = 0; i < lesionados.tamanho; i++) {
@@ -78,7 +87,20 @@ int main() {
 			adversario = equipas[jornada - 17];
 
 		selecionarEquipa(plantel, titulares, suplentes);
-		simularJornada(plantel, titulares, suplentes, lesionados, castigados, transferencias, usados, adversario, pontos);
+
+		cout << "\nTitulares:\n";
+		mostrarLista(titulares);
+
+		cout << "\nSuplentes:\n";
+		mostrarLista(suplentes);
+
+		if (plantel.tamanho < 7) {
+			cout << "\nO jogo não pode começares, o EDA FC não tem jogadores suficientes para jogar.\n";
+		}
+		else {
+			simularJornada(plantel, titulares, suplentes, lesionados, castigados, transferencias, usados, adversario, pontos);
+			resumoAnterior = "Jogo contra " + adversario + " terminado.";
+		}
 		jornada++;
 		cout << "\n(s) seguinte    (o) sair ";
 		cin >> escolha;
@@ -101,4 +123,3 @@ int main() {
 //     srand(time(NULL));
 //     string* nomes = new nome[118]; //Cria um apontador de nome "nomes" do tipo string e cria se 118 lugares do tipo "nomes" que recebera o nome dos jogadores
 // }
-

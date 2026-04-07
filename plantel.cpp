@@ -2,9 +2,12 @@
 // Created by clara on 29/03/2026.
 //
 //.cpp implementa
+#include <iostream>
 #include "plantel.h"
 #include "jogador.h"
 #include <stdlib.h>
+
+using namespace std;
 
 void inicializarLista(ListaJogadores &p, int capacidade) {
     p.jogadores = new Jogador[capacidade]; // hummmmm
@@ -12,7 +15,7 @@ void inicializarLista(ListaJogadores &p, int capacidade) {
     p.capacidade = capacidade;
 }
 
-void inserirJogador(ListaJogadores &p, Jogador j) {
+void inserirJogador(ListaJogadores &p, Jogador j) { // & é para trabalhar na lista original
     if (p.tamanho < p.CAPACIDADEMAX) { // se o nº de jogadores atual for menor que a capacidade do plantel
         int i = 0;
         // vamos encontrar a posição certa para a lista continuar ordenada
@@ -83,7 +86,7 @@ void recuperarLesionado(ListaJogadores &plantel, ListaJogadores &lesionados, int
     Jogador j = lesionados.jogadores[a]; // vai buscar o jogador j à lista de lesionados, que contém jogadores, na posição index
     j.jornadasLesao = 0; // não fica lesionado nenhuma jornada neste momento, porque já recuperou da lesão
     inserirJogador(plantel, j); // adiciona o jogador j no fim da lista do plantel onde o jogador j é o jogador que recuperou da lesão
-    removerJogador(lesionados, a); // remove jogador j dos lesionados atraves da funcao remover jogador ja definida
+    removerJogador(lesionados, a); // remove jogador j dos lesionados através da funcao remover jogador já definida
 }
 
 void recuperarCastigado(ListaJogadores &plantel, ListaJogadores &castigados, int a) {
@@ -114,3 +117,9 @@ void ordenarPorQualidade(ListaJogadores &p) { // dentro de cada posição
         }
     }
 } // 30 40 20 50    40 30 20 50     40 30 20 50
+
+void mostrarLista(ListaJogadores &p) {
+    for (int i = 0; i < p.tamanho; i++) {
+        cout << p.jogadores[i].nome << " | " << p.jogadores[i].posicao << " | " << p.jogadores[i].qualidade << endl;
+    }
+}

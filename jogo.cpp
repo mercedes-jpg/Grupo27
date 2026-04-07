@@ -89,15 +89,16 @@ void simularJornada(ListaJogadores &plantel, ListaJogadores &titulares, ListaJog
             if (substituicoes < 3 && suplentes.tamanho > 0) {
                 int s = encontrarSubstituto(suplentes, titulares.jogadores[i].posicao, grS, defS, medS, avaS);
                 subs = subs + titulares.jogadores[i].nome + " -> " + suplentes.jogadores[s].nome + "\n";
+                lesionarJogador(plantel, lesionados, i);
                 inserirJogador(titulares, suplentes.jogadores[s]);
                 removerJogador(suplentes, s);
                 substituicoes++;
             }
             else {
+                lesionarJogador(plantel, lesionados, i);
                 removerJogador(titulares, i);
                 i--; // como remove um jogador e os outros andam uma casa para trás temos de decrementar o i para não saltarmos um jogador
             }
-            lesionarJogador(plantel, lesionados, i);
         }
     }
     //simular castigos um a um
@@ -110,15 +111,16 @@ void simularJornada(ListaJogadores &plantel, ListaJogadores &titulares, ListaJog
                 int s = encontrarSubstituto(suplentes, titulares.jogadores[i].posicao, grS, defS, medS, avaS);
 
                 subs = subs + titulares.jogadores[i].nome + " -> " + suplentes.jogadores[s].nome + "\n";
+                castigarJogador(plantel, castigados, i);
                 inserirJogador(titulares, suplentes.jogadores[s]);
                 removerJogador(suplentes, s);
                 substituicoes++; // incrementamos o número de substituições usadas
             }
             else {
+                castigarJogador(plantel, castigados, i);
                 removerJogador(titulares, i); // se já tivermos usado as 3, o jogador sai à mesma, mas a equipa passa a jogar com menos um jogador
                 i--; //como remove um jogador e os outros andam uma casa para trás temos de decrementar o i para não saltarmos um jogador
             }
-            castigarJogador(plantel, castigados, i);
         }
     }
     if (plantel.tamanho < 7) {
