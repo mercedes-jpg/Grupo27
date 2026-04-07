@@ -12,7 +12,7 @@ Jogador criarJogador(string nome, int numero, string posicao) {
     j.numero = numero;
     j.posicao = posicao;
 
-    j.idade = 16 + rand() % 25; // entre 16 e 40
+    j.idade = rand() % 25 + 16; // entre 16 e 40
     j.probLesao = rand() % 16; // entre 0 e 15
     j.probCastigo = rand() % 21; // entre 0 e 20
     j.qualidade = rand() % 101; // entre 0 e 100
@@ -21,11 +21,12 @@ Jogador criarJogador(string nome, int numero, string posicao) {
     j.jornadasLesao = 0;
     j.jogosCastigo = 0;
 
+
     return j;
 }
 
 string obterNomeAleatorio() {
-    string nomes [150]; // porque tem 118 nomes na lista de nomes
+    string nomes [150]; // porque tem 114 nomes na lista de nomes
     int total = 0;
     string linha;
     fstream fs;
@@ -38,7 +39,6 @@ string obterNomeAleatorio() {
     }
     return nomes[rand() % total]; // o rand vai dar um indice aleatorio do vetor nomes; logo vai retornar um nome aleatório
 }
-
 
 //números aleatórios e não repetidos para os jogadores
 int gerarNumeroUnico(bool usados[]) {
