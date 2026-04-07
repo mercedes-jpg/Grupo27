@@ -5,7 +5,6 @@
 #include "jogador.h"
 #include <stdlib.h> // dá acesso a rand()
 #include <fstream> // biblioteca (classe) para escrita e leitrua de ficheiros
-#include <locale.h>
 
 Jogador criarJogador(string nome, int numero, string posicao) {
     Jogador j;
