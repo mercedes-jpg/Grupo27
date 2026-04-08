@@ -48,7 +48,7 @@ int encontrarSubstituto(ListaJogadores &s, string pos, int grS, int defS, int me
     return 0;
 }
 
-void simularJornada(ListaJogadores &plantel, ListaJogadores &titulares, ListaJogadores &suplentes, ListaJogadores &lesionados, ListaJogadores &castigados, ListaJogadores &transferencias, bool usados[], string adversario, int &pontos) {
+void simularJornada(ListaJogadores &plantel, ListaJogadores &titulares, ListaJogadores &suplentes, ListaJogadores &lesionados, ListaJogadores &castigados, ListaJogadores &lesionadosJornada, ListaJogadores &castigadosJornada, ListaJogadores &transferencias, bool usados[], string adversario, int &pontos) {
 
     int grS=0, defS=0, medS=0, avaS=0;
     for (int i = 0; i < suplentes.tamanho; i++) {
@@ -65,9 +65,6 @@ void simularJornada(ListaJogadores &plantel, ListaJogadores &titulares, ListaJog
     int totalGolos = rand() % 9; // mínimo 0 golos, máximo 8 golos, no total
     int golosEDA = rand() % (totalGolos + 1); // escolher um número aleatório entre 0 e o total de golos que deu, para ver quantos golos o EDA FC marcou
     int golosADV = totalGolos - golosEDA; // depois o que restar fica para a equipa adversária
-
-    cout << "EDA FC vs " << adversario << endl;
-    cout << "Resultado : EDA FC:" << golosEDA << " - " << adversario << ":"<< golosADV << endl;
 
     // atualizar pontos do EDA FC
 
@@ -88,6 +85,7 @@ void simularJornada(ListaJogadores &plantel, ListaJogadores &titulares, ListaJog
             int indicePlantel = encontrarIndicePorNumero(plantel, titulares.jogadores[i].numero);
 
             if (indicePlantel != -1) {
+                inserirJogador(lesionadosJornada, plantel.jogadores[indicePlantel]);
                 lesionarJogador(plantel, lesionados, indicePlantel);
                 removerJogador(titulares, i);
 
@@ -114,6 +112,7 @@ void simularJornada(ListaJogadores &plantel, ListaJogadores &titulares, ListaJog
             int indicePlantel = encontrarIndicePorNumero(plantel, titulares.jogadores[i].numero);
 
             if (indicePlantel != -1) {
+                inserirJogador(castigadosJornada, plantel.jogadores[indicePlantel]);
                 castigarJogador(plantel, castigados, indicePlantel);
                 removerJogador(titulares, i);
 
@@ -130,8 +129,6 @@ void simularJornada(ListaJogadores &plantel, ListaJogadores &titulares, ListaJog
             }
         }
     }
-
-    cout << "\nSubstituicoes:\n" << subs << endl;
     //
     // if (plantel.tamanho < 7) {
     //     cout << "Nao ha jogadores suficientes. Ora bolas!";

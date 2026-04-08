@@ -10,39 +10,23 @@
 using namespace std;
 
 int main() {
-    srand(time(NULL));
+	srand(time(NULL));
 	//SetConsoleOutputCP(CP_UTF8);
-    ListaJogadores plantel; //declaração dos diferentes arrays
+	ListaJogadores plantel; //declaração dos diferentes arrays
 	ListaJogadores lesionados;
 	ListaJogadores castigados;
 	ListaJogadores transferencias;
 	ListaJogadores titulares;
 	ListaJogadores suplentes;
 	bool usados[100] = {false}; // todos começam como não usados; é até 100 porque iremos como índices (usados[numero]) ignoramos o 0
-    //int capacidade = 20 + rand() % 11; // 20 a 30 jogadores
+	//int capacidade = 20 + rand() % 11; // 20 a 30 jogadores
 	//int capacidadeMax = 30;
-    inicializarLista(plantel, 30); //inicialização dos arrays
+	inicializarLista(plantel, 30); //inicialização dos arrays
 	inicializarLista(lesionados, 30);
 	inicializarLista(castigados, 30);
 	inicializarLista(transferencias, 30);
 	inicializarLista (titulares, 11);
 	inicializarLista (suplentes, 6);
-
-	ListaJogadores titularesIniciais;
-	ListaJogadores suplentesIniciais;
-
-	inicializarLista(titularesIniciais, 11);
-    inicializarLista(suplentesIniciais, 6);
-
-	// copiar os titulares
-	for (int i = 0; i < titulares.tamanho; i++) {
-		inserirJogador(titularesIniciais, titulares.jogadores[i]);
-	}
-
-	//copiar os suplentes
-	for (int i = 0; i <suplentes.tamanho; i++) {
-		inserirJogador(suplentesIniciais, titulares.jogadores[i]);
-	}
 
 	gerarPlantel(plantel, usados); // aqui p = plantel
 
@@ -64,6 +48,21 @@ int main() {
 	int jornada = 0;
 	int pontos = 0;
 	char escolha;
+
+	string ultimoAdversario = "";
+	int ultimoEDA = 0;
+	int ultimoADV = 0;
+	string ultSubs = "";
+
+	ListaJogadores ultTitulares;
+	ListaJogadores ultSuplentes;
+	ListaJogadores ultLesionados;
+	ListaJogadores ultCastigados;
+
+	inicializarLista(ultTitulares, 11);
+	inicializarLista(ultSuplentes, 6);
+	inicializarLista(ultLesionados, 30);
+	inicializarLista(ultCastigados, 30);
 
 	do {
 		cout << "***********************************\n";
@@ -88,29 +87,74 @@ int main() {
 			}
 		}
 
+		//selecionarEquipa(plantel, titulares, suplentes);
+
+		// ListaJogadores titularesIniciais;
+		// ListaJogadores suplentesIniciais;
+		//
+		// inicializarLista(titularesIniciais, 11);
+		// inicializarLista(suplentesIniciais, 6);
+
+		// listas de castigados e lesionados de cada jornada apenas
+		// ListaJogadores lesionadosJornada;
+		// ListaJogadores castigadosJornada;
+		// inicializarLista(lesionadosJornada, 30);
+		// inicializarLista(castigadosJornada, 30);
+		//
+		// simularJornada(plantel, titulares, suplentes, lesionados, castigados, lesionadosJornada, castigadosJornada, transferencias, usados, adversario, pontos);
+
+		if (jornada > 0) {
+			cout << "Resultado Anterior:\n";
+			cout << "Resultado : EDA FC:" << ultimoEDA << " - " << ultimoAdversario << ultimoADV << endl;
+			cout << "\nTitulares:\n";
+			mostrarLista(ultTitulares);
+
+			cout << "\nSuplentes:\n";
+			mostrarLista(ultSuplentes);
+
+			cout << "\nCastigados:\n";
+			mostrarLista(ultCastigados);
+
+			cout << "\nLesionados:\n";
+			mostrarLista(ultLesionados);
+
+			cout << "\nSubstituicoes:\n" << ultSubs << endl;
+		}
+		selecionarEquipa(plantel, titulares, suplentes);
+
+		limparLista(ultTitulares);
+		limparLista(ultSuplentes);
+		limparLista(ultLesionados);
+		limparLista(ultCastigados);
+		ultSubs = "";
+
+		// guardar os titulares iniciais
+		for (int i = 0; i < titulares.tamanho; i++)
+			inserirJogador(ultTitulares, titulares.jogadores[i]);
+
+		// copiar os suplentes
+		for (int i = 0; i < suplentes.tamanho; i++)
+			inserirJogador(ultSuplentes, suplentes.jogadores[i]);
+
 		string adversario;
 		if (jornada < 17)
 			adversario = equipas[jornada];
 		else
 			adversario = equipas[jornada - 17];
 
-		selecionarEquipa(plantel, titulares, suplentes);
-		simularJornada(plantel, titulares, suplentes, lesionados, castigados, transferencias, usados, adversario, pontos);
+		simularJornada(plantel, titulares, suplentes, lesionados, castigados, ultLesionados, ultCastigados, ultSubs, ultimoEDA, ultimoADV, transferencias, usados, adversario, pontos);
 
-		cout << "\n--- TITULARES ---\n";
-		mostrarLista(titularesIniciais);
+		ultimoAdversario = adversario;
 
-		cout << "\n--- SUPLENTES ---\n";
-		mostrarLista(suplentesIniciais);
+		//estado atual do plantel e outras listas
+		cout << "\n***********************************" << " Plantel Disponivel: " << "***********************************\n";
+		mostrarLista(plantel);
 
-		cout << "\n--- CASTIGADOS ---\n";
+		cout << "\nCastigados:\n";
 		mostrarLista(castigados);
 
-		cout << "\n--- LESIONADOS ---\n";
+		cout << "\nLesionados:\n";
 		mostrarLista(lesionados);
-
-		cout << "***********************************" << " Plantel Disponivel: " << "***********************************\n";
-		mostrarLista(plantel);
 
 		jornada++;
 
@@ -130,9 +174,3 @@ int main() {
 //     int nMed;
 //     int nAva;
 //};
-
-// int main() {
-//     srand(time(NULL));
-//     string* nomes = new nome[118]; //Cria um apontador de nome "nomes" do tipo string e cria se 118 lugares do tipo "nomes" que recebera o nome dos jogadores
-// }
-
