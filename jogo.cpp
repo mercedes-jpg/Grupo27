@@ -132,7 +132,7 @@ void simularJornada(ListaJogadores &plantel, ListaJogadores &titulares, ListaJog
         }
     }
     if (plantel.tamanho < 7) {
-        cout << "Nao has jogadores suficientes. Ora bolas!";
+        cout << "Nao ha jogadores suficientes. Ora bolas!";
     }
     if (titulares.tamanho < 7) {
         cout << "O jogo foi terminado por falta de jogadores.\n";
