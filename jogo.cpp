@@ -89,6 +89,7 @@ void simularJornada(ListaJogadores &plantel, ListaJogadores &titulares, ListaJog
 
             if (indicePlantel != -1) {
                 lesionarJogador(plantel, lesionados, indicePlantel);
+                removerJogador(titulares, i);
 
                 if (substituicoes < 3 && suplentes.tamanho > 0) {
 
@@ -99,10 +100,7 @@ void simularJornada(ListaJogadores &plantel, ListaJogadores &titulares, ListaJog
                     removerJogador(suplentes, s);
                     substituicoes++;
                 }
-                else {
-                    removerJogador(titulares, i);
-                    i--; // como remove um jogador e os outros andam uma casa para trás temos de decrementar o i para não saltarmos um jogador
-                }
+                i--;
             }
         }
     }
@@ -117,6 +115,7 @@ void simularJornada(ListaJogadores &plantel, ListaJogadores &titulares, ListaJog
 
             if (indicePlantel != -1) {
                 castigarJogador(plantel, castigados, indicePlantel);
+                removerJogador(titulares, i);
 
                 if (substituicoes < 3 && suplentes.tamanho > 0) { // se ainda não tivermos usado as 3 substituições
 
@@ -127,10 +126,7 @@ void simularJornada(ListaJogadores &plantel, ListaJogadores &titulares, ListaJog
                     removerJogador(suplentes, s);
                     substituicoes++; // incrementamos o número de substituições usadas
                 }
-                else {
-                    removerJogador(titulares, i); // se já tivermos usado as 3, o jogador sai à mesma, mas a equipa passa a jogar com menos um jogador
-                    i--; //como remove um jogador e os outros andam uma casa para trás temos de decrementar o i para não saltarmos um jogador
-                }
+                i--;
             }
         }
     }
