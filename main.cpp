@@ -11,7 +11,7 @@ using namespace std;
 
 int main() {
     srand(time(NULL));
-	// SetConsoleOutputCP(CP_UTF8);
+	//SetConsoleOutputCP(CP_UTF8);
     ListaJogadores plantel; //declaração dos diferentes arrays
 	ListaJogadores lesionados;
 	ListaJogadores castigados;
