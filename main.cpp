@@ -31,7 +31,6 @@ int main() {
     gerarPlantel(plantel, usados); // aqui p = plantel
 
 	string equipas[17];
-
 	int i = 0;
 	while (i < 17) {
 		string e = obterEquipaAdvAleatoria();
@@ -54,7 +53,6 @@ int main() {
 		cout << "***********************************\n";
 		cout << "* EDA FC - " << jornada+1 << "a Jornada - " << pontos << " pontos.\n";
 		cout << "***********************************\n";
-		cout << "***********************************" << " Plantel Disponivel: " << "***********************************\n";
 
 		//jornadasLesao e jogosCastigo
 		for (int i = 0; i < lesionados.tamanho; i++) {
@@ -81,15 +79,26 @@ int main() {
 			adversario = equipas[jornada - 17];
 
 		selecionarEquipa(plantel, titulares, suplentes);
+		simularJornada(plantel, titulares, suplentes, lesionados, castigados, transferencias, usados, adversario, pontos);
 
 		cout << "\n--- TITULARES ---\n";
 		mostrarLista(titulares);
-		cout << "\n--- SUPLENTES ---\n";
 
+		cout << "\n--- SUPLENTES ---\n";
 		mostrarLista(suplentes);
-		simularJornada(plantel, titulares, suplentes, lesionados, castigados, transferencias, usados, adversario, pontos);
+
+		cout << "\n--- CASTIGADOS ---\n";
+		mostrarLista(castigados);
+
+		cout << "\n--- LESIONADOS ---\n";
+		mostrarLista(lesionados);
+
+		cout << "***********************************" << " Plantel Disponivel: " << "***********************************\n";
+		mostrarLista(plantel);
+
 		jornada++;
-		cout << "\n(s) seguinte    (o) sair ";
+
+		cout << "\n(s) seguinte    (o) sair\n";
 		cin >> escolha;
 
 	} while (escolha == 's' && jornada < 34);
