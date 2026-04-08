@@ -28,7 +28,23 @@ int main() {
 	inicializarLista (titulares, 11);
 	inicializarLista (suplentes, 6);
 
-    gerarPlantel(plantel, usados); // aqui p = plantel
+	ListaJogadores titularesIniciais;
+	ListaJogadores suplentesIniciais;
+
+	inicializarLista(titularesIniciais, 11);
+    inicializarLista(suplentesIniciais, 6);
+
+	// copiar os titulares
+	for (int i = 0; i < titulares.tamanho; i++) {
+		inserirJogador(titularesIniciais, titulares.jogadores[i]);
+	}
+
+	//copiar os suplentes
+	for (int i = 0; i <suplentes.tamanho; i++) {
+		inserirJogador(suplentesIniciais, titulares.jogadores[i]);
+	}
+
+	gerarPlantel(plantel, usados); // aqui p = plantel
 
 	string equipas[17];
 	int i = 0;
@@ -82,10 +98,10 @@ int main() {
 		simularJornada(plantel, titulares, suplentes, lesionados, castigados, transferencias, usados, adversario, pontos);
 
 		cout << "\n--- TITULARES ---\n";
-		mostrarLista(titulares);
+		mostrarLista(titularesIniciais);
 
 		cout << "\n--- SUPLENTES ---\n";
-		mostrarLista(suplentes);
+		mostrarLista(suplentesIniciais);
 
 		cout << "\n--- CASTIGADOS ---\n";
 		mostrarLista(castigados);
