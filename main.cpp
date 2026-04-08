@@ -105,7 +105,7 @@ int main() {
 
 		if (jornada > 0) {
 			cout << "Resultado Anterior:\n";
-			cout << "Resultado : EDA FC:" << ultimoEDA << " - " << ultimoAdversario << ultimoADV << endl;
+			cout << "Resultado : EDA FC:" << ultimoEDA << " - " << ultimoAdversario << ":" << ultimoADV << endl;
 			cout << "\nTitulares:\n";
 			mostrarLista(ultTitulares);
 
@@ -122,10 +122,10 @@ int main() {
 		}
 		selecionarEquipa(plantel, titulares, suplentes);
 
-		limparLista(ultTitulares);
-		limparLista(ultSuplentes);
-		limparLista(ultLesionados);
-		limparLista(ultCastigados);
+		ultTitulares.tamanho = 0;
+		ultSuplentes.tamanho = 0;
+		ultLesionados.tamanho = 0;
+		ultCastigados.tamanho = 0;
 		ultSubs = "";
 
 		// guardar os titulares iniciais
@@ -142,7 +142,7 @@ int main() {
 		else
 			adversario = equipas[jornada - 17];
 
-		simularJornada(plantel, titulares, suplentes, lesionados, castigados, ultLesionados, ultCastigados, ultSubs, ultimoEDA, ultimoADV, transferencias, usados, adversario, pontos);
+		simularJornada(plantel, titulares, suplentes, lesionados, castigados, ultLesionados, ultCastigados, transferencias, usados, adversario, pontos);
 
 		ultimoAdversario = adversario;
 

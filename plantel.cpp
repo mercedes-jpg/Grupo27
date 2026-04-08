@@ -5,6 +5,7 @@
 #include <iostream>
 #include "plantel.h"
 #include "jogador.h"
+#include <iomanip> // para usar o setw
 #include <stdlib.h>
 
 using namespace std;
@@ -143,7 +144,9 @@ void ordenarPorQualidade(ListaJogadores &p) { // dentro de cada posição
 } // 30 40 20 50    40 30 20 50     40 30 20 50
 
 void mostrarLista(ListaJogadores &p) {
+    cout << left << setw(23) << "Nome" << " | " << setw(3) << "No" << " | " << setw(7) << "Posicao" << " | " << setw(5) << "Idade" << " | " << setw(9) << "ProbLesao" << " | " << setw(11) << "ProbCastigo" << " | " << setw(10) << "Qualidade" << endl;
+    cout << "--------------------------------------------------------------------------------------\n";
     for (int i = 0; i < p.tamanho; i++) {
-        cout << p.jogadores[i].nome << " | " << p.jogadores[i].numero << " | " << p.jogadores[i].posicao << " | " << p.jogadores[i].idade << " | " << p.jogadores[i].probLesao << "% | " << p.jogadores[i].probCastigo << "% | " << p.jogadores[i].qualidade << endl;
+        cout << left << setw(23) << p.jogadores[i].nome << " | " << setw(3) << p.jogadores[i].numero << " | " << setw(7) << p.jogadores[i].posicao << " | " << setw(5) << p.jogadores[i].idade << " | " << setw(9) << (to_string(p.jogadores[i].probLesao) + "%") << " | " << setw(11) << (to_string(p.jogadores[i].probCastigo) + "%") << " | " << setw(10) << p.jogadores[i].qualidade << endl;
     }
 }
