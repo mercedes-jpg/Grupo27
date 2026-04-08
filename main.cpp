@@ -142,7 +142,7 @@ int main() {
 		else
 			adversario = equipas[jornada - 17];
 
-		simularJornada(plantel, titulares, suplentes, lesionados, castigados, ultLesionados, ultCastigados, transferencias, usados, adversario, pontos);
+		simularJornada(plantel, titulares, suplentes, lesionados, castigados, ultLesionados, ultCastigados, transferencias, usados, adversario, pontos, ultimoEDA, ultimoADV, ultSubs);
 
 		ultimoAdversario = adversario;
 
@@ -150,11 +150,13 @@ int main() {
 		cout << "\n***********************************" << " Plantel Disponivel: " << "***********************************\n";
 		mostrarLista(plantel);
 
-		cout << "\nCastigados:\n";
-		mostrarLista(castigados);
+		if (jornada > 0) {
+			cout << "\nCastigados:\n";
+			mostrarLista(castigados);
 
-		cout << "\nLesionados:\n";
-		mostrarLista(lesionados);
+			cout << "\nLesionados:\n";
+			mostrarLista(lesionados);
+		}
 
 		jornada++;
 
@@ -173,4 +175,3 @@ int main() {
 //     int nDef;
 //     int nMed;
 //     int nAva;
-//};

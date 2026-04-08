@@ -48,7 +48,7 @@ int encontrarSubstituto(ListaJogadores &s, string pos, int grS, int defS, int me
     return 0;
 }
 
-void simularJornada(ListaJogadores &plantel, ListaJogadores &titulares, ListaJogadores &suplentes, ListaJogadores &lesionados, ListaJogadores &castigados, ListaJogadores &lesionadosJornada, ListaJogadores &castigadosJornada, ListaJogadores &transferencias, bool usados[], string adversario, int &pontos) {
+void simularJornada(ListaJogadores &plantel, ListaJogadores &titulares, ListaJogadores &suplentes, ListaJogadores &lesionados, ListaJogadores &castigados, ListaJogadores &lesionadosJornada, ListaJogadores &castigadosJornada, ListaJogadores &transferencias, bool usados[], string adversario, int &pontos, int &golosEDA, int&golosADV, string &subs) {
 
     int grS=0, defS=0, medS=0, avaS=0;
     for (int i = 0; i < suplentes.tamanho; i++) {
@@ -61,19 +61,22 @@ void simularJornada(ListaJogadores &plantel, ListaJogadores &titulares, ListaJog
         else if (suplentes.jogadores[i].posicao == "AVA")
             avaS++;
     }
+    if (titulares.tamanho < 7) {
+        golosEDA = 0;
+        golosADV = 3 + rand() % 6;
+    }
 
     int totalGolos = rand() % 9; // mínimo 0 golos, máximo 8 golos, no total
-    int golosEDA = rand() % (totalGolos + 1); // escolher um número aleatório entre 0 e o total de golos que deu, para ver quantos golos o EDA FC marcou
-    int golosADV = totalGolos - golosEDA; // depois o que restar fica para a equipa adversária
+    golosEDA = rand() % (totalGolos + 1); // escolher um número aleatório entre 0 e o total de golos que deu, para ver quantos golos o EDA FC marcou
+    golosADV = totalGolos - golosEDA; // depois o que restar fica para a equipa adversária
 
     // atualizar pontos do EDA FC
-
     if (golosEDA > golosADV)
         pontos = pontos + 3;
     else if (golosEDA == golosADV)
         pontos = pontos + 1;
 
-    string subs = "";
+    subs = "";
     int substituicoes = 0;
 
     //simular lesões um a um
