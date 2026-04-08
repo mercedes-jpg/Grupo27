@@ -88,7 +88,8 @@ using namespace std;
 // }
 
 void selecionarEquipa(ListaJogadores &plantel, ListaJogadores &titulares, ListaJogadores &suplentes) {
-
+    titulares.tamanho = 0;
+    titulares.tamanho = 0;
     inicializarLista(titulares, 11);// inicializa a lista de titulares
     inicializarLista(suplentes, 6);// inicializa a lista dos suplentes
     ordenarPorQualidade(plantel);// ordena o plantel por qualidade

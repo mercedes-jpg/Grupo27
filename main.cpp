@@ -25,6 +25,8 @@ int main() {
 	inicializarLista(lesionados, 30);
 	inicializarLista(castigados, 30);
 	inicializarLista(transferencias, 30);
+	inicializarLista (titulares, 11);
+	inicializarLista (suplentes, 6);
 
     gerarPlantel(plantel, usados); // aqui p = plantel
 
@@ -79,6 +81,12 @@ int main() {
 			adversario = equipas[jornada - 17];
 
 		selecionarEquipa(plantel, titulares, suplentes);
+
+		cout << "\n--- TITULARES ---\n";
+		mostrarLista(titulares);
+		cout << "\n--- SUPLENTES ---\n";
+
+		mostrarLista(suplentes);
 		simularJornada(plantel, titulares, suplentes, lesionados, castigados, transferencias, usados, adversario, pontos);
 		jornada++;
 		cout << "\n(s) seguinte    (o) sair ";

@@ -37,6 +37,7 @@ string obterNomeAleatorio() {
         }
         fs.close();// fecha o ficheiro
     }
+    if (total == 0) return "Jogador";
     return nomes[rand() % total]; // o rand vai dar um indice aleatorio do vetor nomes; logo vai retornar um nome aleatório
 }
 
