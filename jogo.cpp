@@ -132,7 +132,7 @@ void simularJornada(ListaJogadores &plantel, ListaJogadores &titulares, ListaJog
         }
     }
     if (plantel.tamanho < 7) {
-        cout << "Não há jogadores suficientes. Ora bolas!";
+        cout << "Nao has jogadores suficientes. Ora bolas!";
     }
     if (titulares.tamanho < 7) {
         cout << "O jogo foi terminado por falta de jogadores.\n";
@@ -145,7 +145,7 @@ void simularJornada(ListaJogadores &plantel, ListaJogadores &titulares, ListaJog
         cout << "Resultado : EDA FC:" << golosEDA << " - " << adversario << ":"<< golosADV << endl;
     }
 
-    cout << "\nSubstituições:\n" << subs << endl;
+    cout << "\nSubstituicoes:\n" << subs << endl;
 
     //transferências
     for (int i = 0; i < 2; i++) {

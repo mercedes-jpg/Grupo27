@@ -5,13 +5,13 @@
 #include "jogador.h"
 #include "jogo.h"
 #include "equipa.h"
-#include <windows.h> // para conseguirmos mostrar os acentos e isso na consola
+//#include <windows.h> // para conseguirmos mostrar os acentos e isso na consola
 
 using namespace std;
 
 int main() {
     srand(time(NULL));
-	SetConsoleOutputCP(CP_UTF8);
+	// SetConsoleOutputCP(CP_UTF8);
     ListaJogadores plantel; //declaração dos diferentes arrays
 	ListaJogadores lesionados;
 	ListaJogadores castigados;
@@ -50,9 +50,9 @@ int main() {
 
 	do {
 		cout << "***********************************\n";
-		cout << "* EDA FC - " << jornada+1 << "ª Jornada - " << pontos << " pontos.\n";
+		cout << "* EDA FC - " << jornada+1 << "a Jornada - " << pontos << " pontos.\n";
 		cout << "***********************************\n";
-		cout << "***********************************" << " Plantel Disponível: " << "***********************************\n";
+		cout << "***********************************" << " Plantel Disponivel: " << "***********************************\n";
 
 		//jornadasLesao e jogosCastigo
 		for (int i = 0; i < lesionados.tamanho; i++) {
