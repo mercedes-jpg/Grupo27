@@ -59,7 +59,7 @@ void simularJornada(ListaJogadores &plantel, ListaJogadores &titulares, ListaJog
     if (titulares.tamanho < 7) {
         golosEDA = 0;
         golosADV = 3 + rand() % 6;
-        return;
+        return; // termina a função, sai da função simularJornada
     }
     else {
         int totalGolos = rand() % 9; // mínimo 0 golos, máximo 8 golos, no total
@@ -93,7 +93,7 @@ void simularJornada(ListaJogadores &plantel, ListaJogadores &titulares, ListaJog
                 if (substituicoes < 3 && suplentes.tamanho > 0) {
 
                     int s = encontrarSubstituto(suplentes, jogadorSai.posicao, grS, defS, medS, avaS);
-                    subs = subs + titulares.jogadores[i].nome + " -> " + suplentes.jogadores[s].nome + "\n";
+                    subs = subs + jogadorSai.nome + " -> " + suplentes.jogadores[s].nome + "\n";
 
                     inserirJogador(titulares, suplentes.jogadores[s]);
                     removerJogador(suplentes, s);

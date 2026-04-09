@@ -29,5 +29,6 @@ void adicionarTransferencia(ListaJogadores &transferencias, Jogador j);
 void mostrarPlantelEtc(ListaJogadores &p);
 void mostrarLesionados(ListaJogadores &p);
 void mostrarCastigados(ListaJogadores &p);
+void mostrarTransferencias(ListaJogadores &p);
 
 #endif //GRUPO27_PLANTEL_H

@@ -30,6 +30,14 @@ int main() {
 
 	gerarPlantel(plantel, usados); // aqui p = plantel
 
+	ListaJogadores plantelInicial;
+	inicializarLista(plantelInicial, 30);
+
+	// copiar o plantel
+	for (int i = 0; i < plantel.tamanho; i++) {
+		inserirJogador(plantelInicial, plantel.jogadores[i]);
+	}
+
 	string equipas[17];
 	int i = 0;
 	while (i < 17) {
@@ -69,23 +77,23 @@ int main() {
 		cout << "* EDA FC - " << jornada+1 << "a Jornada - " << pontos << " pontos.\n";
 		cout << "***********************************\n";
 
-		//jornadasLesao e jogosCastigo
-		for (int i = 0; i < lesionados.tamanho; i++) {
-			if (lesionados.jogadores[i].jornadasLesao == 0) {
-				recuperarLesionado(plantel, lesionados, i);
-				i--;
-			} else {
-				lesionados.jogadores[i].jornadasLesao--;
-			}
-		}
-		for (int i = 0; i <castigados.tamanho; i++) {
-			if (castigados.jogadores[i].jogosCastigo == 0) {
-				recuperarCastigado(plantel, castigados, i);
-				i--;
-			} else {
-				castigados.jogadores[i].jogosCastigo--;
-			}
-		}
+		// //jornadasLesao e jogosCastigo
+		// for (int i = 0; i < lesionados.tamanho; i++) {
+		// 	if (lesionados.jogadores[i].jornadasLesao == 0) {
+		// 		recuperarLesionado(plantel, lesionados, i);
+		// 		i--;
+		// 	} else {
+		// 		lesionados.jogadores[i].jornadasLesao--;
+		// 	}
+		// }
+		// for (int i = 0; i <castigados.tamanho; i++) {
+		// 	if (castigados.jogadores[i].jogosCastigo == 0) {
+		// 		recuperarCastigado(plantel, castigados, i);
+		// 		i--;
+		// 	} else {
+		// 		castigados.jogadores[i].jogosCastigo--;
+		// 	}
+		// }
 
 		//selecionarEquipa(plantel, titulares, suplentes);
 
@@ -144,11 +152,32 @@ int main() {
 
 		simularJornada(plantel, titulares, suplentes, lesionados, castigados, ultLesionados, ultCastigados, transferencias, usados, adversario, pontos, ultimoEDA, ultimoADV, ultSubs);
 
+		//jornadasLesao e jogosCastigo
+		for (int i = 0; i < lesionados.tamanho; i++) {
+			if (lesionados.jogadores[i].jornadasLesao == 0) {
+				recuperarLesionado(plantel, lesionados, i);
+				i--;
+			} else {
+				lesionados.jogadores[i].jornadasLesao--;
+			}
+		}
+		for (int i = 0; i <castigados.tamanho; i++) {
+			if (castigados.jogadores[i].jogosCastigo == 0) {
+				recuperarCastigado(plantel, castigados, i);
+				i--;
+			} else {
+				castigados.jogadores[i].jogosCastigo--;
+			}
+		}
 		ultimoAdversario = adversario;
 
 		//estado atual do plantel e outras listas
 		cout << "\n***********************************" << " Plantel Disponivel: " << "***********************************\n";
-		mostrarPlantelEtc(plantel);
+
+		if (jornada == 0)
+			mostrarPlantelEtc(plantelInicial);
+		else
+			mostrarPlantelEtc(plantel);
 
 		if (jornada > 0) {
 			cout << "\nCastigados:\n";
@@ -156,6 +185,9 @@ int main() {
 
 			cout << "\nLesionados:\n";
 			mostrarLesionados(lesionados);
+
+			cout << "\nTransferencias:\n";
+			mostrarTransferencias(transferencias);
 		}
 
 		jornada++;
