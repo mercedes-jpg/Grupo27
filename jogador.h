@@ -1,7 +1,3 @@
-//
-// Created by clara on 29/03/2026.
-//
-//.h declara
 #ifndef GRUPO27_JOGADOR_H
 #define GRUPO27_JOGADOR_H
 
@@ -26,4 +22,3 @@ string obterNomeAleatorio(); // existe uma função com este nome e retorna stri
 int gerarNumeroUnico(bool usados[]);
 
 #endif //GRUPO27_JOGADOR_H
-

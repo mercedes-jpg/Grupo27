@@ -1,7 +1,3 @@
-//
-// Created by clara on 29/03/2026.
-//
-//.cpp implementa
 #include <iostream>
 #include "plantel.h"
 #include "jogador.h"

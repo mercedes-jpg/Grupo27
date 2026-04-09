@@ -1,7 +1,3 @@
-//
-// Created by gnps0 on 03/04/2026.
-//
-
 #ifndef GRUPO27_EQUIPA_H
 #define GRUPO27_EQUIPA_H
 #include "plantel.h"
@@ -13,4 +9,3 @@ void escolherSuplentes(ListaJogadores &plantel, ListaJogadores &suplentes);
 void selecionarEquipa(ListaJogadores &plantel, ListaJogadores &titulares, ListaJogadores &suplentes);
 
 #endif //GRUPO27_EQUIPA_H
-
