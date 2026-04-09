@@ -107,16 +107,16 @@ int main() {
 			cout << "Resultado Anterior:\n";
 			cout << "Resultado : EDA FC:" << ultimoEDA << " - " << ultimoAdversario << ":" << ultimoADV << endl;
 			cout << "\nTitulares:\n";
-			mostrarLista(ultTitulares);
+			mostrarPlantelEtc(ultTitulares);
 
 			cout << "\nSuplentes:\n";
-			mostrarLista(ultSuplentes);
+			mostrarPlantelEtc(ultSuplentes);
 
 			cout << "\nCastigados:\n";
-			mostrarLista(ultCastigados);
+			mostrarCastigados(ultCastigados);
 
 			cout << "\nLesionados:\n";
-			mostrarLista(ultLesionados);
+			mostrarLesionados(ultLesionados);
 
 			cout << "\nSubstituicoes:\n" << ultSubs << endl;
 		}
@@ -148,14 +148,14 @@ int main() {
 
 		//estado atual do plantel e outras listas
 		cout << "\n***********************************" << " Plantel Disponivel: " << "***********************************\n";
-		mostrarLista(plantel);
+		mostrarPlantelEtc(plantel);
 
 		if (jornada > 0) {
 			cout << "\nCastigados:\n";
-			mostrarLista(castigados);
+			mostrarCastigados(castigados);
 
 			cout << "\nLesionados:\n";
-			mostrarLista(lesionados);
+			mostrarLesionados(lesionados);
 		}
 
 		jornada++;

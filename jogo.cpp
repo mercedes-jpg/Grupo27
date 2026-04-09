@@ -65,10 +65,11 @@ void simularJornada(ListaJogadores &plantel, ListaJogadores &titulares, ListaJog
         golosEDA = 0;
         golosADV = 3 + rand() % 6;
     }
-
-    int totalGolos = rand() % 9; // mínimo 0 golos, máximo 8 golos, no total
-    golosEDA = rand() % (totalGolos + 1); // escolher um número aleatório entre 0 e o total de golos que deu, para ver quantos golos o EDA FC marcou
-    golosADV = totalGolos - golosEDA; // depois o que restar fica para a equipa adversária
+    else {
+        int totalGolos = rand() % 9; // mínimo 0 golos, máximo 8 golos, no total
+        golosEDA = rand() % (totalGolos + 1); // escolher um número aleatório entre 0 e o total de golos que deu, para ver quantos golos o EDA FC marcou
+        golosADV = totalGolos - golosEDA; // depois o que restar fica para a equipa adversária
+    }
 
     // atualizar pontos do EDA FC
     if (golosEDA > golosADV)
@@ -90,11 +91,12 @@ void simularJornada(ListaJogadores &plantel, ListaJogadores &titulares, ListaJog
             if (indicePlantel != -1) {
                 inserirJogador(lesionadosJornada, plantel.jogadores[indicePlantel]);
                 lesionarJogador(plantel, lesionados, indicePlantel);
+                Jogador jogadorSai = titulares.jogadores[i];
                 removerJogador(titulares, i);
 
                 if (substituicoes < 3 && suplentes.tamanho > 0) {
 
-                    int s = encontrarSubstituto(suplentes, titulares.jogadores[i].posicao, grS, defS, medS, avaS);
+                    int s = encontrarSubstituto(suplentes, jogadorSai.posicao, grS, defS, medS, avaS);
                     subs = subs + titulares.jogadores[i].nome + " -> " + suplentes.jogadores[s].nome + "\n";
 
                     inserirJogador(titulares, suplentes.jogadores[s]);
@@ -117,11 +119,12 @@ void simularJornada(ListaJogadores &plantel, ListaJogadores &titulares, ListaJog
             if (indicePlantel != -1) {
                 inserirJogador(castigadosJornada, plantel.jogadores[indicePlantel]);
                 castigarJogador(plantel, castigados, indicePlantel);
+                Jogador jogadorSai = titulares.jogadores[i];
                 removerJogador(titulares, i);
 
                 if (substituicoes < 3 && suplentes.tamanho > 0) { // se ainda não tivermos usado as 3 substituições
 
-                    int s = encontrarSubstituto(suplentes, titulares.jogadores[i].posicao, grS, defS, medS, avaS);
+                    int s = encontrarSubstituto(suplentes, jogadorSai.posicao, grS, defS, medS, avaS);
                     subs = subs + titulares.jogadores[i].nome + " -> " + suplentes.jogadores[s].nome + "\n";
 
                     inserirJogador(titulares, suplentes.jogadores[s]);

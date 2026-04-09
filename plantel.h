@@ -30,6 +30,8 @@ void recuperarLesionado(ListaJogadores &plantel, ListaJogadores &lesionados, int
 void recuperarCastigado(ListaJogadores &plantel, ListaJogadores &castigados, int a);
 void adicionarTransferencia(ListaJogadores &transferencias, Jogador j);
 
-void mostrarLista(ListaJogadores &p);
+void mostrarPlantelEtc(ListaJogadores &p);
+void mostrarLesionados(ListaJogadores &p);
+void mostrarCastigados(ListaJogadores &p);
 
 #endif //GRUPO27_PLANTEL_H
