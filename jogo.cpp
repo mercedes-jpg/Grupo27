@@ -1,8 +1,3 @@
-
-//
-// Created by clara on 31/03/2026.
-//
-
 #include "jogo.h"
 #include "jogador.h"
 #include <iostream>
@@ -64,6 +59,7 @@ void simularJornada(ListaJogadores &plantel, ListaJogadores &titulares, ListaJog
     if (titulares.tamanho < 7) {
         golosEDA = 0;
         golosADV = 3 + rand() % 6;
+        return;
     }
     else {
         int totalGolos = rand() % 9; // mínimo 0 golos, máximo 8 golos, no total
