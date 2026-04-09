@@ -10,12 +10,23 @@
 
 using namespace std;
 
+/**
+ *
+ * @param p
+ * @param capacidade
+ */
 void inicializarLista(ListaJogadores &p, int capacidade) {
     p.jogadores = new Jogador[capacidade]; // hummmmm
     p.tamanho = 0;
     p.capacidade = capacidade;
 }
 
+/**
+ *
+ * @param p
+ * @param numero
+ * @return
+ */
 int encontrarIndicePorNumero(ListaJogadores &p, int numero) {
     for (int i = 0; i < p.tamanho; i++) {
         if (p.jogadores[i].numero == numero)
@@ -24,6 +35,11 @@ int encontrarIndicePorNumero(ListaJogadores &p, int numero) {
     return -1;
 }
 
+/**
+ *
+ * @param pos
+ * @return
+ */
 int ordemPos(string pos) {
     if (pos == "GR") {
         return 0;
@@ -40,6 +56,11 @@ int ordemPos(string pos) {
     return -1;
 }
 
+/**
+ *
+ * @param p
+ * @param j
+ */
 void inserirJogador(ListaJogadores &p, Jogador j) { // & é para trabalhar na lista original
     if (p.tamanho < p.CAPACIDADEMAX) { // se o nº de jogadores atual for menor que a capacidade do plantel
         int i = 0;
