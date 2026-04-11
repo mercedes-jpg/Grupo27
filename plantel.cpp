@@ -3,6 +3,8 @@
 #include "jogador.h"
 #include <iomanip> // para usar o setw
 #include <stdlib.h>
+#include <fstream> // biblioteca para escrita e leitura de ficheiros
+#include <sstream> // responsavel pela análise de ficheiros
 
 using namespace std;
 
@@ -327,5 +329,85 @@ void treinarJogador(ListaJogadores &plantel, int i, int semanas)
     if (j.qualidade > 100)
     {
         j.qualidade = 100; // define o máximo permitido
+    }
+}
+
+void gravarEquipa(ListaJogadores &p, string nomeFicheiro) {
+    ofstream fs(nomeFicheiro, ios::out); //ficheiro é aberto para escrita
+    if (fs.is_open()) {
+        fs << p.tamanho << endl; //guarda o tamanho
+        for (int i = 0; i < p.tamanho; i++) {
+            Jogador j = p.jogadores[i];
+            fs << j.nome << ";" <<j.numero << ";" << j.posicao << ";" << j.idade << ";" << j.qualidade << ";" << j.jornadasLesao << ";" << j.jogosCastigo << endl;
+        }
+        fs.close();
+    }
+}
+
+void gravarProgresso(int jornada, int pontos, string nomeFicheiro) {
+    ofstream fs(nomeFicheiro, ios::out); //ficheiro é aberto para escrita
+    if (fs.is_open()) {
+        fs << jornada << endl;
+        fs << pontos << endl;
+        fs.close();
+        cout << "Progresso guardado" << endl;
+    } else {
+        cout << "Erro ao guardar o progresso" << endl;
+    }
+}
+
+void carregarEquipa(ListaJogadores &p, string nomeFicheiro) {
+    ifstream fs(nomeFicheiro, ios::in); //ficheiro é aberto para leitura
+    if (!fs.is_open()) {
+        return; // Se o ficheiro não existir, sai da função
+    }
+    p.tamanho = 0; //limpa o atual para não duplicar os dados
+
+    string linha;
+    if (getline(fs, linha)) {
+        int totalGravado = stoi(linha); // "stoi" converte uma string num inteiro
+        while (getline(fs, linha) &&p.tamanho < totalGravado) {
+
+            stringstream ss(linha); // converte o texto do ficheiro num fluxo
+            string parte;
+
+            Jogador j;
+
+            getline(ss, j.nome, ';'); // faz uma leitura direita uma vez que o nome ja é uma string
+
+            getline(ss, parte, ';'); // faz uma leitura indireta uma vez que extrai como texto e converte para int
+            j.numero = stoi(parte);
+
+            getline(ss, j.posicao, ';');
+
+            getline(ss, parte, ';');
+            j.idade = stoi(parte);
+
+            getline(ss, parte, ';');
+            j.qualidade = stoi(parte);
+
+            getline(ss, parte, ';');
+            j.jornadasLesao = stoi(parte);
+
+            getline(ss, parte, ';');
+            j.jogosCastigo = stoi(parte);
+
+            p.jogadores[p.tamanho++] = j;
+        }
+    }
+    fs.close();
+}
+
+void carregarProgresso(int &jornada, int &pontos, string nomeFicheiro) {
+    ifstream fs;
+    fs.open(nomeFicheiro, ios::in); //ficheiro é aberto para leitura
+    if (fs.is_open()) {
+        fs >> jornada; // Lê o primeiro número e guarda na variável
+        fs >> pontos;  // Lê o segundo número e guarda na variável
+        fs.close();
+    } else {
+        cout << "Ficheiro de progresso não encontrado." << endl;
+        jornada = 0;
+        pontos = 0;
     }
 }
