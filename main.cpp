@@ -241,15 +241,15 @@ int main() {
 		// se quiser fazer treino (ou seja, escolheu 1 ou 2)
 		mostrarPlantelEtc(plantel);
 		if (opcao == 1 || opcao == 2){
-    		int index;
+    		int in;
     		// variável para guardar o índice do jogador no array
 
     		cout << "Indice do jogador: ";
     		// pede ao utilizador qual jogador quer alterar
 
-    		cin >> index;
+    		cin >> i;
     		// lê o índice escolhido
-			if (index < 0 || index >= plantel.tamanho){
+			if (i < 0 || i >= plantel.tamanho){
     			cout << "Indice invalido!\n";
 			}
 			else {
@@ -270,7 +270,7 @@ int main() {
         				// se for inválida, avisa e não faz nada
     				}
     				else {
-        				mudarPosicao(plantel, index, novaPos);
+        				mudarPosicao(plantel, i, novaPos);
         				// só muda se for válida
     				}
 				}
@@ -288,7 +288,7 @@ int main() {
         			cin >> semanas;
         			// lê o número introduzido
 
-        			treinarJogador(plantel, index, semanas);
+        			treinarJogador(plantel, i, semanas);
         			// chama a função que aumenta a qualidade do jogador
         			// de acordo com o número de semanas
     			}

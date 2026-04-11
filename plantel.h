@@ -31,5 +31,8 @@ void mostrarLesionados(ListaJogadores &p);
 void mostrarCastigados(ListaJogadores &p);
 void mostrarTransferencias(ListaJogadores &p);
 int contarPosicao(ListaJogadores &plantel, string posicao);
+void ordenarPorPosicao(ListaJogadores &plantel);
+void mudarPosicao(ListaJogadores &plantel, int i, string novaPosicao);
+void treinarJogador(ListaJogadores &plantel, int i, int semanas);
 
 #endif //GRUPO27_PLANTEL_H
