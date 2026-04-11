@@ -219,6 +219,12 @@ int main() {
 		cout << "2 - Melhorar qualidade\n";
 		// opção 2: treinar jogador para aumentar qualidade
 
+		cout << "3 - Gravar Jogo\n";
+		//opção 3: gravar o jogo num ficheiro
+
+		cout << "4 - Carregar Jogo\n";
+		//opção 4: carregar o jodo do ficheiro
+
 		cout << "0 - Ignorar\n";
 		// opção 0: não fazer nada (seguir o jogo normalmente)
 
@@ -283,6 +289,28 @@ int main() {
         			// chama a função que aumenta a qualidade do jogador
         			// de acordo com o número de semanas
     			}
+
+				//se escolheu gravar equipa
+   				else if (opcao == 3) {
+   					cout << "A gravar os dados do jogo..." << endl;
+   					gravarEquipa(plantel, "plantel.txt");
+   					gravarEquipa(lesionados, "lesionados.txt");
+   					gravarEquipa(castigados, "castigados.txt");
+   					gravarEquipa(transferencias, "transferencias.txt");
+   					gravarProgresso(jornada, pontos, "estado.txt");
+   					cout << "Jogo guardado\n";
+   				}
+
+				//se escolheu carregar equipa
+   				else if (opcao == 4) {
+   					cout << "A carregar os dados do jogo..." << endl;
+   					carregarEquipa(plantel, "plantel.txt");
+   					carregarEquipa(lesionados, "lesionados.txt");
+   					carregarEquipa(castigados, "castigados.txt");
+   					carregarEquipa(transferencias, "transferencias.txt");
+   					carregarProgresso(jornada, pontos, "estado.txt");
+   					cout << "Jogo carregado\n";
+   				}
 			}
 		}
 
