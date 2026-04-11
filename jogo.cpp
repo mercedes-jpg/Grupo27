@@ -5,6 +5,10 @@
 #include <stdlib.h>
 using namespace std;
 
+/**
+ * Obtém uma equipa adversária aleatória do ficheiro equipas.txt
+ * @return Nome da equipa adversária
+ */
 string obterEquipaAdvAleatoria() {
     string equipas[50];
     int total = 0;
@@ -20,29 +24,55 @@ string obterEquipaAdvAleatoria() {
     return equipas[rand() % total];
 }
 
+/**
+ * Encontra o melhor substituto disponível para uma posição
+ * @param s Lista dos suplentes
+ * @param pos Posição que queremos
+ * @param grS Número de GR disponíveis
+ * @param defS Número de DEF disponíveis
+ * @param medS Número de MED disponíveis
+ * @param avaS Número de AVA disponíveis
+ * @return Índice do substituto na lista dos suplentes
+ */
 int encontrarSubstituto(ListaJogadores &s, string pos, int grS, int defS, int medS, int avaS) {
-    for (int i = 0; i < s.tamanho; i++) {
-        if (s.jogadores[i].posicao == pos)
+    for (int i = 0; i < s.tamanho; i++) { // vamos percorrer os suplentes
+        if (s.jogadores[i].posicao == pos) // logo que encontramos um da mesma posição retornamos o indice dele (porque a lista está ordenada)
             return i;
-    }
+    } // se não houver da mesma posição, vamos retornar o índice do melhor da posição que tem mais suplentes
     string escolhida;
-
-    if (grS >= defS && grS >= medS && grS >= avaS)
+    // primeiro vamos ver qual posição tem mais
+    if (grS >= defS && grS >= medS && grS >= avaS) // tem mais GR
         escolhida = "GR";
-    else if (defS >= medS && defS >= avaS)
+    else if (defS >= medS && defS >= avaS) // tem mais DEF
         escolhida = "DEF"; // não precisamos de comparar com grS porque já verificamos antes se ele era o maior
-    else if (medS>= avaS)
+    else if (medS>= avaS) // tem mais MED
         escolhida = "MED";
-    else
+    else // tem mais AVA
         escolhida = "AVA";
 
     for (int i = 0; i < s.tamanho; i++) {
-        if (s.jogadores[i].posicao == escolhida)
+        if (s.jogadores[i].posicao == escolhida) // depois o primeiro que aparecer dessa posição vai ser o substituto
             return i;
     }
     return 0;
 }
 
+/**
+ * Simula parte do jogo/jornada
+ * @param plantel Lista principal de jogadores
+ * @param titulares Lista dos titulares
+ * @param suplentes Lista dos suplentes
+ * @param lesionados Lista dos lesionados
+ * @param castigados Lista dos castigados
+ * @param lesionadosJornada Lista dos que se lesionaram na jornada anterior
+ * @param castigadosJornada Lista dos que foram castigados
+ * @param usados Array de números utilizados
+ * @param adversario Nome da equipa adversária
+ * @param pontos Pontos acumulados pelo EDA FC
+ * @param golosEDA Golos marcados pelo EDA FC
+ * @param golosADV Golos marcados pela equipa adversária
+ * @param subs String com substituições realizadas
+ */
 void simularJornada(ListaJogadores &plantel, ListaJogadores &titulares, ListaJogadores &suplentes, ListaJogadores &lesionados, ListaJogadores &castigados, ListaJogadores & lesionadosJornada, ListaJogadores & castigadosJornada, bool usados[], string adversario, int &pontos, int &golosEDA, int&golosADV, string &subs) {
 
     int grS=0, defS=0, medS=0, avaS=0;

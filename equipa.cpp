@@ -87,6 +87,12 @@ using namespace std;
 //     }
 // }
 
+/**
+ * Seleciona os titulares e suplentes com base na posição e na qualidade
+ * @param plantel Lista de jogadores disponíveis
+ * @param titulares Lista onde serão guardados os titulares
+ * @param suplentes Lista onde serão guardados os suplentes
+ */
 void selecionarEquipa(ListaJogadores &plantel, ListaJogadores &titulares, ListaJogadores &suplentes) {
     titulares.tamanho = 0;
     inicializarLista(titulares, 11);// inicializa a lista de titulares
