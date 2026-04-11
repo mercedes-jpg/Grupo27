@@ -33,9 +33,6 @@ int main() {
 	ListaJogadores plantelInicial;
 	inicializarLista(plantelInicial, 30);
 
-	ListaJogadores transferenciasAteAgora;
-	inicializarLista(transferenciasAteAgora, 68);
-
 	// copiar o plantel
 	for (int i = 0; i < plantel.tamanho; i++) {
 		inserirJogador(plantelInicial, plantel.jogadores[i]);
@@ -119,23 +116,6 @@ int main() {
 			ultLesionados.tamanho = 0;
 			ultCastigados.tamanho = 0;
 			ultSubs = "";
-
-			//jornadasLesao e jogosCastigo
-			for (int i = 0; i < lesionados.tamanho; i++) {
-				lesionados.jogadores[i].jornadasLesao--;
-				if (lesionados.jogadores[i].jornadasLesao < 0) {
-					// vamos voltar a colocá-lo no plantel na jornada seguinte a ficar a zeros
-					recuperarLesionado(plantel, lesionados, i);
-					i--;
-				}
-			}
-			for (int i = 0; i <castigados.tamanho; i++) {
-				castigados.jogadores[i].jogosCastigo--;
-				if (castigados.jogadores[i].jogosCastigo < 0) { // vamos voltar a colocá-lo no plantel na jornada seguinte a ficar a zeros
-					recuperarCastigado(plantel, castigados, i);
-					i--;
-				}
-			}
 		}
 
 		castigadosAteAgora.tamanho = 0;
@@ -233,7 +213,7 @@ int main() {
 
 
 		// se quiser fazer treino (ou seja, escolheu 1 ou 2)
-		mostrarPlantelEtc(plantel);
+		//mostrarPlantelEtc(plantel);
 		if (opcao == 1 || opcao == 2){
     		int i;
     		// variável para guardar o índice do jogador no array
@@ -289,9 +269,26 @@ int main() {
 			}
 		}
 
+		//jornadasLesao e jogosCastigo
+		for (int i = 0; i < lesionados.tamanho; i++) {
+			lesionados.jogadores[i].jornadasLesao--;
+			if (lesionados.jogadores[i].jornadasLesao < 0) {
+				// vamos voltar a colocá-lo no plantel na jornada seguinte a ficar a zeros
+				recuperarLesionado(plantel, lesionados, i);
+				i--;
+			}
+		}
+		for (int i = 0; i <castigados.tamanho; i++) {
+			castigados.jogadores[i].jogosCastigo--;
+			if (castigados.jogadores[i].jogosCastigo < 0) { // vamos voltar a colocá-lo no plantel na jornada seguinte a ficar a zeros
+				recuperarCastigado(plantel, castigados, i);
+				i--;
+			}
+		}
+
 		jornada++;
 
-		cout << "\n(s) seguinte    (o) Sair\n";
+		cout << "\n(s) seguinte    (o) sair\n";
 		cin >> escolha;
 	}
 		while (escolha == 's' && jornada < 34);
