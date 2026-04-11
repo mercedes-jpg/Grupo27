@@ -314,6 +314,7 @@ void treinarJogador(ListaJogadores &plantel, int i, int semanas)
     {
         return; // sai da função sem alterar nada
     }
+    
     j.semanasTreino += semanas;
     // calcula o aumento da qualidade
     // cada semana dá +5 pontos
