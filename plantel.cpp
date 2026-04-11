@@ -185,7 +185,6 @@ void mostrarCastigados(ListaJogadores &p) {
 }
 
 void mostrarTransferencias(ListaJogadores &p) {
-    cout << "**************************************************************************************\n";
     cout << left << setw(23) << "Nome" << " | " << setw(3) << "No" << " | " << setw(7) << "Posicao" << " | " << setw(5) << "Idade" << " | " << setw(9) << "ProbLesao" << " | " << setw(11) << "ProbCastigo" << " | " << setw(10) << "Qualidade" << endl;
     cout << "--------------------------------------------------------------------------------------\n";
     for (int i = 0; i < p.tamanho; i++) {

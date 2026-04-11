@@ -2,6 +2,13 @@
 #include <stdlib.h> // dá acesso a rand()
 #include <fstream> // biblioteca (classe) para escrita e leitrua de ficheiros
 
+/**
+ * cria um novo jogador e inicializa os seus atributos
+ * @param nome nome do jogador
+ * @param numero número do jogador
+ * @param posicao posição do jogador
+ * @return jogador
+ */
 Jogador criarJogador(string nome, int numero, string posicao) {
     Jogador j;
     j.nome = nome;
@@ -21,6 +28,10 @@ Jogador criarJogador(string nome, int numero, string posicao) {
     return j;
 }
 
+/**
+ *
+ * @return
+ */
 string obterNomeAleatorio() {
     string nomes [150]; // porque tem 114 nomes na lista de nomes
     int total = 0;

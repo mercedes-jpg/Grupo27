@@ -114,7 +114,7 @@ int main() {
 		if (jornada > 0) {
 			//jornadasLesao e jogosCastigo
 			for (int i = 0; i < lesionados.tamanho; i++) {
-				if (lesionados.jogadores[i].jornadasLesao == 0) {
+				if (lesionados.jogadores[i].jornadasLesao < 0) {// vamos voltar a colocá-lo no plantel na jornada seguinte a ficar a zeros
 					recuperarLesionado(plantel, lesionados, i);
 					i--;
 				} else {
@@ -122,7 +122,7 @@ int main() {
 				}
 			}
 			for (int i = 0; i <castigados.tamanho; i++) {
-				if (castigados.jogadores[i].jogosCastigo == 0) {
+				if (castigados.jogadores[i].jogosCastigo < 0) { // vamos voltar a colocá-lo no plantel na jornada seguinte a ficar a zeros
 					recuperarCastigado(plantel, castigados, i);
 					i--;
 				} else {
@@ -187,6 +187,7 @@ int main() {
 			cout << "\nLesionados:\n";
 			mostrarLesionados(lesionados);
 
+			cout << "**************************************************************************************\n";
 			cout << "\nTransferencias:\n";
 			mostrarTransferencias(transferencias);
 		}
