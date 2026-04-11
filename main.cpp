@@ -78,6 +78,9 @@ int main() {
 	inicializarLista(lesionadosJornada, 30);
 	inicializarLista(castigadosJornada, 30);
 
+	ListaJogadores transferenciasJornada;
+	inicializarLista(transferenciasJornada, 10);
+
 	do {
 		cout << "***********************************\n";
 		cout << "* EDA FC - " << jornada+1 << "a Jornada - " << pontos << " pontos.\n";
@@ -118,6 +121,24 @@ int main() {
 		// simularJornada(plantel, titulares, suplentes, lesionados, castigados, lesionadosJornada, castigadosJornada, transferencias, usados, adversario, pontos);
 
 		if (jornada > 0) {
+
+			cout << "Resultado Anterior:\n";
+			cout << "Resultado : EDA FC:" << ultimoEDA << " - " << ultimoAdversario << ":" << ultimoADV << endl;
+
+			cout << "\nTitulares:\n";
+			mostrarPlantelEtc(ultTitulares);
+
+			cout << "\nSuplentes:\n";
+			mostrarPlantelEtc(ultSuplentes);
+
+			cout << "\nCastigados:\n";
+			mostrarCastigados(ultCastigados);
+
+			cout << "\nLesionados:\n";
+			mostrarLesionados(ultLesionados);
+
+			cout << "\nSubstituicoes:\n" << ultSubs << endl;
+
 			//jornadasLesao e jogosCastigo
 			for (int i = 0; i < lesionados.tamanho; i++) {
 				lesionados.jogadores[i].jornadasLesao--;
@@ -134,24 +155,13 @@ int main() {
 					i--;
 				}
 			}
-
-			cout << "Resultado Anterior:\n";
-			cout << "Resultado : EDA FC:" << ultimoEDA << " - " << ultimoAdversario << ":" << ultimoADV << endl;
-			cout << "\nTitulares:\n";
-			mostrarPlantelEtc(ultTitulares);
-
-			cout << "\nSuplentes:\n";
-			mostrarPlantelEtc(ultSuplentes);
-
-			cout << "\nCastigados:\n";
-			mostrarCastigados(ultCastigados);
-
-			cout << "\nLesionados:\n";
-			mostrarLesionados(ultLesionados);
-
-			cout << "\nSubstituicoes:\n" << ultSubs << endl;
 		}
+
 		selecionarEquipa(plantel, titulares, suplentes);
+
+		lesionadosJornada.tamanho = 0;
+		castigadosJornada.tamanho = 0;
+		transferenciasJornada.tamanho = 0;
 
 		ultTitulares.tamanho = 0;
 		ultSuplentes.tamanho = 0;
@@ -173,10 +183,24 @@ int main() {
 		else
 			adversario = equipas[jornada - 17];
 
-		simularJornada(plantel, titulares, suplentes, lesionados, castigados, lesionadosJornada, castigadosJornada, transferencias, usados, adversario, pontos, ultimoEDA, ultimoADV, ultSubs);
+		simularJornada(plantel, titulares, suplentes, lesionados, castigados, lesionadosJornada, castigadosJornada, usados, adversario, pontos, ultimoEDA, ultimoADV, ultSubs);
 
 		ultimoAdversario = adversario;
 
+		// copiar os do jogo que está a ocorrer
+		for (int i = 0; i < lesionadosJornada.tamanho; i++)
+			inserirJogador(ultLesionados, lesionadosJornada.jogadores[i]);
+
+		for (int i = 0; i < castigadosJornada.tamanho; i++)
+			inserirJogador(ultCastigados, castigadosJornada.jogadores[i]);
+
+		//transferencias
+		for (int i = 0; i < 2; i++) {
+			string posicoes[] = {"GR","DEF","MED","AVA"};
+
+			Jogador j = criarJogador(obterNomeAleatorio(), gerarNumeroUnico(usados), posicoes[rand() % 4]);
+			inserirJogador(transferencias, j);
+		}
 		//estado atual do plantel e outras listas
 		cout << "\n***********************************" << " Plantel Disponivel: " << "***********************************\n";
 

@@ -43,7 +43,7 @@ int encontrarSubstituto(ListaJogadores &s, string pos, int grS, int defS, int me
     return 0;
 }
 
-void simularJornada(ListaJogadores &plantel, ListaJogadores &titulares, ListaJogadores &suplentes, ListaJogadores &lesionados, ListaJogadores &castigados, ListaJogadores &lesionadosJornada, ListaJogadores &castigadosJornada, ListaJogadores &transferencias, bool usados[], string adversario, int &pontos, int &golosEDA, int&golosADV, string &subs) {
+void simularJornada(ListaJogadores &plantel, ListaJogadores &titulares, ListaJogadores &suplentes, ListaJogadores &lesionados, ListaJogadores &castigados, ListaJogadores & lesionadosJornada, ListaJogadores & castigadosJornada, bool usados[], string adversario, int &pontos, int &golosEDA, int&golosADV, string &subs) {
 
     int grS=0, defS=0, medS=0, avaS=0;
     for (int i = 0; i < suplentes.tamanho; i++) {
@@ -56,6 +56,7 @@ void simularJornada(ListaJogadores &plantel, ListaJogadores &titulares, ListaJog
         else if (suplentes.jogadores[i].posicao == "AVA")
             avaS++;
     }
+
     if (titulares.tamanho < 7) {
         golosEDA = 0;
         golosADV = 3 + rand() % 6;
@@ -87,16 +88,17 @@ void simularJornada(ListaJogadores &plantel, ListaJogadores &titulares, ListaJog
             if (indicePlantel != -1) {
                 Jogador j = plantel.jogadores[indicePlantel];
                 lesionarJogador(plantel, lesionados, indicePlantel);
-                inserirJogador(lesionadosJornada, plantel.jogadores[indicePlantel]);
-                Jogador jogadorSai = titulares.jogadores[i];
+                inserirJogador(lesionadosJornada, j);
+                Jogador sai = titulares.jogadores[i];
                 removerJogador(titulares, i);
 
                 if (substituicoes < 3 && suplentes.tamanho > 0) {
 
-                    int s = encontrarSubstituto(suplentes, jogadorSai.posicao, grS, defS, medS, avaS);
-                    subs += jogadorSai.nome + " -> " + suplentes.jogadores[s].nome + "\n";
+                    int s = encontrarSubstituto(suplentes, sai.posicao, grS, defS, medS, avaS);
 
                     Jogador entra = suplentes.jogadores[s];
+                    subs += sai.nome + " -> " + entra.nome + "\n";
+
                     removerJogador(suplentes, s);
                     inserirJogador(titulares, entra);
                     substituicoes++;
@@ -109,7 +111,9 @@ void simularJornada(ListaJogadores &plantel, ListaJogadores &titulares, ListaJog
     //simular castigos um a um
     for (int i = 0; i < titulares.tamanho; i++) {
         int r = rand() % 101;
+
         if (titulares.jogadores[i].jornadasLesao > 0) continue;
+
         if (r < titulares.jogadores[i].probCastigo) { // se esse número for menos que a probabilidade de castigo desse jogador então ele é castigado
 
             int indicePlantel = encontrarIndicePorNumero(plantel, titulares.jogadores[i].numero);
@@ -117,16 +121,17 @@ void simularJornada(ListaJogadores &plantel, ListaJogadores &titulares, ListaJog
             if (indicePlantel != -1) {
                 Jogador j = plantel.jogadores[indicePlantel];
                 castigarJogador(plantel, castigados, indicePlantel);
-                inserirJogador(castigadosJornada, plantel.jogadores[indicePlantel]);
-                Jogador jogadorSai = titulares.jogadores[i];
+                inserirJogador(castigadosJornada, j);
+                Jogador sai = titulares.jogadores[i];
                 removerJogador(titulares, i);
 
                 if (substituicoes < 3 && suplentes.tamanho > 0) { // se ainda não tivermos usado as 3 substituições
 
-                    int s = encontrarSubstituto(suplentes, jogadorSai.posicao, grS, defS, medS, avaS);
-                    subs += jogadorSai.nome + " -> " + suplentes.jogadores[s].nome + "\n";
+                    int s = encontrarSubstituto(suplentes, sai.posicao, grS, defS, medS, avaS);
 
                     Jogador entra = suplentes.jogadores[s];
+                    subs += sai.nome + " -> " + entra.nome + "\n";
+
                     removerJogador(suplentes, s);
                     inserirJogador(titulares, entra);
                     substituicoes++; // incrementamos o número de substituições usadas
@@ -151,10 +156,4 @@ void simularJornada(ListaJogadores &plantel, ListaJogadores &titulares, ListaJog
     // }
 
     //transferências
-    for (int i = 0; i < 2; i++) {
-        string posicoes[] = {"GR","DEF","MED","AVA"};
-
-        Jogador j = criarJogador(obterNomeAleatorio(), gerarNumeroUnico(usados), posicoes[rand() % 4]);
-        inserirJogador(transferencias, j);
-    }
 }
