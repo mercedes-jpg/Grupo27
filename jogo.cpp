@@ -64,8 +64,8 @@ int encontrarSubstituto(ListaJogadores &s, string pos, int grS, int defS, int me
  * @param suplentes Lista dos suplentes
  * @param lesionados Lista dos lesionados
  * @param castigados Lista dos castigados
- * @param lesionadosJornada Lista dos que se lesionaram na jornada anterior
- * @param castigadosJornada Lista dos que foram castigados
+ * @param lesionadosJornada Lista dos que se lesionaram nesta jornada
+ * @param castigadosJornada Lista dos que foram castigados nesta jornada
  * @param usados Array de números utilizados
  * @param adversario Nome da equipa adversária
  * @param pontos Pontos acumulados pelo EDA FC
