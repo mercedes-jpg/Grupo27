@@ -408,6 +408,14 @@ void treinarJogador(ListaJogadores &plantel, int i, int semanas)
     }
 }
 
+
+/**
+ * Grava uma lista de jogadores num ficheiro de texto, separando os campos por ';'
+ * Grava o tamanho da lista para facilitar a leitura
+ * @param p ListaJogadores
+ * @param nomeFicheiro nome do ficheiro de onde os dados serão guardados
+ */
+
 void gravarEquipa(ListaJogadores &p, string nomeFicheiro) {
     ofstream fs(nomeFicheiro, ios::out); //ficheiro é aberto para escrita
     if (fs.is_open()) {
@@ -420,6 +428,14 @@ void gravarEquipa(ListaJogadores &p, string nomeFicheiro) {
     }
 }
 
+
+
+/**
+ * Função que guarda o estado atual do progresso do campeonato
+ * @param jornada
+ * @param pontos
+ * @param nomeFicheiro
+ */
 void gravarProgresso(int jornada, int pontos, string nomeFicheiro) {
     ofstream fs(nomeFicheiro, ios::out); //ficheiro é aberto para escrita
     if (fs.is_open()) {
@@ -432,6 +448,13 @@ void gravarProgresso(int jornada, int pontos, string nomeFicheiro) {
     }
 }
 
+
+/**
+ * Função que carrega a equipa de um ficheiro para uma ListaJogadores
+ * Utiliza stringstream para separar e converter tipos de dados
+ * @param p ListaJogadores
+ * @param nomeFicheiro nome do ficheiro de onde os dados serão lidos
+ */
 void carregarEquipa(ListaJogadores &p, string nomeFicheiro) {
     ifstream fs(nomeFicheiro, ios::in); //ficheiro é aberto para leitura
     if (!fs.is_open()) {
@@ -474,6 +497,14 @@ void carregarEquipa(ListaJogadores &p, string nomeFicheiro) {
     fs.close();
 }
 
+
+/**
+ * Função que recupera a jornada e os pontos guardados num ficheiro
+ * Se o ficheiro não existir, as variáveis são reiniciadas com valores por defeito
+ * @param jornada
+ * @param pontos
+ * @param nomeFicheiro
+ */
 void carregarProgresso(int &jornada, int &pontos, string nomeFicheiro) {
     ifstream fs;
     fs.open(nomeFicheiro, ios::in); //ficheiro é aberto para leitura
