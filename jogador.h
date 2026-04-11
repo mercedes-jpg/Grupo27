@@ -12,8 +12,8 @@ struct Jogador {
     int probLesao;
     int probCastigo;
     int qualidade;
-    int semanasTreino;
-    int jornadasLesao;
+    int semTreino;
+    int jogosLesao;
     int jogosCastigo;
 
 };

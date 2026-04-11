@@ -4,10 +4,9 @@
 #include "jogador.h" // como usamos jogador o compilador precisa saber o que é um jogador; quando usamos uma struct temos de incluir o ficheiro onde ela está definida
 
 struct ListaJogadores {
-    Jogador* jogadores; //array dinâmico  hummmmmm jogadores porque é um array de vários jogadores
+    Jogador* jogadores; //array dinâmico, jogadores porque é um array de vários jogadores
     int tamanho; // número atual de jogadores
     int capacidade; // número inicial de jogadores
-    const int CAPACIDADEMAX = 30; // no máximo 30 jogadores
 };
 
 void inicializarLista(ListaJogadores &p, int capacidade);
