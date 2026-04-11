@@ -35,4 +35,9 @@ void ordenarPorPosicao(ListaJogadores &plantel);
 void mudarPosicao(ListaJogadores &plantel, int i, string novaPosicao);
 void treinarJogador(ListaJogadores &plantel, int i, int semanas);
 
+void gravarEquipa(ListaJogadores &p, string nomeFicheiro);
+void gravarProgresso(int jornada, int pontos, string nomeFicheiro);
+void carregarEquipa(ListaJogadores &p, string nomeFicheiro);
+void carregarProgresso(int &jornada, int &pontos, string nomeFicheiro);
+
 #endif //GRUPO27_PLANTEL_H
