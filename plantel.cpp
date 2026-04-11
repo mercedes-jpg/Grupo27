@@ -410,7 +410,6 @@ void treinarJogador(ListaJogadores &plantel, int i, int semanas)
     }
 }
 
-
 /**
  * Grava uma lista de jogadores num ficheiro de texto, separando os campos por ';'
  * Grava o tamanho da lista para facilitar a leitura
@@ -430,8 +429,6 @@ void gravarEquipa(ListaJogadores &p, string nomeFicheiro) {
     }
 }
 
-
-
 /**
  * Função que guarda o estado atual do progresso do campeonato
  * @param jornada
@@ -449,7 +446,6 @@ void gravarProgresso(int jornada, int pontos, string nomeFicheiro) {
         cout << "Erro ao guardar o progresso" << endl;
     }
 }
-
 
 /**
  * Função que carrega a equipa de um ficheiro para uma ListaJogadores
@@ -498,7 +494,6 @@ void carregarEquipa(ListaJogadores &p, string nomeFicheiro) {
     }
     fs.close();
 }
-
 
 /**
  * Função que recupera a jornada e os pontos guardados num ficheiro
