@@ -191,3 +191,136 @@ void mostrarTransferencias(ListaJogadores &p) {
         cout << left << setw(23) << p.jogadores[i].nome << " | " << setw(3) << p.jogadores[i].numero << " | " << setw(7) << p.jogadores[i].posicao << " | " << setw(5) << p.jogadores[i].idade << " | " << setw(9) << (to_string(p.jogadores[i].probLesao) + "%") << " | " << setw(11) << (to_string(p.jogadores[i].probCastigo) + "%") << " | " << setw(10) << p.jogadores[i].qualidade << endl;
     }
 }
+int contarPosicao(ListaJogadores &plantel, string posicao){ //funcão auxiliar
+    int count = 0; // variável para contar jogadores dessa posição - começa a zero
+
+    // percorre todos os jogadores do plantel
+    for (int i = 0; i < plantel.tamanho; i++)
+    {
+        // se a posição do jogador for igual à que queremos contar - caso não seja ignora o if e passa para outra posição (outra verificação)
+        if (plantel.jogadores[i].posicao == posicao)
+        {
+            count++; // incrementa um à variável
+        }
+    }
+
+    return count; // devolve a variável - numero de jogadores numa dada posição
+}
+void ordenarPorPosicao(ListaJogadores &plantel)
+{
+    // função que recebe o plantel por referência (&)
+    // ou seja, vai alterar diretamente o plantel original
+
+    for (int i = 0; i < plantel.tamanho - 1; i++)
+    {
+        // ciclo exterior: percorre o plantel desde o primeiro jogador até ao penúltimo
+        // usamos tamanho - 1 porque o último já fica automaticamente ordenado - O último elemento não precisa de ser percorrido porque já foi comparado com todos os anteriores, garantindo a sua posição correta
+
+        for (int j = i + 1; j < plantel.tamanho; j++)
+        {
+            // ciclo interior: compara o jogador i com todos os jogadores à frente dele
+            // começa em i+1 porque não faz sentido comparar com ele próprio
+
+            // usa a função ordemPos para converter a posição em número
+            // e comparar esses valores
+
+            if (ordemPos(plantel.jogadores[i].posicao) >
+                ordemPos(plantel.jogadores[j].posicao))
+            {
+                // se o jogador i tiver uma posição "maior" que o j
+                // significa que está fora de ordem e deve trocar
+
+                Jogador temp = plantel.jogadores[i];
+                // guarda temporariamente o jogador i
+                // para não perder os dados quando fizermos a troca
+
+                plantel.jogadores[i] = plantel.jogadores[j];
+                // coloca o jogador j na posição i
+
+                plantel.jogadores[j] = temp;
+                // coloca o antigo jogador i (guardado em temp) na posição j
+            }
+        }
+    }
+}
+void mudarPosicao(ListaJogadores &plantel, int i, string novaPosicao)
+{
+    // verifica se o índice é válido (não pode ser negativo nem maior ou igual ao tamanho)
+    if (i < 0 || i >= plantel.tamanho)
+    {
+        return; // se for inválido, sai da função sem fazer nada
+    }
+
+    // cria um endereço ao jogador na posição indicada
+    Jogador &j = plantel.jogadores[i];
+    // usamos & para não criar cópia → assim alteramos diretamente o jogador no plantel - poisa usamos bo seu endereço unico
+
+    // conta quantos jogadores já existem na posição que queremos mudar
+    int total = contarPosicao(plantel, novaPosicao);
+    // isto é importante para respeitar os limites do enunciado
+
+    // verificar limites máximos de cada posição
+
+    if (novaPosicao == "GR" && total >= 3)
+        return; // já existem 3 GR → não pode adicionar mais - para a função
+
+    if (novaPosicao == "DEF" && total >= 10)
+        return; // já existem 10 DEF → não pode adicionar mais
+
+    if (novaPosicao == "MED" && total >= 10)
+        return; // já existem 10 MED → não pode adicionar mais
+
+    if (novaPosicao == "AVA" && total >= 7)
+        return; // já existem 7 AVA → não pode adicionar mais
+
+    // alterar a posição do jogador
+    j.posicao = novaPosicao;
+    // aqui o jogador j passa oficialmente a ter a nova posição
+    // ao mudar a posição, o plantel fica desorganizado
+
+    ordenarPorPosicao(plantel);
+    // chama a função que reorganiza o plantel usando ordemPos
+}
+void treinarJogador(ListaJogadores &plantel, int i, int semanas)
+{
+    // verificar se o índice é válido (não pode ser negativo nem maior ou igual ao tamanho)
+    if (i < 0 || i >= plantel.tamanho)
+    {
+        return; // sai da função se o jogador não existir
+    }
+
+    // criar um endereço ao jogador (não é cópia!)
+    Jogador &j = plantel.jogadores[i];
+    // isto permite alterar diretamente o jogador dentro do plantel
+
+    // verificar se o jogador está lesionado
+    if (j.jornadasLesao > 0)
+    {
+        return; // jogador lesionado não pode treinar
+    }
+
+    // limitar o número de semanas hummm
+    if (semanas > 5)
+    {
+        semanas = 5; // se for maior que 5, passa a 5
+    }
+
+    // se semanas for negativo ou 0, não faz sentido treinar
+    if (semanas <= 0)
+    {
+        return; // sai da função
+    }
+
+    // calcular o aumento da qualidade
+    int aumento = semanas * 5;
+    // cada semana dá +5 pt
+
+    // adicionar o aumento à qualidade atual
+    j.qualidade = j.qualidade + aumento;
+
+    // garantir que a qualidade não passa de 100
+    if (j.qualidade > 100)
+    {
+        j.qualidade = 100; // limite máximo
+    }
+}

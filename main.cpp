@@ -216,13 +216,92 @@ int main() {
 			cout << "Transferencias:\n";
 			mostrarTransferencias(transferencias);
 		}
+		int opcao;
+		// variável onde vamos guardar a escolha do utilizador (1, 2 ou 0)
+
+		cout << "--- TREINO ---\n";
+		// imprime um título para a parte do treino
+
+		cout << "1 - Mudar posição\n";
+		// opção 1: alterar a posição de um jogador
+
+		cout << "2 - Melhorar qualidade\n";
+		// opção 2: treinar jogador para aumentar qualidade
+
+		cout << "0 - Ignorar\n";
+		// opção 0: não fazer nada (seguir o jogo normalmente)
+
+		cout << "Escolha: ";
+		// pede ao utilizador que escolha uma opção
+
+		cin >> opcao;
+		// lê o valor que o utilizador escreveu e guarda em "opcao"
+
+
+		// se quiser fazer treino (ou seja, escolheu 1 ou 2)
+		mostrarPlantelEtc(plantel);
+		if (opcao == 1 || opcao == 2){
+    		int index;
+    		// variável para guardar o índice do jogador no array
+
+    		cout << "Indice do jogador: ";
+    		// pede ao utilizador qual jogador quer alterar
+
+    		cin >> index;
+    		// lê o índice escolhido
+			if (index < 0 || index >= plantel.tamanho){
+    			cout << "Indice invalido!\n";
+			}
+			else {
+
+
+    			// se escolheu mudar posição
+    			if (opcao == 1){
+    				string novaPos;
+    				// variável para guardar a nova posição
+
+    				cout << "Nova posicao (GR DEF MED AVA): ";
+    				cin >> novaPos;
+    				// lê a posição
+
+
+    				if (novaPos != "GR" && novaPos != "DEF" && novaPos != "MED" && novaPos != "AVA") {
+       					cout << "Posicao invalida!\n";
+        				// se for inválida, avisa e não faz nada
+    				}
+    				else {
+        				mudarPosicao(plantel, index, novaPos);
+        				// só muda se for válida
+    				}
+				}
+
+
+
+    			// se escolheu melhorar qualidade
+   				else if (opcao == 2){
+        			int semanas;
+        			// variável para guardar o número de semanas de treino
+
+        			cout << "Numero de semanas (max 5): ";
+        			// pede ao utilizador quantas semanas quer treinar
+
+        			cin >> semanas;
+        			// lê o número introduzido
+
+        			treinarJogador(plantel, index, semanas);
+        			// chama a função que aumenta a qualidade do jogador
+        			// de acordo com o número de semanas
+    			}
+			}
+		}
 
 		jornada++;
 
 		cout << "\n(s) seguinte    (o) opcoes\n";
 		cin >> escolha;
 
-	} while (escolha == 's' && jornada < 34);
+	}
+		while (escolha == 's' && jornada < 34);
 
 	return 0;
 }

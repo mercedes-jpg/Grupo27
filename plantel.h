@@ -30,5 +30,6 @@ void mostrarPlantelEtc(ListaJogadores &p);
 void mostrarLesionados(ListaJogadores &p);
 void mostrarCastigados(ListaJogadores &p);
 void mostrarTransferencias(ListaJogadores &p);
+int contarPosicao(ListaJogadores &plantel, string posicao);
 
 #endif //GRUPO27_PLANTEL_H
