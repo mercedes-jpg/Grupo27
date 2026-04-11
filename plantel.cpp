@@ -348,7 +348,7 @@ void gravarEquipa(ListaJogadores &p, string nomeFicheiro) {
         fs << p.tamanho << endl; //guarda o tamanho
         for (int i = 0; i < p.tamanho; i++) {
             Jogador j = p.jogadores[i];
-            fs << j.nome << ";" <<j.numero << ";" << j.posicao << ";" << j.idade << ";" << j.qualidade << ";" << j.jornadasLesao << ";" << j.jogosCastigo << endl;
+            fs << j.nome << ";" <<j.numero << ";" << j.posicao << ";" << j.idade << ";" << j.qualidade << ";" << j.jogosLesao << ";" << j.jogosCastigo << endl;
         }
         fs.close();
     }
@@ -397,7 +397,7 @@ void carregarEquipa(ListaJogadores &p, string nomeFicheiro) {
             j.qualidade = stoi(parte);
 
             getline(ss, parte, ';');
-            j.jornadasLesao = stoi(parte);
+            j.jogosLesao = stoi(parte);
 
             getline(ss, parte, ';');
             j.jogosCastigo = stoi(parte);
