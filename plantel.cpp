@@ -161,10 +161,10 @@ void ordenarPorQualidade(ListaJogadores &p) { // dentro de cada posição
 } // 30 40 20 50    40 30 20 50     40 30 20 50
 
 void mostrarPlantelEtc(ListaJogadores &p) {
-    cout << left << setw(23) << "Nome" << " | " << setw(3) << "No" << " | " << setw(7) << "Posicao" << " | " << setw(5) << "Idade" << " | " << setw(9) << "ProbLesao" << " | " << setw(11) << "ProbCastigo" << " | " << setw(10) << "Qualidade" << endl;
+    cout << left << setw(23) << "Nome" << " | " << setw(3) << "No" << " | " << setw(7) << "Posicao" << " | " << setw(5) << "Idade" << " | " << setw(9) << "ProbLesao" << " | " << setw(11) << "ProbCastigo" << " | " << setw(10) << "Qualidade" << " | " << setw(9) << "SemTreino"<< endl;
     cout << "--------------------------------------------------------------------------------------\n";
     for (int i = 0; i < p.tamanho; i++) {
-        cout << left << setw(23) << p.jogadores[i].nome << " | " << setw(3) << p.jogadores[i].numero << " | " << setw(7) << p.jogadores[i].posicao << " | " << setw(5) << p.jogadores[i].idade << " | " << setw(9) << (to_string(p.jogadores[i].probLesao) + "%") << " | " << setw(11) << (to_string(p.jogadores[i].probCastigo) + "%") << " | " << setw(10) << p.jogadores[i].qualidade << endl;
+        cout << left << setw(23) << p.jogadores[i].nome << " | " << setw(3) << p.jogadores[i].numero << " | " << setw(7) << p.jogadores[i].posicao << " | " << setw(5) << p.jogadores[i].idade << " | " << setw(9) << (to_string(p.jogadores[i].probLesao) + "%") << " | " << setw(11) << (to_string(p.jogadores[i].probCastigo) + "%") << " | " << setw(10) << p.jogadores[i].qualidade << setw(9) << p.jogadores[i].semanasTreino << " | "  <<endl;
     }
 }
 
@@ -283,44 +283,48 @@ void mudarPosicao(ListaJogadores &plantel, int i, string novaPosicao)
 }
 void treinarJogador(ListaJogadores &plantel, int i, int semanas)
 {
-    // verificar se o índice é válido (não pode ser negativo nem maior ou igual ao tamanho)
+    // verifica se o índice i é válido
+    // i não pode ser menor que 0 nem maior ou igual ao tamanho do plantel
     if (i < 0 || i >= plantel.tamanho)
     {
-        return; // sai da função se o jogador não existir
+        return; // se for inválido, sai da função sem fazer nada
     }
 
-    // criar um endereço ao jogador (não é cópia!)
+    // cria uma REFERÊNCIA ao jogador na posição i do array
+    // isto NÃO cria cópia → altera diretamente o jogador original
     Jogador &j = plantel.jogadores[i];
-    // isto permite alterar diretamente o jogador dentro do plantel
 
-    // verificar se o jogador está lesionado
+    // verifica se o jogador está lesionado
+    // se jornadasLesao > 0 significa que ainda está lesionado
     if (j.jornadasLesao > 0)
     {
-        return; // jogador lesionado não pode treinar
+        return; // jogador lesionado não pode treinar → sai da função
     }
 
-    // limitar o número de semanas hummm
+    // limita o número de semanas a no máximo 5
+    // mesmo que o utilizador escreva 10, passa a 5
     if (semanas > 5)
     {
-        semanas = 5; // se for maior que 5, passa a 5
+        semanas = 5;
     }
 
-    // se semanas for negativo ou 0, não faz sentido treinar
+    // verifica se o número de semanas é inválido (0 ou negativo)
+    // não faz sentido treinar nessas condições
     if (semanas <= 0)
     {
-        return; // sai da função
+        return; // sai da função sem alterar nada
     }
 
-    // calcular o aumento da qualidade
+    // calcula o aumento da qualidade
+    // cada semana dá +5 pontos
     int aumento = semanas * 5;
-    // cada semana dá +5 pt
 
-    // adicionar o aumento à qualidade atual
-    j.qualidade = j.qualidade + aumento;
+    // adiciona o aumento à qualidade atual do jogador
+    j.qualidade += aumento;
 
-    // garantir que a qualidade não passa de 100
+    // garante que a qualidade não ultrapassa o máximo (100)
     if (j.qualidade > 100)
     {
-        j.qualidade = 100; // limite máximo
+        j.qualidade = 100; // define o máximo permitido
     }
 }
