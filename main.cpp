@@ -180,10 +180,10 @@ int main() {
 
 		if (jornada > 0) {
 			cout << "\nCastigados:\n";
-			mostrarCastigados(ultCastigados);
+			mostrarCastigados(castigados);
 
 			cout << "\nLesionados:\n";
-			mostrarLesionados(ultLesionados);
+			mostrarLesionados(lesionados);
 
 			cout << "\n**************************************************************************************\n";
 			cout << "Transferencias:\n";
