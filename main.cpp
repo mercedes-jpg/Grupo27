@@ -138,6 +138,12 @@ int main() {
 
 			cout << "\nSubstituicoes:\n" << ultSubs << endl;
 
+			lesionadosJornada.tamanho = 0;
+			castigadosJornada.tamanho = 0;
+			ultLesionados.tamanho = 0;
+			ultCastigados.tamanho = 0;
+			ultSubs = "";
+
 			//jornadasLesao e jogosCastigo
 			for (int i = 0; i < lesionados.tamanho; i++) {
 				lesionados.jogadores[i].jornadasLesao--;
@@ -158,12 +164,8 @@ int main() {
 
 		selecionarEquipa(plantel, titulares, suplentes);
 
-		lesionadosJornada.tamanho = 0;
-		castigadosJornada.tamanho = 0;
 		ultTitulares.tamanho = 0;
 		ultSuplentes.tamanho = 0;
-		ultLesionados.tamanho = 0;
-		ultCastigados.tamanho = 0;
 		ultSubs = "";
 		transferenciasUltimas.tamanho = 0;
 
