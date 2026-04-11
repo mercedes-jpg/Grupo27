@@ -306,9 +306,7 @@ int main() {
 
 		cout << "\n(s) seguinte    (o) Sair\n";
 		cin >> escolha;
-
 	}
 		while (escolha == 's' && jornada < 34);
-
 	return 0;
 }

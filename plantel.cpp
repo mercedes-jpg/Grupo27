@@ -161,10 +161,10 @@ void ordenarPorQualidade(ListaJogadores &p) { // dentro de cada posição
 } // 30 40 20 50    40 30 20 50     40 30 20 50
 
 void mostrarPlantelEtc(ListaJogadores &p) {
-    cout << left << setw(23) << "Nome" << " | " << setw(3) << "No" << " | " << setw(7) << "Posicao" << " | " << setw(5) << "Idade" << " | " << setw(9) << "ProbLesao" << " | " << setw(11) << "ProbCastigo" << " | " << setw(10) << "Qualidade" << " | " << setw(9) << "SemTreino"<< endl;
+    cout << left << setw(23) << "Nome" << " | " << setw(3) << "No" << " | " << setw(7) << "Posicao" << " | " << setw(5) << "Idade" << " | " << setw(9) << "ProbLesao" << " | " << setw(11) << "ProbCastigo" << " | " << setw(10) << "Qualidade" << " | " << setw(10) << "SemTreinos"<< endl;
     cout << "--------------------------------------------------------------------------------------\n";
     for (int i = 0; i < p.tamanho; i++) {
-        cout << left << setw(23) << p.jogadores[i].nome << " | " << setw(3) << p.jogadores[i].numero << " | " << setw(7) << p.jogadores[i].posicao << " | " << setw(5) << p.jogadores[i].idade << " | " << setw(9) << (to_string(p.jogadores[i].probLesao) + "%") << " | " << setw(11) << (to_string(p.jogadores[i].probCastigo) + "%") << " | " << setw(10) << p.jogadores[i].qualidade << setw(9) << p.jogadores[i].semanasTreino << " | "  <<endl;
+        cout << left << setw(23) << p.jogadores[i].nome << " | " << setw(3) << p.jogadores[i].numero << " | " << setw(7) << p.jogadores[i].posicao << " | " << setw(5) << p.jogadores[i].idade << " | " << setw(9) << (to_string(p.jogadores[i].probLesao) + "%") << " | " << setw(11) << (to_string(p.jogadores[i].probCastigo) + "%") << " | " << setw(10) << p.jogadores[i].qualidade << setw(10) << p.jogadores[i].semanasTreino << " | "  <<endl;
     }
 }
 
@@ -290,15 +290,15 @@ void treinarJogador(ListaJogadores &plantel, int i, int semanas)
         return; // se for inválido, sai da função sem fazer nada
     }
 
-    // cria uma REFERÊNCIA ao jogador na posição i do array
-    // isto NÃO cria cópia → altera diretamente o jogador original
+    // cria um endereço ao jogador na posição i do array
+    // isto NÃO cria cópia - altera diretamente o jogador original
     Jogador &j = plantel.jogadores[i];
 
     // verifica se o jogador está lesionado
     // se jornadasLesao > 0 significa que ainda está lesionado
     if (j.jornadasLesao > 0)
     {
-        return; // jogador lesionado não pode treinar → sai da função
+        return; // jogador lesionado não pode treinar - sai da função
     }
 
     // limita o número de semanas a no máximo 5

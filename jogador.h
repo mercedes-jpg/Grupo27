@@ -12,10 +12,10 @@ struct Jogador {
     int probLesao;
     int probCastigo;
     int qualidade;
-    int diasTreino;
+    int semanasTreino;
     int jornadasLesao;
     int jogosCastigo;
-    int semanasTreino;
+
 };
 
 Jogador criarJogador(string nome, int numero, string posicao);
