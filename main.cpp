@@ -18,9 +18,9 @@ int main() {
 	ListaJogadores transferencias;
 	ListaJogadores titulares;
 	ListaJogadores suplentes;
+
 	bool usados[100] = {false}; // todos começam como não usados; é até 100 porque iremos como índices (usados[numero]) ignoramos o 0
-	//int capacidade = 20 + rand() % 11; // 20 a 30 jogadores
-	//int capacidadeMax = 30;
+
 	inicializarLista(plantel, 30); //inicialização dos arrays
 	inicializarLista(lesionados, 30);
 	inicializarLista(castigados, 30);
@@ -32,6 +32,9 @@ int main() {
 
 	ListaJogadores plantelInicial;
 	inicializarLista(plantelInicial, 30);
+
+	ListaJogadores transferenciasAteAgora;
+	inicializarLista(transferenciasAteAgora, 68);
 
 	// copiar o plantel
 	for (int i = 0; i < plantel.tamanho; i++) {
@@ -80,6 +83,13 @@ int main() {
 
 	ListaJogadores transferenciasUltimas;
 	inicializarLista(transferenciasUltimas, 68);
+
+	ListaJogadores castigadosAteAgora;
+	ListaJogadores lesionadosAteAgora;
+
+	inicializarLista(castigadosAteAgora, 30);
+	inicializarLista(lesionadosAteAgora, 30);
+
 	do {
 		cout << "***********************************\n";
 		cout << "* EDA FC - " << jornada+1 << "a Jornada - " << pontos << " pontos.\n";
@@ -128,6 +138,15 @@ int main() {
 			}
 		}
 
+		castigadosAteAgora.tamanho = 0;
+		lesionadosAteAgora.tamanho = 0;
+
+		for (int i = 0; i < castigados.tamanho; i++)
+			inserirJogador(castigadosAteAgora, castigados.jogadores[i]);
+
+		for (int i = 0; i < lesionados.tamanho; i++)
+			inserirJogador(lesionadosAteAgora, lesionados.jogadores[i]);
+
 		selecionarEquipa(plantel, titulares, suplentes);
 
 		ultTitulares.tamanho = 0;
@@ -146,6 +165,7 @@ int main() {
 		//copiar as transferencias
 		for (int i = 0; i < transferencias.tamanho; i++)
 			inserirJogador(transferenciasUltimas, transferencias.jogadores[i]);
+
 		string adversario;
 		if (jornada < 17)
 			adversario = equipas[jornada];
@@ -180,15 +200,16 @@ int main() {
 
 		if (jornada > 0) {
 			cout << "\nCastigados:\n";
-			mostrarCastigados(castigados);
+			mostrarCastigados(castigadosAteAgora);
 
 			cout << "\nLesionados:\n";
-			mostrarLesionados(lesionados);
+			mostrarLesionados(lesionadosAteAgora);
 
 			cout << "\n**************************************************************************************\n";
 			cout << "Transferencias:\n";
 			mostrarTransferencias(transferenciasUltimas);
 		}
+
 		int opcao;
 		// variável onde vamos guardar a escolha do utilizador (1, 2 ou 0)
 
