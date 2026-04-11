@@ -187,8 +187,8 @@ int main() {
 			cout << "\nLesionados:\n";
 			mostrarLesionados(lesionados);
 
-			cout << "**************************************************************************************\n";
-			cout << "\nTransferencias:\n";
+			cout << "\n**************************************************************************************\n";
+			cout << "Transferencias:\n";
 			mostrarTransferencias(transferencias);
 		}
 

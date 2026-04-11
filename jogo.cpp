@@ -107,7 +107,7 @@ void simularJornada(ListaJogadores &plantel, ListaJogadores &titulares, ListaJog
     //simular castigos um a um
     for (int i = 0; i < titulares.tamanho; i++) {
         int r = rand() % 101;
-
+        if (titulares.jogadores[i].jornadasLesao > 0) continue;
         if (r < titulares.jogadores[i].probCastigo) { // se esse número for menos que a probabilidade de castigo desse jogador então ele é castigado
 
             int indicePlantel = encontrarIndicePorNumero(plantel, titulares.jogadores[i].numero);
@@ -121,7 +121,8 @@ void simularJornada(ListaJogadores &plantel, ListaJogadores &titulares, ListaJog
                 if (substituicoes < 3 && suplentes.tamanho > 0) { // se ainda não tivermos usado as 3 substituições
 
                     int s = encontrarSubstituto(suplentes, jogadorSai.posicao, grS, defS, medS, avaS);
-                    subs = subs + jogadorSai.nome + " -> " + suplentes.jogadores[s].nome + "\n";
+                    subs +=s
+                    jogadorSai.nome + " -> " + suplentes.jogadores[s].nome + "\n";
 
                     inserirJogador(titulares, suplentes.jogadores[s]);
                     removerJogador(suplentes, s);
