@@ -87,8 +87,8 @@ void simularJornada(ListaJogadores &plantel, ListaJogadores &titulares, ListaJog
 
             if (indicePlantel != -1) {
                 lesionarJogador(plantel, lesionados, indicePlantel);
-                int k = encontrarIndicePorNumero(castigados, titulares.jogadores[i].numero);
-                Jogador j = plantel.jogadores[k];
+                int k = encontrarIndicePorNumero(lesionados, titulares.jogadores[i].numero);
+                Jogador j = lesionados.jogadores[k];
                 inserirJogador(lesionadosJornada, j);
                 Jogador sai = titulares.jogadores[i];
                 removerJogador(titulares, i);
@@ -122,7 +122,7 @@ void simularJornada(ListaJogadores &plantel, ListaJogadores &titulares, ListaJog
             if (indicePlantel != -1) {
                 castigarJogador(plantel, castigados, indicePlantel);
                 int k = encontrarIndicePorNumero(castigados, titulares.jogadores[i].numero);
-                Jogador j = plantel.jogadores[k];
+                Jogador j = castigados.jogadores[k];
                 inserirJogador(castigadosJornada, j);
                 Jogador sai = titulares.jogadores[i];
                 removerJogador(titulares, i);
