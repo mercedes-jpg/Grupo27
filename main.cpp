@@ -9,6 +9,10 @@
 
 using namespace std;
 
+/**
+ * Função principal do programa
+ * @return registo das jornadas e informações
+ */
 int main() {
 	srand(time(NULL));
 	//SetConsoleOutputCP(CP_UTF8);
@@ -236,7 +240,7 @@ int main() {
 
 
 		// se quiser fazer treino (ou seja, escolheu 1 ou 2)
-		//mostrarPlantelEtc(plantel);
+		mostrarPlantelEtc(plantel);
 		if (opcao == 1 || opcao == 2){
     		int i;
     		// variável para guardar o índice do jogador no array

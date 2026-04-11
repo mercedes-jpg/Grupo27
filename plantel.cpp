@@ -89,8 +89,8 @@ void removerJogador(ListaJogadores &p, int a) {
 }
 
 /**
- * Gera automaticamente
- * @param p Lista de Jogadores
+ * Gera um plantel com jogadores aleatórios e cumprindo as restrições
+ * @param p Lista onde será criado o plantel
  * @param usados Array de números já utilizados
  */
 void gerarPlantel(ListaJogadores &p, bool usados[]) { // ListaJogadores é o tipo, p(plantel) é a variável
@@ -120,6 +120,12 @@ void gerarPlantel(ListaJogadores &p, bool usados[]) { // ListaJogadores é o tip
         inserirJogador(p, criarJogador(obterNomeAleatorio(), gerarNumeroUnico(usados), "AVA"));
 }
 
+/**
+ * Move um jogador do plantel para a lista de lesionados aplicando os jogos de lesão que terá de esperar, aleatoriamente
+ * @param plantel Lista principal
+ * @param lesionados Lista dos lesionados
+ * @param a Índice do jogador a lesioanar no plantel
+ */
 void lesionarJogador(ListaJogadores &plantel, ListaJogadores &lesionados, int a) {
     Jogador j = plantel.jogadores[a]; // vai buscar o jogador ao plantel
     j.jogosLesao = 1 + rand() % 10; // jornadas a ficar lesionado 1 a 10 aleatoriamente
@@ -128,6 +134,12 @@ void lesionarJogador(ListaJogadores &plantel, ListaJogadores &lesionados, int a)
 	removerJogador(plantel, a); // remove jogador j do plantel através da função remover jogador já definida
 }
 
+/**
+ * Move um jogador do plantel para a lista de castigados, aplicando o castigo, aleatoriamente
+ * @param plantel Lista principal
+ * @param castigados Lista dos castigados
+ * @param a Índice do jogador a castigar no plantel
+ */
 void castigarJogador(ListaJogadores &plantel, ListaJogadores &castigados, int a) {
     Jogador j = plantel.jogadores[a]; // vai buscar o jogador ao plantel
     j.jogosCastigo = 1 + rand() % 10; // jogos a ficar castigado 1 a 10 aleatoriamente
@@ -136,6 +148,12 @@ void castigarJogador(ListaJogadores &plantel, ListaJogadores &castigados, int a)
 	removerJogador(plantel, a); // remove jogador j do plantel através da funcao remover jogador já definida
 }
 
+/**
+ * Recupera um jogador da lista dos lesionados, traz de volta para o plantel
+ * @param plantel Lista principal
+ * @param lesionados Lista dos lesionados
+ * @param a Índice do jogador lesionado
+ */
 void recuperarLesionado(ListaJogadores &plantel, ListaJogadores &lesionados, int a) {
     Jogador j = lesionados.jogadores[a]; // vai buscar o jogador j à lista de lesionados, que contém jogadores, na posição index
     j.jogosLesao = 0; // não fica lesionado nenhuma jornada neste momento, porque já recuperou da lesão
@@ -143,6 +161,12 @@ void recuperarLesionado(ListaJogadores &plantel, ListaJogadores &lesionados, int
     removerJogador(lesionados, a); // remove jogador j dos lesionados através da funcao remover jogador já definida
 }
 
+/**
+ * Recupera um jogador da lista dos castigados, traz de volta para o plantel
+ * @param plantel Lista principal
+ * @param castigados Lista de castigados
+ * @param a Índice do jogador castigado
+ */
 void recuperarCastigado(ListaJogadores &plantel, ListaJogadores &castigados, int a) {
     Jogador j = castigados.jogadores[a]; // vai buscar o jogador à lista de castigados
     j.jogosCastigo = 0; // não fica castigado em nenhum jogo, pois tirado do castigo
@@ -150,10 +174,10 @@ void recuperarCastigado(ListaJogadores &plantel, ListaJogadores &castigados, int
     removerJogador(castigados, a); // remove jogador j da lista de castigados através da função remover jogador já definida
 }
 
-void adicionarTransferencia(ListaJogadores &transferencias, Jogador j) {
-    inserirJogador(transferencias, j);
-}
-
+/**
+ * Ordena os jogadores por qualidade dentro de cada posição
+ * @param p Lista de jogadores
+ */
 void ordenarPorQualidade(ListaJogadores &p) { // dentro de cada posição
 // bubble sort porque tem relativamente poucos dados
     bool swapped = true; // inicializamos a true para entrar no for
@@ -172,6 +196,10 @@ void ordenarPorQualidade(ListaJogadores &p) { // dentro de cada posição
     }
 } // 30 40 20 50    40 30 20 50     40 30 20 50
 
+/**
+ * Mostra os jogadores da lista e os seus atributos
+ * @param p Lista de jogadores
+ */
 void mostrarPlantelEtc(ListaJogadores &p) {
     cout << left << setw(23) << "Nome" << " | " << setw(3) << "No" << " | " << setw(7) << "Posicao" << " | " << setw(5) << "Idade" << " | " << setw(9) << "ProbLesao" << " | " << setw(11) << "ProbCastigo" << " | " << setw(10) << "Qualidade" << " | " << setw(10) << "SemTreinos"<< endl;
     cout << "------------------------------------------------------------------------------------------------------\n";
@@ -180,6 +208,10 @@ void mostrarPlantelEtc(ListaJogadores &p) {
     }
 }
 
+/**
+ * Mostra a lista dos jogadores lesionados e os seus atributos
+ * @param p Lista dos lesionados
+ */
 void mostrarLesionados(ListaJogadores &p) {
     cout << left << setw(23) << "Nome" << " | " << setw(3) << "No" << " | " << setw(7) << "Posicao" << " | " << setw(5) << "Idade" << " | " << setw(9) << "ProbLesao" << " | " << setw(11) << "ProbCastigo" << " | " << setw(10) << "Qualidade" << " | " << setw(8) << "JogosLesao" << endl;
     cout << "----------------------------------------------------------------------------------------------------\n";
@@ -188,6 +220,10 @@ void mostrarLesionados(ListaJogadores &p) {
     }
 }
 
+/**
+ * Mostra a lista dos jogadores castigados e os seus atributos
+ * @param p Lista dos castigados
+ */
 void mostrarCastigados(ListaJogadores &p) {
     cout << left << setw(23) << "Nome" << " | " << setw(3) << "No" << " | " << setw(7) << "Posicao" << " | " << setw(5) << "Idade" << " | " << setw(9) << "ProbLesao" << " | " << setw(11) << "ProbCastigo" << " | " << setw(10) << "Qualidade" << " | " << setw(8) << "JogosCastigo" << endl;
     cout << "------------------------------------------------------------------------------------------------------\n";
@@ -196,6 +232,10 @@ void mostrarCastigados(ListaJogadores &p) {
     }
 }
 
+/**
+ * Mostra a lista das transferências
+ * @param p Lista das transferências
+ */
 void mostrarTransferencias(ListaJogadores &p) {
     cout << left << setw(23) << "Nome" << " | " << setw(3) << "No" << " | " << setw(7) << "Posicao" << " | " << setw(5) << "Idade" << " | " << setw(9) << "ProbLesao" << " | " << setw(11) << "ProbCastigo" << " | " << setw(10) << "Qualidade" << endl;
     cout << "--------------------------------------------------------------------------------------\n";
@@ -203,6 +243,13 @@ void mostrarTransferencias(ListaJogadores &p) {
         cout << left << setw(23) << p.jogadores[i].nome << " | " << setw(3) << p.jogadores[i].numero << " | " << setw(7) << p.jogadores[i].posicao << " | " << setw(5) << p.jogadores[i].idade << " | " << setw(9) << (to_string(p.jogadores[i].probLesao) + "%") << " | " << setw(11) << (to_string(p.jogadores[i].probCastigo) + "%") << " | " << setw(10) << p.jogadores[i].qualidade << endl;
     }
 }
+
+/**
+ *
+ * @param plantel
+ * @param posicao
+ * @return
+ */
 int contarPosicao(ListaJogadores &plantel, string posicao){ //funcão auxiliar
     int count = 0; // variável para contar jogadores dessa posição - começa a zero
 
@@ -218,6 +265,11 @@ int contarPosicao(ListaJogadores &plantel, string posicao){ //funcão auxiliar
 
     return count; // devolve a variável - numero de jogadores numa dada posição
 }
+
+/**
+ *
+ * @param plantel
+ */
 void ordenarPorPosicao(ListaJogadores &plantel)
 {
     // função que recebe o plantel por referência (&)
@@ -255,6 +307,13 @@ void ordenarPorPosicao(ListaJogadores &plantel)
         }
     }
 }
+
+/**
+ *
+ * @param plantel
+ * @param i
+ * @param novaPosicao
+ */
 void mudarPosicao(ListaJogadores &plantel, int i, string novaPosicao)
 {
     // verifica se o índice é válido (não pode ser negativo nem maior ou igual ao tamanho)
@@ -293,6 +352,13 @@ void mudarPosicao(ListaJogadores &plantel, int i, string novaPosicao)
     ordenarPorPosicao(plantel);
     // chama a função que reorganiza o plantel usando ordemPos
 }
+
+/**
+ *
+ * @param plantel
+ * @param i
+ * @param semanas
+ */
 void treinarJogador(ListaJogadores &plantel, int i, int semanas)
 {
     // verifica se o índice i é válido
