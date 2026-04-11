@@ -88,6 +88,32 @@ int main() {
 	inicializarLista(lesionadosAteAgora, 30);
 
 	do {
+		castigadosAteAgora.tamanho = 0;
+		lesionadosAteAgora.tamanho = 0;
+
+		for (int i = 0; i < castigados.tamanho; i++)
+			inserirJogador(castigadosAteAgora, castigados.jogadores[i]);
+
+		for (int i = 0; i < lesionados.tamanho; i++)
+			inserirJogador(lesionadosAteAgora, lesionados.jogadores[i]);
+
+		//jornadasLesao e jogosCastigo
+		for (int i = 0; i < lesionados.tamanho; i++) {
+			lesionados.jogadores[i].jogosLesao--;
+			if (lesionados.jogadores[i].jogosLesao < 0) {
+				// vamos voltar a colocá-lo no plantel na jornada seguinte a ficar a zeros
+				recuperarLesionado(plantel, lesionados, i);
+				i--;
+			}
+		}
+		for (int i = 0; i <castigados.tamanho; i++) {
+			castigados.jogadores[i].jogosCastigo--;
+			if (castigados.jogadores[i].jogosCastigo < 0) { // vamos voltar a colocá-lo no plantel na jornada seguinte a ficar a zeros
+				recuperarCastigado(plantel, castigados, i);
+				i--;
+			}
+		}
+
 		cout << "***********************************\n";
 		cout << "* EDA FC - " << jornada+1 << "a Jornada - " << pontos << " pontos.\n";
 		cout << "***********************************\n";
@@ -117,15 +143,6 @@ int main() {
 			ultCastigados.tamanho = 0;
 			ultSubs = "";
 		}
-
-		castigadosAteAgora.tamanho = 0;
-		lesionadosAteAgora.tamanho = 0;
-
-		for (int i = 0; i < castigados.tamanho; i++)
-			inserirJogador(castigadosAteAgora, castigados.jogadores[i]);
-
-		for (int i = 0; i < lesionados.tamanho; i++)
-			inserirJogador(lesionadosAteAgora, lesionados.jogadores[i]);
 
 		selecionarEquipa(plantel, titulares, suplentes);
 
@@ -269,22 +286,22 @@ int main() {
 			}
 		}
 
-		//jornadasLesao e jogosCastigo
-		for (int i = 0; i < lesionados.tamanho; i++) {
-			lesionados.jogadores[i].jornadasLesao--;
-			if (lesionados.jogadores[i].jornadasLesao < 0) {
-				// vamos voltar a colocá-lo no plantel na jornada seguinte a ficar a zeros
-				recuperarLesionado(plantel, lesionados, i);
-				i--;
-			}
-		}
-		for (int i = 0; i <castigados.tamanho; i++) {
-			castigados.jogadores[i].jogosCastigo--;
-			if (castigados.jogadores[i].jogosCastigo < 0) { // vamos voltar a colocá-lo no plantel na jornada seguinte a ficar a zeros
-				recuperarCastigado(plantel, castigados, i);
-				i--;
-			}
-		}
+		// //jornadasLesao e jogosCastigo
+		// for (int i = 0; i < lesionados.tamanho; i++) {
+		// 	lesionados.jogadores[i].jornadasLesao--;
+		// 	if (lesionados.jogadores[i].jornadasLesao < 0) {
+		// 		// vamos voltar a colocá-lo no plantel na jornada seguinte a ficar a zeros
+		// 		recuperarLesionado(plantel, lesionados, i);
+		// 		i--;
+		// 	}
+		// }
+		// for (int i = 0; i <castigados.tamanho; i++) {
+		// 	castigados.jogadores[i].jogosCastigo--;
+		// 	if (castigados.jogadores[i].jogosCastigo < 0) { // vamos voltar a colocá-lo no plantel na jornada seguinte a ficar a zeros
+		// 		recuperarCastigado(plantel, castigados, i);
+		// 		i--;
+		// 	}
+		// }
 
 		jornada++;
 

@@ -98,7 +98,7 @@ void selecionarEquipa(ListaJogadores &plantel, ListaJogadores &titulares, ListaJ
     for (int i = 0; i < plantel.tamanho; i++) { // percorre se o plantel usando o seu indice e o que esta abaixo acontece sempre que i<plantel.tamanho ou i<=(plantel.tamanho - 1) sendo que i começa a zero e vai incrementando sempre 1
         Jogador j = plantel.jogadores[i];// jogado j é um jogador que se foi buscar ao plantel de jogadores ou a lista de jogadores no plantel na posição i e por sua vez guarda se na variavel j do tipo jogador
 
-        if (j.jornadasLesao > 0 || j.jogosCastigo > 0) {
+        if (j.jogosLesao > 0 || j.jogosCastigo > 0) {
             continue;
         }
         if (j.posicao == "GR" && gr < 1) { // se a posição do jogador j for gr e se ainda não tivermos nenhum guarda redes, pois so precisamos de um gr, então:
@@ -125,7 +125,7 @@ void selecionarEquipa(ListaJogadores &plantel, ListaJogadores &titulares, ListaJ
     for (int i = 0; i < plantel.tamanho; i++) {
         Jogador j = plantel.jogadores[i];
 
-        if (j.jornadasLesao > 0 || j.jogosCastigo > 0) {
+        if (j.jogosLesao > 0 || j.jogosCastigo > 0) {
             continue;
         }
         bool jaTitular = false; // para não usar os que já são titulares - cria se uma var do tipo boolenano inicializada a false
