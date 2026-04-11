@@ -85,40 +85,6 @@ int main() {
 		cout << "* EDA FC - " << jornada+1 << "a Jornada - " << pontos << " pontos.\n";
 		cout << "***********************************\n";
 
-		// //jornadasLesao e jogosCastigo
-		// for (int i = 0; i < lesionados.tamanho; i++) {
-		// 	if (lesionados.jogadores[i].jornadasLesao == 0) {
-		// 		recuperarLesionado(plantel, lesionados, i);
-		// 		i--;
-		// 	} else {
-		// 		lesionados.jogadores[i].jornadasLesao--;
-		// 	}
-		// }
-		// for (int i = 0; i <castigados.tamanho; i++) {
-		// 	if (castigados.jogadores[i].jogosCastigo == 0) {
-		// 		recuperarCastigado(plantel, castigados, i);
-		// 		i--;
-		// 	} else {
-		// 		castigados.jogadores[i].jogosCastigo--;
-		// 	}
-		// }
-
-		//selecionarEquipa(plantel, titulares, suplentes);
-
-		// ListaJogadores titularesIniciais;
-		// ListaJogadores suplentesIniciais;
-		//
-		// inicializarLista(titularesIniciais, 11);
-		// inicializarLista(suplentesIniciais, 6);
-
-		// listas de castigados e lesionados de cada jornada apenas
-		// ListaJogadores lesionadosJornada;
-		// ListaJogadores castigadosJornada;
-		// inicializarLista(lesionadosJornada, 30);
-		// inicializarLista(castigadosJornada, 30);
-		//
-		// simularJornada(plantel, titulares, suplentes, lesionados, castigados, lesionadosJornada, castigadosJornada, transferencias, usados, adversario, pontos);
-
 		if (jornada > 0) {
 
 			cout << "Resultado Anterior:\n";
@@ -214,10 +180,10 @@ int main() {
 
 		if (jornada > 0) {
 			cout << "\nCastigados:\n";
-			mostrarCastigados(castigados);
+			mostrarCastigados(ultCastigados);
 
 			cout << "\nLesionados:\n";
-			mostrarLesionados(lesionados);
+			mostrarLesionados(ultLesionados);
 
 			cout << "\n**************************************************************************************\n";
 			cout << "Transferencias:\n";
