@@ -121,7 +121,7 @@ void simularJornada(ListaJogadores &plantel, ListaJogadores &titulares, ListaJog
                 if (substituicoes < 3 && suplentes.tamanho > 0) { // se ainda não tivermos usado as 3 substituições
 
                     int s = encontrarSubstituto(suplentes, jogadorSai.posicao, grS, defS, medS, avaS);
-                    subs = subs + titulares.jogadores[i].nome + " -> " + suplentes.jogadores[s].nome + "\n";
+                    subs = subs + jogadorSai.nome + " -> " + suplentes.jogadores[s].nome + "\n";
 
                     inserirJogador(titulares, suplentes.jogadores[s]);
                     removerJogador(suplentes, s);

@@ -170,7 +170,7 @@ void mostrarPlantelEtc(ListaJogadores &p) {
 
 void mostrarLesionados(ListaJogadores &p) {
     cout << left << setw(23) << "Nome" << " | " << setw(3) << "No" << " | " << setw(7) << "Posicao" << " | " << setw(5) << "Idade" << " | " << setw(9) << "ProbLesao" << " | " << setw(11) << "ProbCastigo" << " | " << setw(10) << "Qualidade" << " | " << setw(8) << "JogosLesao" << endl;
-    cout << "--------------------------------------------------------------------------------------\n";
+    cout << "----------------------------------------------------------------------------------------------------\n";
     for (int i = 0; i < p.tamanho; i++) {
         cout << left << setw(23) << p.jogadores[i].nome << " | " << setw(3) << p.jogadores[i].numero << " | " << setw(7) << p.jogadores[i].posicao << " | " << setw(5) << p.jogadores[i].idade << " | " << setw(9) << (to_string(p.jogadores[i].probLesao) + "%") << " | " << setw(11) << (to_string(p.jogadores[i].probCastigo) + "%") << " | " << setw(10) << p.jogadores[i].qualidade << " | " << setw(8) << p.jogadores[i].jornadasLesao << endl;
     }
@@ -178,7 +178,7 @@ void mostrarLesionados(ListaJogadores &p) {
 
 void mostrarCastigados(ListaJogadores &p) {
     cout << left << setw(23) << "Nome" << " | " << setw(3) << "No" << " | " << setw(7) << "Posicao" << " | " << setw(5) << "Idade" << " | " << setw(9) << "ProbLesao" << " | " << setw(11) << "ProbCastigo" << " | " << setw(10) << "Qualidade" << " | " << setw(8) << "JogosCastigo" << endl;
-    cout << "--------------------------------------------------------------------------------------\n";
+    cout << "------------------------------------------------------------------------------------------------------\n";
     for (int i = 0; i < p.tamanho; i++) {
         cout << left << setw(23) << p.jogadores[i].nome << " | " << setw(3) << p.jogadores[i].numero << " | " << setw(7) << p.jogadores[i].posicao << " | " << setw(5) << p.jogadores[i].idade << " | " << setw(9) << (to_string(p.jogadores[i].probLesao) + "%") << " | " << setw(11) << (to_string(p.jogadores[i].probCastigo) + "%") << " | " << setw(10) << p.jogadores[i].qualidade << " | " << setw(8) << p.jogadores[i].jogosCastigo << endl;
     }
