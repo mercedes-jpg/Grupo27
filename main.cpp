@@ -78,6 +78,8 @@ int main() {
 	inicializarLista(lesionadosJornada, 30);
 	inicializarLista(castigadosJornada, 30);
 
+	ListaJogadores transferenciasUltimas;
+	inicializarLista(transferenciasUltimas, 68);
 	do {
 		cout << "***********************************\n";
 		cout << "* EDA FC - " << jornada+1 << "a Jornada - " << pontos << " pontos.\n";
@@ -158,12 +160,12 @@ int main() {
 
 		lesionadosJornada.tamanho = 0;
 		castigadosJornada.tamanho = 0;
-
 		ultTitulares.tamanho = 0;
 		ultSuplentes.tamanho = 0;
 		ultLesionados.tamanho = 0;
 		ultCastigados.tamanho = 0;
 		ultSubs = "";
+		transferenciasUltimas.tamanho = 0;
 
 		// guardar os titulares iniciais
 		for (int i = 0; i < titulares.tamanho; i++)
@@ -173,6 +175,9 @@ int main() {
 		for (int i = 0; i < suplentes.tamanho; i++)
 			inserirJogador(ultSuplentes, suplentes.jogadores[i]);
 
+		//copiar as transferencias
+		for (int i = 0; i < transferencias.tamanho; i++)
+			inserirJogador(transferenciasUltimas, transferencias.jogadores[i]);
 		string adversario;
 		if (jornada < 17)
 			adversario = equipas[jornada];
@@ -214,12 +219,12 @@ int main() {
 
 			cout << "\n**************************************************************************************\n";
 			cout << "Transferencias:\n";
-			mostrarTransferencias(transferencias);
+			mostrarTransferencias(transferenciasUltimas);
 		}
 		int opcao;
 		// variável onde vamos guardar a escolha do utilizador (1, 2 ou 0)
 
-		cout << "--- TREINO ---\n";
+		cout << "\n--- TREINO ---\n";
 		// imprime um título para a parte do treino
 
 		cout << "1 - Mudar posicao\n";
