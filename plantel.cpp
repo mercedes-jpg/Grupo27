@@ -162,9 +162,9 @@ void ordenarPorQualidade(ListaJogadores &p) { // dentro de cada posição
 
 void mostrarPlantelEtc(ListaJogadores &p) {
     cout << left << setw(23) << "Nome" << " | " << setw(3) << "No" << " | " << setw(7) << "Posicao" << " | " << setw(5) << "Idade" << " | " << setw(9) << "ProbLesao" << " | " << setw(11) << "ProbCastigo" << " | " << setw(10) << "Qualidade" << " | " << setw(10) << "SemTreinos"<< endl;
-    cout << "--------------------------------------------------------------------------------------\n";
+    cout << "------------------------------------------------------------------------------------------------------\n";
     for (int i = 0; i < p.tamanho; i++) {
-        cout << left << setw(23) << p.jogadores[i].nome << " | " << setw(3) << p.jogadores[i].numero << " | " << setw(7) << p.jogadores[i].posicao << " | " << setw(5) << p.jogadores[i].idade << " | " << setw(9) << (to_string(p.jogadores[i].probLesao) + "%") << " | " << setw(11) << (to_string(p.jogadores[i].probCastigo) + "%") << " | " << setw(10) << p.jogadores[i].qualidade << setw(10) << p.jogadores[i].semanasTreino << " | "  <<endl;
+        cout << left << setw(23) << p.jogadores[i].nome << " | " << setw(3) << p.jogadores[i].numero << " | " << setw(7) << p.jogadores[i].posicao << " | " << setw(5) << p.jogadores[i].idade << " | " << setw(9) << (to_string(p.jogadores[i].probLesao) + "%") << " | " << setw(11) << (to_string(p.jogadores[i].probCastigo) + "%") << " | " << setw(10) << p.jogadores[i].qualidade << " | "  << setw(10) << p.jogadores[i].semanasTreino << " | "  <<endl;
     }
 }
 
@@ -314,7 +314,7 @@ void treinarJogador(ListaJogadores &plantel, int i, int semanas)
     {
         return; // sai da função sem alterar nada
     }
-
+    j.semanasTreino += semanas;
     // calcula o aumento da qualidade
     // cada semana dá +5 pontos
     int aumento = semanas * 5;
