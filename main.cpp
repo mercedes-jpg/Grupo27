@@ -241,7 +241,7 @@ int main() {
 		// se quiser fazer treino (ou seja, escolheu 1 ou 2)
 		mostrarPlantelEtc(plantel);
 		if (opcao == 1 || opcao == 2){
-    		int in;
+    		int i;
     		// variável para guardar o índice do jogador no array
 
     		cout << "Indice do jogador: ";
