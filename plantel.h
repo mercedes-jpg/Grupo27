@@ -40,4 +40,6 @@ void gravarProgresso(int jornada, int pontos, string nomeFicheiro);
 void carregarEquipa(ListaJogadores &p, string nomeFicheiro);
 void carregarProgresso(int &jornada, int &pontos, string nomeFicheiro);
 
+void fazerTransferencia(ListaJogadores &plantel, ListaJogadores &transferencias);
+
 #endif //GRUPO27_PLANTEL_H

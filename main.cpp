@@ -341,5 +341,13 @@ int main() {
 		cin >> escolha;
 	}
 		while (escolha == 's' && jornada < 34);
+
+	int opTransferencia;
+	cout << "\n--- Tranferências ---\n";
+	cout << "1 - Contratar jogador\n0 - Ignorar\nEscolha: ";
+	cin >> opTransferencia;
+	if (opTransferencia == 1) {
+		fazerTransferencia(plantel, transferencias);
+	}
 	return 0;
 }

@@ -520,3 +520,45 @@ void carregarProgresso(int &jornada, int &pontos, string nomeFicheiro) {
         pontos = 0;
     }
 }
+
+/**
+ * Faz as tranferências dos jogadores da equipa para as trasnferências e vice-versa
+ * @param plantel lista principal
+ * @param transferencias lista de tranferências
+ */
+void fazerTransferencia(ListaJogadores &plantel, ListaJogadores &transferencias) {
+    cout << "\n--- Transferencias Disponiveis ---\n";
+    mostrarTransferencias(transferencias); // mostrar os jogadores que estão disponíveis para contratar
+    int escolha;
+    cout << "Indice do jogador a contratar: ";
+    cin >> escolha;    // escolher o índice do jogador
+    if (escolha < 0 || escolha >= transferencias.tamanho) {
+        cout << "Indice invalido!\n";  // verificar se índice é válido
+        return;
+    }
+
+    Jogador novo = transferencias.jogadores[escolha]; // o jogador já está escolhido
+
+    if (plantel.tamanho < plantel.capacidade) {  // verifica se há espaço no plantel
+        inserirJogador(plantel, novo); // se houver espaço, entra diretamente
+        removerJogador(transferencias, escolha); // e remove da lista de transferências
+        cout << "Jogador contratado!\n";
+    }
+    else {
+        cout << "\nPlantel cheio! Escolha um jogador para sair:\n"; // se o plantel estiver cheio, algum jogador terá que sair
+        mostrarPlantelEtc(plantel);
+        int sair;
+        cin >> sair;
+        if (sair < 0 || sair >= plantel.tamanho) {
+            cout << "Indice invalido!\n";
+            return;
+        }
+
+        Jogador antigo = plantel.jogadores[sair]; // guardar jogador que vai sair
+        removerJogador(plantel, sair); // remove o jogador do plantel
+        inserirJogador(plantel, novo);  // insere o novo jogador no plantel
+        inserirJogador(transferencias, antigo); // o jogador antigo (removido) vai para as transferências
+        removerJogador(transferencias, escolha); // remove o novo jogador (jogador contratado) da lista de transferências
+        cout << "Transferência realizada!\n";
+    }
+}
