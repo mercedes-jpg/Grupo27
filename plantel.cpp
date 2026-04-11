@@ -53,7 +53,7 @@ int ordemPos(string pos) {
 }
 
 /**
- * Insere um jogador numa lista, mantendo a lista ordenada por posição e por qualidade, dentro de cada posição
+ * Insere um jogador na lista, mantendo a lista ordenada por posição e por qualidade, dentro de cada posição
  * @param p Lista de jogadores
  * @param j Jogador a inserir
  */
@@ -61,7 +61,7 @@ void inserirJogador(ListaJogadores &p, Jogador j) { // & é para trabalhar na li
     if (p.tamanho < p.capacidade) { // se o nº de jogadores atual for menor que a capacidade do plantel então conseguimos inseri-lo
         int i = 0;
         // vamos encontrar a posição certa para a lista continuar ordenada
-        while ((ordemPos(p.jogadores[i].posicao) < ordemPos(j.posicao)) || (p.jogadores[i].posicao == j.posicao && p.jogadores[i].qualidade > j.qualidade)) {
+        while (i < p.tamanho && (ordemPos(p.jogadores[i].posicao) < ordemPos(j.posicao) || (p.jogadores[i].posicao == j.posicao && p.jogadores[i].qualidade > j.qualidade))) {
         // se a posição do jogador de índice i for "menor" que o que vamos inserir, passamos ao próximo, se a posição é a mesma, mas a qualidade é maior passamos ao próximo
             i++; // vamos passar ao próximo
         }
@@ -69,11 +69,16 @@ void inserirJogador(ListaJogadores &p, Jogador j) { // & é para trabalhar na li
         for (int k = p.tamanho; k > i; k--) {
             p.jogadores[k] = p.jogadores[k - 1]; // no índice do tamanho, isto é, no fim da lista vamos igualar esse ao anterior, depois o indice anterior ao anterior-anterior (= passar todos uma casa para a direita)
         }
-        p.jogadores[i] = j;
+        p.jogadores[i] = j; // quando o tamanho é zero então só inserimos logo
         p.tamanho++; // e o número atual de jogadores será incrementado num valor
     }
 }
 
+/**
+ * Remove um jogador da lista numa dada posição pelo índice
+ * @param p Lista de Jogadores
+ * @param a Índice do jogador a remover
+ */
 void removerJogador(ListaJogadores &p, int a) {
     for (int i = a; i < p.tamanho - 1; i++) { // i começa no que vamos remover
         p.jogadores[i] = p.jogadores[i+1]; // para não deixar espaços em branco os jogadores que vêm depois dele vão recuar uma casa isto é esse lugar vai ser do jogador que vem logo de seguida
@@ -81,6 +86,11 @@ void removerJogador(ListaJogadores &p, int a) {
     p.tamanho--; // o último não fica duplicado graças a isto
 }
 
+/**
+ * Gera automaticamente
+ * @param p Lista de Jogadores
+ * @param usados Array de números já utilizados
+ */
 void gerarPlantel(ListaJogadores &p, bool usados[]) { // ListaJogadores é o tipo, p(plantel) é a variável
 
     int capacidade = 20 + rand() % 11; // 20 a 30 - capacidade

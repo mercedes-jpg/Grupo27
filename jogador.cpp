@@ -10,7 +10,6 @@
  * @return Jogador inicializado com vários atributos inicializados
  */
 Jogador criarJogador(string nome, int numero, string posicao) {
-
     Jogador j;
     j.nome = nome;
     j.numero = numero;
@@ -34,7 +33,7 @@ Jogador criarJogador(string nome, int numero, string posicao) {
  */
 string obterNomeAleatorio() {
 
-    string nomes [150]; // porque tem 114 nomes na lista de nomes
+    string nomes [150]; // porque tem 114 nomes na lista de nomes, caso adicione se mais depois
     int total = 0;
     string linha;
     fstream fs;
@@ -46,6 +45,7 @@ string obterNomeAleatorio() {
         fs.close();// fecha o ficheiro
     }
     if (total == 0) return "Jogador";
+
     return nomes[rand() % total]; // o rand vai dar um indice aleatório do vetor nomes; logo vai retornar um nome aleatório
 }
 
@@ -59,7 +59,7 @@ int gerarNumeroUnico(bool usados[]) {
     int n;
     do {
         n = 1 + rand() % 99; // os números no futebol vão de 1 a 99
-    } while (usados[n]);
-    usados[n] = true;
+    } while (usados[n]); // se já foi usada continua a repetir, se ainda não foi usado sai do ciclo
+    usados[n] = true; // agora esse número passa a usado
     return n;
 }
