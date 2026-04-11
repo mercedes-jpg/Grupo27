@@ -78,9 +78,6 @@ int main() {
 	inicializarLista(lesionadosJornada, 30);
 	inicializarLista(castigadosJornada, 30);
 
-	ListaJogadores transferenciasJornada;
-	inicializarLista(transferenciasJornada, 10);
-
 	do {
 		cout << "***********************************\n";
 		cout << "* EDA FC - " << jornada+1 << "a Jornada - " << pontos << " pontos.\n";
@@ -161,7 +158,6 @@ int main() {
 
 		lesionadosJornada.tamanho = 0;
 		castigadosJornada.tamanho = 0;
-		transferenciasJornada.tamanho = 0;
 
 		ultTitulares.tamanho = 0;
 		ultSuplentes.tamanho = 0;
