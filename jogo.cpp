@@ -113,7 +113,7 @@ void simularJornada(ListaJogadores &plantel, ListaJogadores &titulares, ListaJog
     for (int i = 0; i < titulares.tamanho; i++) {
         int r = rand() % 101;
 
-        if (titulares.jogadores[i].jornadasLesao > 0) continue;
+        if (titulares.jogadores[i].jogosLesao > 0) continue;
 
         if (r < titulares.jogadores[i].probCastigo) { // se esse número for menos que a probabilidade de castigo desse jogador então ele é castigado
 
@@ -142,20 +142,4 @@ void simularJornada(ListaJogadores &plantel, ListaJogadores &titulares, ListaJog
             }
         }
     }
-    //
-    // if (plantel.tamanho < 7) {
-    //     cout << "Nao ha jogadores suficientes. Ora bolas!";
-    // }
-    // if (titulares.tamanho < 7) {
-    //     cout << "O jogo foi terminado por falta de jogadores.\n";
-    //     if (golosADV > 3) {
-    //         cout << "Resultado : EDA FC:0" << " - " << adversario << ":"<< golosADV << endl;
-    //     } else {
-    //         cout << "Resultado : EDA FC:0" << " - " << adversario << ":"<< "3" << endl;
-    //     }
-    // } else {
-    //     cout << "Resultado : EDA FC:" << golosEDA << " - " << adversario << ":"<< golosADV << endl;
-    // }
-
-    //transferências
 }

@@ -53,15 +53,15 @@ int ordemPos(string pos) {
 }
 
 /**
- * Insere um jogador
- * @param p
- * @param j
+ * Insere um jogador numa lista, mantendo a lista ordenada por posição e por qualidade, dentro de cada posição
+ * @param p Lista de jogadores
+ * @param j Jogador a inserir
  */
 void inserirJogador(ListaJogadores &p, Jogador j) { // & é para trabalhar na lista original
-    if (p.tamanho < p.CAPACIDADEMAX) { // se o nº de jogadores atual for menor que a capacidade do plantel
+    if (p.tamanho < p.capacidade) { // se o nº de jogadores atual for menor que a capacidade do plantel então conseguimos inseri-lo
         int i = 0;
         // vamos encontrar a posição certa para a lista continuar ordenada
-        while (i < p.tamanho && (ordemPos(p.jogadores[i].posicao) < ordemPos(j.posicao) || (p.jogadores[i].posicao == j.posicao && p.jogadores[i].qualidade > j.qualidade))) {
+        while ((ordemPos(p.jogadores[i].posicao) < ordemPos(j.posicao)) || (p.jogadores[i].posicao == j.posicao && p.jogadores[i].qualidade > j.qualidade)) {
         // se a posição do jogador de índice i for "menor" que o que vamos inserir, passamos ao próximo, se a posição é a mesma, mas a qualidade é maior passamos ao próximo
             i++; // vamos passar ao próximo
         }
@@ -126,7 +126,7 @@ void castigarJogador(ListaJogadores &plantel, ListaJogadores &castigados, int a)
 
 void recuperarLesionado(ListaJogadores &plantel, ListaJogadores &lesionados, int a) {
     Jogador j = lesionados.jogadores[a]; // vai buscar o jogador j à lista de lesionados, que contém jogadores, na posição index
-    j.jornadasLesao = 0; // não fica lesionado nenhuma jornada neste momento, porque já recuperou da lesão
+    j.jogosLesao = 0; // não fica lesionado nenhuma jornada neste momento, porque já recuperou da lesão
     inserirJogador(plantel, j); // adiciona o jogador j no fim da lista do plantel onde o jogador j é o jogador que recuperou da lesão
     removerJogador(lesionados, a); // remove jogador j dos lesionados através da funcao remover jogador já definida
 }
@@ -172,7 +172,7 @@ void mostrarLesionados(ListaJogadores &p) {
     cout << left << setw(23) << "Nome" << " | " << setw(3) << "No" << " | " << setw(7) << "Posicao" << " | " << setw(5) << "Idade" << " | " << setw(9) << "ProbLesao" << " | " << setw(11) << "ProbCastigo" << " | " << setw(10) << "Qualidade" << " | " << setw(8) << "JogosLesao" << endl;
     cout << "----------------------------------------------------------------------------------------------------\n";
     for (int i = 0; i < p.tamanho; i++) {
-        cout << left << setw(23) << p.jogadores[i].nome << " | " << setw(3) << p.jogadores[i].numero << " | " << setw(7) << p.jogadores[i].posicao << " | " << setw(5) << p.jogadores[i].idade << " | " << setw(9) << (to_string(p.jogadores[i].probLesao) + "%") << " | " << setw(11) << (to_string(p.jogadores[i].probCastigo) + "%") << " | " << setw(10) << p.jogadores[i].qualidade << " | " << setw(8) << p.jogadores[i].jornadasLesao << endl;
+        cout << left << setw(23) << p.jogadores[i].nome << " | " << setw(3) << p.jogadores[i].numero << " | " << setw(7) << p.jogadores[i].posicao << " | " << setw(5) << p.jogadores[i].idade << " | " << setw(9) << (to_string(p.jogadores[i].probLesao) + "%") << " | " << setw(11) << (to_string(p.jogadores[i].probCastigo) + "%") << " | " << setw(10) << p.jogadores[i].qualidade << " | " << setw(8) << p.jogadores[i].jogosLesao << endl;
     }
 }
 
@@ -296,7 +296,7 @@ void treinarJogador(ListaJogadores &plantel, int i, int semanas)
 
     // verifica se o jogador está lesionado
     // se jornadasLesao > 0 significa que ainda está lesionado
-    if (j.jornadasLesao > 0)
+    if (j.jogosLesao > 0)
     {
         return; // jogador lesionado não pode treinar - sai da função
     }

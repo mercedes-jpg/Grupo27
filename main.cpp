@@ -99,8 +99,8 @@ int main() {
 
 		//jornadasLesao e jogosCastigo
 		for (int i = 0; i < lesionados.tamanho; i++) {
-			lesionados.jogadores[i].jornadasLesao--;
-			if (lesionados.jogadores[i].jornadasLesao < 0) {
+			lesionados.jogadores[i].jogosLesao--;
+			if (lesionados.jogadores[i].jogosLesao < 0) {
 				// vamos voltar a colocá-lo no plantel na jornada seguinte a ficar a zeros
 				recuperarLesionado(plantel, lesionados, i);
 				i--;

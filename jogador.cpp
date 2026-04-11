@@ -21,7 +21,7 @@ Jogador criarJogador(string nome, int numero, string posicao) {
     j.probCastigo = rand() % 21; // entre 0 e 20
     j.qualidade = rand() % 101; // entre 0 e 100
 
-    j.semTreino = 0;
+    j.semanasTreino = 0;
     j.jogosLesao = 0;
     j.jogosCastigo = 0;
 
