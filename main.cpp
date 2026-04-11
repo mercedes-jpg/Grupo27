@@ -222,7 +222,7 @@ int main() {
 		cout << "--- TREINO ---\n";
 		// imprime um título para a parte do treino
 
-		cout << "1 - Mudar posição\n";
+		cout << "1 - Mudar posicao\n";
 		// opção 1: alterar a posição de um jogador
 
 		cout << "2 - Melhorar qualidade\n";
@@ -297,7 +297,7 @@ int main() {
 
 		jornada++;
 
-		cout << "\n(s) seguinte    (o) opcoes\n";
+		cout << "\n(s) seguinte    (o) Sair\n";
 		cin >> escolha;
 
 	}
