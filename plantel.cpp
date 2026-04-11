@@ -245,10 +245,10 @@ void mostrarTransferencias(ListaJogadores &p) {
 }
 
 /**
- *
- * @param plantel
- * @param posicao
- * @return
+ * Conta o número de jogadores de uma determinada posição no plantel
+ * @param plantel Lista de jogadores onde se pretende contar
+ * @param posicao Posição a contar (GR, DEF, MED, AVA)
+ * @return Número de jogadores dessa posição
  */
 int contarPosicao(ListaJogadores &plantel, string posicao){ //funcão auxiliar
     int count = 0; // variável para contar jogadores dessa posição - começa a zero
@@ -267,8 +267,8 @@ int contarPosicao(ListaJogadores &plantel, string posicao){ //funcão auxiliar
 }
 
 /**
- *
- * @param plantel
+ *Ordena o plantel por posição
+ * @param plantel Lista de jogadores a ordenar
  */
 void ordenarPorPosicao(ListaJogadores &plantel)
 {
@@ -309,10 +309,12 @@ void ordenarPorPosicao(ListaJogadores &plantel)
 }
 
 /**
- *
- * @param plantel
- * @param i
- * @param novaPosicao
+ * Altera a posição de um jogador, respeitando os limites máximos por posição
+ * Se a nova posição exceder o limite permitido, não faz alterações
+ * No final, reorganiza o plantel por posição
+ * @param plantel Lista de jogadores
+ * @param i Índice do jogador a alterar
+ * @param novaPosicao Nova posição (GR, DEF, MED, AVA)
  */
 void mudarPosicao(ListaJogadores &plantel, int i, string novaPosicao)
 {
@@ -354,10 +356,10 @@ void mudarPosicao(ListaJogadores &plantel, int i, string novaPosicao)
 }
 
 /**
- *
- * @param plantel
- * @param i
- * @param semanas
+ * Treina um jogador aumentando a sua qualidade
+ * @param plantel Lista de jogadores
+ * @param i Índice do jogador a treinar
+ * @param semanas Número de semanas de treino
  */
 void treinarJogador(ListaJogadores &plantel, int i, int semanas)
 {
