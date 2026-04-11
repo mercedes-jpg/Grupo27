@@ -24,7 +24,7 @@ int main() {
 	inicializarLista(plantel, 30); //inicialização dos arrays
 	inicializarLista(lesionados, 30);
 	inicializarLista(castigados, 30);
-	inicializarLista(transferencias, 30);
+	inicializarLista(transferencias, 68);
 	inicializarLista (titulares, 11);
 	inicializarLista (suplentes, 6);
 
@@ -72,6 +72,12 @@ int main() {
 	inicializarLista(ultLesionados, 30);
 	inicializarLista(ultCastigados, 30);
 
+	ListaJogadores lesionadosJornada;
+	ListaJogadores castigadosJornada;
+
+	inicializarLista(lesionadosJornada, 30);
+	inicializarLista(castigadosJornada, 30);
+
 	do {
 		cout << "***********************************\n";
 		cout << "* EDA FC - " << jornada+1 << "a Jornada - " << pontos << " pontos.\n";
@@ -114,19 +120,18 @@ int main() {
 		if (jornada > 0) {
 			//jornadasLesao e jogosCastigo
 			for (int i = 0; i < lesionados.tamanho; i++) {
-				if (lesionados.jogadores[i].jornadasLesao < 0) {// vamos voltar a colocá-lo no plantel na jornada seguinte a ficar a zeros
+				lesionados.jogadores[i].jornadasLesao--;
+				if (lesionados.jogadores[i].jornadasLesao < 0) {
+					// vamos voltar a colocá-lo no plantel na jornada seguinte a ficar a zeros
 					recuperarLesionado(plantel, lesionados, i);
 					i--;
-				} else {
-					lesionados.jogadores[i].jornadasLesao--;
 				}
 			}
 			for (int i = 0; i <castigados.tamanho; i++) {
+				castigados.jogadores[i].jogosCastigo--;
 				if (castigados.jogadores[i].jogosCastigo < 0) { // vamos voltar a colocá-lo no plantel na jornada seguinte a ficar a zeros
 					recuperarCastigado(plantel, castigados, i);
 					i--;
-				} else {
-					castigados.jogadores[i].jogosCastigo--;
 				}
 			}
 
@@ -168,7 +173,7 @@ int main() {
 		else
 			adversario = equipas[jornada - 17];
 
-		simularJornada(plantel, titulares, suplentes, lesionados, castigados, ultLesionados, ultCastigados, transferencias, usados, adversario, pontos, ultimoEDA, ultimoADV, ultSubs);
+		simularJornada(plantel, titulares, suplentes, lesionados, castigados, lesionadosJornada, castigadosJornada, transferencias, usados, adversario, pontos, ultimoEDA, ultimoADV, ultSubs);
 
 		ultimoAdversario = adversario;
 
@@ -201,11 +206,3 @@ int main() {
 
 	return 0;
 }
-
-// struct equipa {
-//     jogador* plantel;
-//     jogador* convocados;
-//     int nGr;
-//     int nDef;
-//     int nMed;
-//     int nAva;
