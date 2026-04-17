@@ -61,5 +61,6 @@ int gerarNumeroUnico(bool usados[]) {
         n = 1 + rand() % 99; // os números no futebol vão de 1 a 99
     } while (usados[n]); // se já foi usada continua a repetir, se ainda não foi usado sai do ciclo
     usados[n] = true; // agora esse número passa a usado
+
     return n;
 }

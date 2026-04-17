@@ -134,7 +134,7 @@ void simularJornada(ListaJogadores &plantel, ListaJogadores &titulares, ListaJog
                     inserirJogador(titulares, entra);
                     substituicoes++;
                 }
-                i--;
+                i--; // é porque se tiramos um os que estavam à frente veem uma casa para trás então pa
             }
         }
     }

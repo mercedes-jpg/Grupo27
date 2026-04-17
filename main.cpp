@@ -26,7 +26,7 @@ int main() {
 	bool usados[100] = {false}; // todos começam como não usados; é até 100 porque iremos como índices (usados[numero]) ignoramos o 0
 
 	inicializarLista(plantel, 30); //inicialização dos arrays
-	inicializarLista(lesionados, 30);
+	inicializarLista(lesionados, 30); // alocar memoria
 	inicializarLista(castigados, 30);
 	inicializarLista(transferencias, 68);
 	inicializarLista (titulares, 11);
@@ -48,7 +48,8 @@ int main() {
 		string e = obterEquipaAdvAleatoria();
 		bool repetida = false;
 		for (int j= 0; j < i; j++) {
-			if (equipas[j] == e) repetida = true;
+			if (equipas[j] == e)
+				repetida = true;
 		}
 		if (!repetida) {
 			equipas[i] = e;
@@ -59,10 +60,10 @@ int main() {
 	//JORNADAS
 	int jornada = 0;
 	int pontos = 0;
-	char escolha;
+	char escolha; // para o utilizador por seguinte ou sair
 
-	string ultimoAdversario = "";
-	int ultimoEDA = 0;
+	string ultimoAdversario = ""; //
+	int ultimoEDA = 0; // pontos do jogo anterior
 	int ultimoADV = 0;
 	string ultSubs = "";
 
@@ -76,7 +77,7 @@ int main() {
 	inicializarLista(ultLesionados, 30);
 	inicializarLista(ultCastigados, 30);
 
-	ListaJogadores lesionadosJornada;
+	ListaJogadores lesionadosJornada; // da jornada anterior
 	ListaJogadores castigadosJornada;
 
 	inicializarLista(lesionadosJornada, 30);
@@ -92,9 +93,11 @@ int main() {
 	inicializarLista(lesionadosAteAgora, 30);
 
 	do {
+		// limpar as listas antes de copiar dados novos para não acumular repetidos
 		castigadosAteAgora.tamanho = 0;
 		lesionadosAteAgora.tamanho = 0;
 
+		// copiar estados atuais para mostrar depois pois foram acrescentados na jornada anterior
 		for (int i = 0; i < castigados.tamanho; i++)
 			inserirJogador(castigadosAteAgora, castigados.jogadores[i]);
 
@@ -148,9 +151,10 @@ int main() {
 			ultSubs = "";
 		}
 
+		// escolher titulares e suplentes
 		selecionarEquipa(plantel, titulares, suplentes);
 
-		ultTitulares.tamanho = 0;
+		ultTitulares.tamanho = 0; // limpa os dados da jornada anterior
 		ultSuplentes.tamanho = 0;
 		ultSubs = "";
 		transferenciasUltimas.tamanho = 0;
@@ -177,7 +181,7 @@ int main() {
 
 		ultimoAdversario = adversario;
 
-		// copiar os do jogo que está a ocorrer
+		// copiar os lesionados e castigados do jogo que está a ocorrer
 		for (int i = 0; i < lesionadosJornada.tamanho; i++)
 			inserirJogador(ultLesionados, lesionadosJornada.jogadores[i]);
 
