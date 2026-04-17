@@ -130,7 +130,7 @@ void lesionarJogador(ListaJogadores &plantel, ListaJogadores &lesionados, int a)
     Jogador j = plantel.jogadores[a]; // vai buscar o jogador ao plantel
     j.jogosLesao = 1 + rand() % 10; // jornadas a ficar lesionado 1 a 10 aleatoriamente
     // lesionados.jogadores[lesionados.tamanho++] = j; // mete o jogador j na lista lesionados dos jogadores acedida através dos mesmos na posição tamanho e dps encrementa 1
-    inserirJogador(lesionados, j); // adiciona o jogador j no fim da lista dos lesionados onde o jogador j é o jogador lesionado
+    inserirJogador(lesionados, j); // adiciona o jogador j na da lista dos lesionados onde o jogador j é o jogador lesionado
 	removerJogador(plantel, a); // remove jogador j do plantel através da função remover jogador já definida
 }
 
@@ -326,7 +326,7 @@ void mudarPosicao(ListaJogadores &plantel, int i, string novaPosicao)
 
     // cria um endereço ao jogador na posição indicada
     Jogador &j = plantel.jogadores[i];
-    // usamos & para não criar cópia → assim alteramos diretamente o jogador no plantel - poisa usamos bo seu endereço unico
+    // usamos & para não criar cópia - assim alteramos diretamente o jogador no plantel - poisa usamos bo seu endereço unico
 
     // conta quantos jogadores já existem na posição que queremos mudar
     int total = contarPosicao(plantel, novaPosicao);
@@ -335,16 +335,16 @@ void mudarPosicao(ListaJogadores &plantel, int i, string novaPosicao)
     // verificar limites máximos de cada posição
 
     if (novaPosicao == "GR" && total >= 3)
-        return; // já existem 3 GR → não pode adicionar mais - para a função
+        return; // já existem 3 GR - não pode adicionar mais - para a função
 
     if (novaPosicao == "DEF" && total >= 10)
-        return; // já existem 10 DEF → não pode adicionar mais
+        return; // já existem 10 DEF - não pode adicionar mais
 
     if (novaPosicao == "MED" && total >= 10)
-        return; // já existem 10 MED → não pode adicionar mais
+        return; // já existem 10 MED - não pode adicionar mais
 
     if (novaPosicao == "AVA" && total >= 7)
-        return; // já existem 7 AVA → não pode adicionar mais
+        return; // já existem 7 AVA - não pode adicionar mais
 
     // alterar a posição do jogador
     j.posicao = novaPosicao;
